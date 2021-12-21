@@ -11,7 +11,7 @@ public class ImmagineDAOImpl implements ImmagineDAO{
 
 	@Override
 	public void save(Connection conn, Immagine immagine) throws DAOException {
-		
+		String sql="";
 	}
 
 	@Override
