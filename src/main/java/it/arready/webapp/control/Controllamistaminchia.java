@@ -1,5 +1,5 @@
 package it.arready.webapp.control;
 
-public class aaaaaaaaa {
+public class Controllamistaminchia {
 
 }
