@@ -7,20 +7,24 @@ public class Indirizzo {
 	private String citta;
 	private String via;
 	private int numeroCivico;
+	private Immobile immobile;
 	
 	
 	public Indirizzo() {
 		super();
 	}
 	
-	public Indirizzo(int id, String provincia, String citta, String via, int numeroCivico) {
+	public Indirizzo(int id, String provincia, String citta, String via, int numeroCivico, Immobile immobile) {
 		super();
 		this.id = id;
 		this.provincia = provincia;
 		this.citta = citta;
 		this.via = via;
 		this.numeroCivico = numeroCivico;
+		this.immobile = immobile;
 	}
+
+
 	public int getId() {
 		return id;
 	}
@@ -52,12 +56,21 @@ public class Indirizzo {
 		this.numeroCivico = numeroCivico;
 	}
 	
-	
+	public Immobile getImmobile() {
+		return immobile;
+	}
+
+	public void setImmobile(Immobile immobile) {
+		this.immobile = immobile;
+	}
+
 	@Override
 	public String toString() {
 		return "Indirizzo [id=" + id + ", provincia=" + provincia + ", citta=" + citta + ", via=" + via
-				+ ", numeroCivico=" + numeroCivico + "]";
+				+ ", numeroCivico=" + numeroCivico + ", immobile=" + immobile + "]";
 	}
+
+	
 	
 	
 	
