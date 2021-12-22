@@ -1,5 +1,5 @@
 package it.arready.webapp.control;
 
-public class Prova1 {
+public class Prova {
 
 }
