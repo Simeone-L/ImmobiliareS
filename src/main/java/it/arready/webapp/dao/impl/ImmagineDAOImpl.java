@@ -59,7 +59,7 @@ public class ImmagineDAOImpl implements ImmagineDAO{
 	}
 
 	@Override
-	public List<Immagine> findByAll(Connection conn) throws DAOException {
+	public List<Immagine> findAll(Connection conn) throws DAOException {
 		String sql = "SELECT * FROM immagine";
 		//System.out.println(sql);
 		PreparedStatement stat = null;

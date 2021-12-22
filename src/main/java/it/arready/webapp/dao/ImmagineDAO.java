@@ -11,7 +11,7 @@ public interface ImmagineDAO {
 	
 	void update(Connection conn, Immagine immagine) throws DAOException;
 	
-	List<Immagine> findByAll(Connection conn) throws DAOException;
+	List<Immagine> findAll(Connection conn) throws DAOException;
 	
 	void delete(Connection conn, Immagine immagine) throws DAOException;
 
