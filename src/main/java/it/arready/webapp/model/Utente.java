@@ -53,6 +53,9 @@ public class Utente {
 		this.cognome = cognome;
 		this.email = email;
 	}
+	public Utente() {
+		// TODO Auto-generated constructor stub
+	}
 	
 
 }
