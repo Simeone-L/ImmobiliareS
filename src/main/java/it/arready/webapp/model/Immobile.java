@@ -9,13 +9,19 @@ public class Immobile {
 	private int numBagni;
 	private float superficie;
 	private int piano;
+	private StatoImmobile statoImmobile;
 	private boolean venduto;
 
 	public enum StatoImmobile {
-		NUOVO, IN_COSTRUZIONE, RISTRUTTURATO, BUONO, ABITABILE, DA_RISTRUTTURARE, OTTIMO
+		NUOVO(1, "Nuovo"), IN_COSTRUZIONE(2, "In Costruzione"), RISTRUTTURATO(3, "Ristrutturato"), BUONO(4, "Buono"),
+		ABITABILE(5, "Abitabile"), DA_RISTRUTTURARE(6, "Abitabile"), OTTIMO(7, "Ottimo");
+
+		StatoImmobile(int i, String nome) {
+			// TODO Auto-generated constructor stub
+		}
 	}
-	
-	public Immobile(){
+
+	public Immobile() {
 		super();
 	}
 
@@ -30,6 +36,14 @@ public class Immobile {
 		this.superficie = superficie;
 		this.piano = piano;
 		this.venduto = venduto;
+	}
+
+	public StatoImmobile getStatoImmobile() {
+		return statoImmobile;
+	}
+
+	public void setStatoImmobile(StatoImmobile statoImmobile) {
+		this.statoImmobile = statoImmobile;
 	}
 
 	public int getId() {
@@ -98,10 +112,9 @@ public class Immobile {
 
 	@Override
 	public String toString() {
-		return "Immobile: \nid " + id + ", descrizione " + descrizione + ", prezzo " + prezzo + ", numLocali " + numLocali
-				+ ", numBagni " + numBagni + ", superficie " + superficie + ", piano " + piano + ", venduto " + venduto
-			;
+		return "Immobile: \nid " + id + ", descrizione " + descrizione + ", prezzo " + prezzo + ", numLocali "
+				+ numLocali + ", numBagni " + numBagni + ", superficie " + superficie + ", piano " + piano
+				+ ", venduto " + venduto;
 	}
 
-	
 }
