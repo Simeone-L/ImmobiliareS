@@ -2,6 +2,7 @@ package it.arready.webapp.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,67 +56,94 @@ public class ImmobileDAOImpl implements ImmobileDAO {
 
 	@Override
 	public List<Immobile> orderByFind(Connection connection, Float prezzo, Integer numLocali, Integer numBagni,
-			Float superficie, Integer piano, StatoImmobile statoImmobile, String citta)
-			throws DAOException {
+			Float superficie, Integer piano, StatoImmobile statoImmobile, String citta) throws DAOException {
 		String sql = "SELECT * FROM immobile ";
 		System.out.println(sql);
-		List<Object> parameters = new ArrayList<Object>();
+		List<String> parameters = new ArrayList<String>();
+
 		if (statoImmobile != null) {
 			sql += "INNER JOIN stato_immobile ON stato_immobile(id)=immobile.stato_immobile_id ";
 			System.out.println(sql);
 		}
-		
+
 		if (citta != null) {
 			sql += "INNER JOIN indirizzo ON indirizzo(id)=immobile.indirizzo_id ";
 			System.out.println(sql);
 		}
-		
+
+		if (statoImmobile != null || citta != null) {
+			sql += "WHERE ";
+		}
+
 		if (prezzo != null) {
 			parameters.add("prezzo=? ");
 		}
-		
-		if(numLocali != null) {
+
+		if (numLocali != null) {
 			parameters.add("num_locali=? ");
 		}
-		
-		if(numBagni != null) {
+
+		if (numBagni != null) {
 			parameters.add("numBagni=? ");
 		}
-		
-		if(superficie != null) {
+
+		if (superficie != null) {
 			parameters.add("superficie=? ");
 		}
-		
-		if(piano != null) {
+
+		if (piano != null) {
 			parameters.add("piano=? ");
 		}
-		
-		if(statoImmobile != null) {
+
+		if (statoImmobile != null) {
 			parameters.add("stato_immobile=? ");
 		}
-		
-		if(citta != null) {
+
+		if (citta != null) {
 			parameters.add("citta=? ");
 		}
-				
-		sql += "WHERE ";
-		System.out.println(sql);
-		
-		for(int i=0; i<parameters.size(); i++) {
-			if(i != parameters.size()-1) {
-				sql += parameters.get(i)+"AND ";
+
+		for (int i = 0; i < parameters.size(); i++) {
+			if (i != parameters.size() - 1) {
+				sql += parameters.get(i) + "AND ";
 			}
 		}
-		PreparedStatement statement = null;
-			try {
-				statement= connection.prepareStatement(sql);
-				
-			} catch (SQLException e) {
-				System.err.println(e.getMessage());
-				throw new DAOException(e.getMessage(), e);
-			}
-		
+
 		System.out.println(sql);
+		PreparedStatement statement = null;
+
+		try {
+			statement = connection.prepareStatement(sql);
+			int i = 0;
+			if (prezzo != null) {
+				statement.setFloat(++i, prezzo);
+			}
+
+			if (numLocali != null) {
+				statement.setInt(++i, numLocali);
+			}
+
+			if (numBagni != null) {
+				statement.setFloat(++i, superficie);
+			}
+
+			if (piano != null) {
+				statement.setInt(++i, piano);
+			}
+
+			if (statoImmobile != null) {
+				statement.setString(++i, statoImmobile);
+			}
+
+			if (citta != null) {
+				statement.setString(++i, citta);
+			}
+
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+		}
+		System.out.println(sql);
+
 		return null;
 	}
 
