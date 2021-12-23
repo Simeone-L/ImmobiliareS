@@ -2,6 +2,7 @@ package it.arready.webapp.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,65 +59,70 @@ public class ImmobileDAOImpl implements ImmobileDAO {
 			Float superficie, Integer piano, StatoImmobile statoImmobile, String citta)
 			throws DAOException {
 		String sql = "SELECT * FROM immobile ";
-		System.out.println(sql);
-		List<Object> parameters = new ArrayList<Object>();
-		if (statoImmobile != null) {
-			sql += "INNER JOIN stato_immobile ON stato_immobile(id)=immobile.stato_immobile_id ";
-			System.out.println(sql);
-		}
+		List<String> stringParameters = new ArrayList<String>();
+		List<Object> acceptParameters = new ArrayList<Object>();
+		List<Immobile> immobili = new ArrayList<Immobile>();
+		if (statoImmobile != null) sql += "INNER JOIN stato_immobile ON stato_immobile(id)=immobile.stato_immobile_id ";
 		
-		if (citta != null) {
-			sql += "INNER JOIN indirizzo ON indirizzo(id)=immobile.indirizzo_id ";
-			System.out.println(sql);
-		}
+		if(citta != null) sql += "INNER JOIN indirizzo ON indirizzo(id)=immobile.indirizzo_id ";
 		
-		if (prezzo != null) {
-			parameters.add("prezzo=? ");
-		}
+		if(prezzo != null) { 
+			stringParameters.add("prezzo=? ");
+			acceptParameters.add(prezzo);
+		}	
 		
-		if(numLocali != null) {
-			parameters.add("num_locali=? ");
-		}
+		if(numLocali != null) stringParameters.add("num_locali=? ");
 		
-		if(numBagni != null) {
-			parameters.add("numBagni=? ");
-		}
+		if(numBagni != null) stringParameters.add("numBagni=? ");
 		
-		if(superficie != null) {
-			parameters.add("superficie=? ");
-		}
+		if(superficie != null) stringParameters.add("superficie=? ");
 		
-		if(piano != null) {
-			parameters.add("piano=? ");
-		}
+		if(piano != null) stringParameters.add("piano=? ");
 		
-		if(statoImmobile != null) {
-			parameters.add("stato_immobile=? ");
-		}
+		if(statoImmobile != null) stringParameters.add("stato_immobile=? ");
 		
-		if(citta != null) {
-			parameters.add("citta=? ");
-		}
+		if(citta != null) stringParameters.add("citta=? ");
 				
-		sql += "WHERE ";
-		System.out.println(sql);
+		if(stringParameters.size() > 0) {
+			sql += "WHERE ";
 		
-		for(int i=0; i<parameters.size(); i++) {
-			if(i != parameters.size()-1) {
-				sql += parameters.get(i)+"AND ";
+			for(int i=0; i<stringParameters.size(); i++) {
+				if(i != stringParameters.size()-1) {
+					sql += stringParameters.get(i)+"AND ";
+				}
 			}
 		}
+		
+		System.out.println(sql);
 		PreparedStatement statement = null;
+		ResultSet rs = null;
 			try {
 				statement= connection.prepareStatement(sql);
-				
+				for(int i = 0; i<acceptParameters.size(); i++) {
+					if(acceptParameters.getClass().getName() == "java.lang.Float" ) {
+						statement.setFloat(i+1, (Float)acceptParameters.get(i));
+					}
+				}
+				rs = statement.executeQuery(sql);
+				while(rs.next()) {
+					Immobile immobile = new Immobile();
+					immobile.setId(rs.getInt(1));
+					immobile.setDescrizione(rs.getString(2));
+					immobile.setPrezzo(rs.getFloat(3));
+					immobile.setNumLocali(rs.getInt(4));
+					immobile.setNumBagni(rs.getInt(5));
+					immobile.setSuperficie(rs.getFloat(6));
+					immobile.setPiano(rs.getInt(7));
+					immobile.setVenduto(rs.getBoolean(8));
+					immobili.add(immobile);
+				}
 			} catch (SQLException e) {
 				System.err.println(e.getMessage());
 				throw new DAOException(e.getMessage(), e);
 			}
 		
 		System.out.println(sql);
-		return null;
+		return immobili;
 	}
 
 }
