@@ -13,7 +13,12 @@ public class Annuncio {
 	
 	
 	public enum StatoVendita {
-		AFFITTO, AFFITTO_A_RISCATTO, VENDITA
+		AFFITTO(1, "Affitto"), AFFITTO_A_RISCATTO(2, "Affitto_riscatto"), VENDITA(3, "Vendita");
+		
+		StatoVendita(int i, String nome) {
+			// TODO Auto-generated constructor stub
+		}
+	
 	}
 
 
