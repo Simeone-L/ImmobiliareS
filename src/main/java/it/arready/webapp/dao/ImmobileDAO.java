@@ -3,7 +3,9 @@ package it.arready.webapp.dao;
 import java.sql.Connection;
 import java.util.List;
 
+import it.arready.webapp.model.Annuncio.StatoVendita;
 import it.arready.webapp.model.Immobile;
+import it.arready.webapp.model.Immobile.StatoImmobile;
 
 public interface ImmobileDAO {
 
@@ -20,7 +22,11 @@ public interface ImmobileDAO {
 	List<Immobile> orderByPrezzo(Connection connection) throws DAOException;
 
 	List<Immobile> orderBySuperficie(Connection connection) throws DAOException;
-	
-	List<Immobile> orderByPriceFromTo (Connection connection, int priceMin, int priceMax) throws DAOException;
+
+	List<Immobile> orderByPriceFromTo(Connection connection, int priceMin, int priceMax) throws DAOException;
+
+	List<Immobile> orderByFind(Connection connection, Float prezzo, Integer numLocali, Integer numBagni,
+			Float superficie, Integer piano, StatoImmobile statoImmobile, String citta)
+			throws DAOException;
 
 }
