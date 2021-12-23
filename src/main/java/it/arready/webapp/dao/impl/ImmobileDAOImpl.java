@@ -143,8 +143,8 @@ public class ImmobileDAOImpl implements ImmobileDAO {
 			System.err.println(e.getMessage());
 		}
 		System.out.println(sql);
-
 		return null;
+
 	}
 
 }
