@@ -17,7 +17,6 @@ public class Immobile {
 		ABITABILE(5, "Abitabile"), DA_RISTRUTTURARE(6, "Abitabile"), OTTIMO(7, "Ottimo");
 
 		StatoImmobile(int i, String nome) {
-			// TODO Auto-generated constructor stub
 		}
 	}
 
