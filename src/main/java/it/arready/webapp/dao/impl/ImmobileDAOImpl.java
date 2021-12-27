@@ -67,28 +67,48 @@ public class ImmobileDAOImpl implements ImmobileDAO {
 		if(citta != null) sql += "INNER JOIN indirizzo ON indirizzo(id)=immobile.indirizzo_id ";
 		
 		if(prezzo != null) { 
-			stringParameters.add("prezzo=? ");
+			stringParameters.add("prezzo=?");
 			acceptParameters.add(prezzo);
 		}	
 		
-		if(numLocali != null) stringParameters.add("num_locali=? ");
+		if(numLocali != null) {
+			stringParameters.add("num_locali=?");
+			acceptParameters.add(numLocali);
+		}
 		
-		if(numBagni != null) stringParameters.add("numBagni=? ");
+		if(numBagni != null) {
+			stringParameters.add("numBagni=?");
+			acceptParameters.add(numBagni);
+		}
 		
-		if(superficie != null) stringParameters.add("superficie=? ");
+		if(superficie != null) {
+			stringParameters.add("superficie=?");
+			acceptParameters.add(superficie);
+		}
 		
-		if(piano != null) stringParameters.add("piano=? ");
+		if(piano != null) {
+			stringParameters.add("piano=?");
+			acceptParameters.add(piano);
+		}
 		
-		if(statoImmobile != null) stringParameters.add("stato_immobile=? ");
+		if(statoImmobile != null) {
+			stringParameters.add("stato_immobile=?");
+			acceptParameters.add(statoImmobile);
+		}
 		
-		if(citta != null) stringParameters.add("citta=? ");
+		if(citta != null) {
+			stringParameters.add("citta=?");
+			acceptParameters.add(citta);
+		}
 				
 		if(stringParameters.size() > 0) {
 			sql += "WHERE ";
 		
 			for(int i=0; i<stringParameters.size(); i++) {
 				if(i != stringParameters.size()-1) {
-					sql += stringParameters.get(i)+"AND ";
+					sql += stringParameters.get(i)+" AND ";
+				} else {
+					sql += stringParameters.get(i);
 				}
 			}
 		}
@@ -99,11 +119,17 @@ public class ImmobileDAOImpl implements ImmobileDAO {
 			try {
 				statement= connection.prepareStatement(sql);
 				for(int i = 0; i<acceptParameters.size(); i++) {
-					if(acceptParameters.getClass().getName() == "java.lang.Float" ) {
-						statement.setFloat(i+1, (Float)acceptParameters.get(i));
+					if(acceptParameters.get(i).getClass().getName() == "java.lang.Float" ) {
+						statement.setFloat(i+1, Float.parseFloat(acceptParameters.get(i).toString()));
+					}
+					if(acceptParameters.get(i).getClass().getName() == "java.lang.Integer" ) {
+						statement.setInt(i+1, Integer.parseInt(acceptParameters.get(i).toString()));
+					}
+					if(acceptParameters.get(i).getClass().getName() == "java.lang.String" ) {
+						statement.setString(i+1, acceptParameters.get(i).toString());
 					}
 				}
-				rs = statement.executeQuery(sql);
+				rs = statement.executeQuery();
 				while(rs.next()) {
 					Immobile immobile = new Immobile();
 					immobile.setId(rs.getInt(1));
