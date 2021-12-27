@@ -24,7 +24,7 @@ public class ImmobileServiceImpl implements ImmobileService {
 	}
 
 	@Override
-	public List<Immobile> findAll(Immobile immobile) throws ServiceException {
+	public List<Immobile> findAll() throws ServiceException {
 		return null;
 	}
 

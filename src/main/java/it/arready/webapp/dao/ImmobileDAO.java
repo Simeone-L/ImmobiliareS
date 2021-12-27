@@ -15,7 +15,7 @@ public interface ImmobileDAO {
 
 	Immobile findById(Connection connection, int id) throws DAOException;
 
-	List<Immobile> findAll(Connection connection, Immobile immobile) throws DAOException;
+	List<Immobile> findAll(Connection connection) throws DAOException;
 
 	List<Immobile> findByCitta(Connection connection, String citta) throws DAOException;
 
