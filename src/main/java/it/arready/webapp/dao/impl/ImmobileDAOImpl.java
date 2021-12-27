@@ -30,7 +30,7 @@ public class ImmobileDAOImpl implements ImmobileDAO {
 	}
 
 	@Override
-	public List<Immobile> findAll(Connection connection, Immobile immobile) throws DAOException {
+	public List<Immobile> findAll(Connection connection) throws DAOException {
 		return null;
 	}
 
@@ -146,8 +146,6 @@ public class ImmobileDAOImpl implements ImmobileDAO {
 				System.err.println(e.getMessage());
 				throw new DAOException(e.getMessage(), e);
 			}
-		
-		System.out.println(sql);
 		return immobili;
 	}
 
