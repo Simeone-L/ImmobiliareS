@@ -12,7 +12,7 @@ public interface ImmobileService {
 
 	Immobile findById(int id) throws ServiceException;
 
-	List<Immobile> findAll(Immobile immobile) throws ServiceException;
+	List<Immobile> findAll() throws ServiceException;
 
 	List<Immobile> findByCitta(String citta) throws ServiceException;
 
