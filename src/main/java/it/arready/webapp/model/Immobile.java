@@ -16,8 +16,22 @@ public class Immobile {
 		NUOVO(1, "Nuovo"), IN_COSTRUZIONE(2, "In Costruzione"), RISTRUTTURATO(3, "Ristrutturato"), BUONO(4, "Buono"),
 		ABITABILE(5, "Abitabile"), DA_RISTRUTTURARE(6, "Abitabile"), OTTIMO(7, "Ottimo");
 
+		private final int i;
+		private final String nome;
+		
 		StatoImmobile(int i, String nome) {
+			this.i = i;
+			this.nome = nome;
 		}
+
+		public int getI() {
+			return i;
+		}
+
+		public String getNome() {
+			return nome;
+		}
+		
 	}
 
 	public Immobile() {

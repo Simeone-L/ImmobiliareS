@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import it.arready.webapp.model.Utente;
 import it.arready.webapp.service.ServiceException;
@@ -63,15 +64,21 @@ public class RegistrazioneServlet extends HttpServlet {
 
 		if (nome == null || nome.trim().isEmpty()) {
 			request.setAttribute("errorNome", "Campo Obbligatorio");
+			hasErrors = true;
 		}
 		if (cognome == null || cognome.trim().isEmpty()) {
 			request.setAttribute("errorCognome", "Campo Obbligatorio");
+			hasErrors = true;
 		}
 		if (email == null || email.trim().isEmpty()) {
 			request.setAttribute("errorEmail", "Campo Obbligatorio");
+			hasErrors = true;
 		}
 		if (password == null || cognome.trim().isEmpty()) {
 			request.setAttribute("errorPassword", "Campo Obbligatorio");
+			hasErrors = true;
 		}
+		
+		return hasErrors;
 	}
 }

@@ -30,26 +30,6 @@ public class ImmobileDAOImpl implements ImmobileDAO {
 	}
 
 	@Override
-	public List<Immobile> findAll(Connection connection) throws DAOException {
-		return null;
-	}
-
-	@Override
-	public List<Immobile> findByCitta(Connection connection, String citta) throws DAOException {
-		return null;
-	}
-
-	@Override
-	public List<Immobile> orderByPrezzo(Connection connection) throws DAOException {
-		return null;
-	}
-
-	@Override
-	public List<Immobile> orderBySuperficie(Connection connection) throws DAOException {
-		return null;
-	}
-
-	@Override
 	public List<Immobile> orderByPriceFromTo(Connection connection, int priceMin, int priceMax) throws DAOException {
 		return null;
 	}
@@ -127,6 +107,9 @@ public class ImmobileDAOImpl implements ImmobileDAO {
 					}
 					if(acceptParameters.get(i).getClass().getName() == "java.lang.String" ) {
 						statement.setString(i+1, acceptParameters.get(i).toString());
+					}
+					if(acceptParameters.get(i).getClass().getName() == "it.arready.webapp.model.Immobile.StatoImmobile") {
+						statement.setString(i+1, ((StatoImmobile)acceptParameters.get(i)).getNome());
 					}
 				}
 				rs = statement.executeQuery();
