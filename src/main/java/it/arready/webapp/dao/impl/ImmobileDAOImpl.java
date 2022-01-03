@@ -8,25 +8,124 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.arready.webapp.dao.DAOException;
+import it.arready.webapp.dao.DBUtil;
 import it.arready.webapp.dao.ImmobileDAO;
 import it.arready.webapp.model.Immobile;
 import it.arready.webapp.model.Immobile.StatoImmobile;
+import it.arready.webapp.model.Indirizzo;
 
 public class ImmobileDAOImpl implements ImmobileDAO {
 
 	@Override
 	public void save(Connection connection, Immobile immobile) throws DAOException {
-
+		String sql = "INSERT INTO immobile(descrizione,prezzo,num_locali,num_bagni,superficie,piano,venduto,stato_immobile,indirizzo_id) VALUES(?,?,?,?,?,?,?,?)";
+		System.out.println(sql);
+		PreparedStatement statement = null;
+		ResultSet generatedKeys = null;
+		try {
+			statement = connection.prepareStatement(sql, new String[] { "id" });
+			statement.setString(1, immobile.getDescrizione());
+			statement.setFloat(2, immobile.getPrezzo());
+			statement.setInt(3, immobile.getNumLocali());
+			statement.setInt(4 , immobile.getNumBagni());
+			statement.setFloat(5 , immobile.getSuperficie());
+			statement.setInt(6 , immobile.getPiano());
+			statement.setBoolean(7, immobile.isVenduto());
+			statement.setString(8, immobile.getStatoImmobile().getNome());
+			statement.setInt(9, immobile.getIndirizzo().getId());
+			statement.executeUpdate();
+			generatedKeys = statement.getGeneratedKeys();
+			if (generatedKeys.next()) {
+				immobile.setId(generatedKeys.getInt(1));
+			}
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+			throw new DAOException(e.getMessage(), e);
+		} finally {
+			DBUtil.close(generatedKeys);
+			DBUtil.close(statement);
+		}
 	}
 
 	@Override
 	public void update(Connection connection, Immobile immobile) throws DAOException {
+		String sql = "UPDATE immobile SET descrizione=?,prezzo=?,num_locali=?,num_bagni=?,superficie=?,piano=?,venduto=?,stato_immobile=?,indirizzo_id=? WHERE id=?";
+		System.out.println(sql);
+		PreparedStatement statement = null;
+		try {
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, immobile.getDescrizione());
+			statement.setFloat(2, immobile.getPrezzo());
+			statement.setInt(3, immobile.getNumLocali());
+			statement.setInt(4 , immobile.getNumBagni());
+			statement.setFloat(5 , immobile.getSuperficie());
+			statement.setInt(6 , immobile.getPiano());
+			statement.setBoolean(7, immobile.isVenduto());
+			statement.setString(8, immobile.getStatoImmobile().getNome());
+			statement.setInt(9, immobile.getIndirizzo().getId());
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+			throw new DAOException(e.getMessage(), e);
+		} finally {
+			DBUtil.close(statement);
+		}
+	}
 
+	public void delete(Connection connection, Immobile immobile) throws DAOException {
+		String sql = "DELETE FROM immobile WHERE id=?";
+		System.out.println(sql);
+		PreparedStatement statement = null;
+		try {
+			statement = connection.prepareStatement(sql);
+			statement.setInt(1, immobile.getId());
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+			throw new DAOException(e.getMessage(), e);
+		} finally {
+			DBUtil.close(statement);
+		}
 	}
 
 	@Override
 	public Immobile findById(Connection connection, int id) throws DAOException {
-		return null;
+		String sql = "SELECT * FROM immobile JOIN indirizzo ON immobile.indirizzo_id = indirizzo.id WHERE immobile.id=?";
+		System.out.println(sql);
+		Immobile immobile = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		try {
+			statement = connection.prepareStatement(sql);
+			statement.setInt(1, id);
+			resultSet = statement.executeQuery();
+			if (resultSet.next()) {
+				immobile.setId(resultSet.getInt(1));
+				immobile.setDescrizione(resultSet.getString(2));
+				immobile.setPrezzo(resultSet.getFloat(3));
+				immobile.setNumLocali (resultSet.getInt(4));
+				immobile.setNumBagni(resultSet.getInt(5));
+				immobile.setSuperficie(resultSet.getFloat(6));
+				immobile.setPiano(resultSet.getInt(7));
+				immobile.setVenduto(resultSet.getBoolean(8));
+				immobile.setStatoImmobile(StatoImmobile.corrispondenzaStato(resultSet.getInt(9)));
+				Indirizzo indirizzo = new Indirizzo();
+				indirizzo.setId(resultSet.getInt(11));
+				indirizzo.setProvincia(resultSet.getString(12));
+				indirizzo.setCitta(resultSet.getString(13));
+				indirizzo.setVia(resultSet.getString(14));
+				indirizzo.setNumeroCivico(resultSet.getInt(15));
+				indirizzo.setImmobile(immobile);
+				immobile.setIndirizzo(indirizzo);
+			}
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+			throw new DAOException(e.getMessage(), e);
+		} finally {
+			DBUtil.close(resultSet);
+			DBUtil.close(statement);
+		}
+		return immobile;
 	}
 
 	@Override

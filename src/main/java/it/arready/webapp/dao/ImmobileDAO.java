@@ -12,6 +12,9 @@ public interface ImmobileDAO {
 
 	void update(Connection connection, Immobile immobile) throws DAOException;
 
+	
+	void delete(Connection connection, Immobile immobile) throws DAOException;
+	
 	Immobile findById(Connection connection, int id) throws DAOException;
 
 	List<Immobile> orderByPriceFromTo(Connection connection, int priceMin, int priceMax) throws DAOException;

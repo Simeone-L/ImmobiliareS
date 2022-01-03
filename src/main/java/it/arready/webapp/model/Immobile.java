@@ -1,5 +1,7 @@
 package it.arready.webapp.model;
 
+import it.arready.webapp.model.Immobile.StatoImmobile;
+
 public class Immobile {
 
 	private int id;
@@ -11,6 +13,9 @@ public class Immobile {
 	private int piano;
 	private StatoImmobile statoImmobile;
 	private boolean venduto;
+	private Indirizzo indirizzo;
+	
+
 
 	public enum StatoImmobile {
 		NUOVO(1, "Nuovo"), IN_COSTRUZIONE(2, "In Costruzione"), RISTRUTTURATO(3, "Ristrutturato"), BUONO(4, "Buono"),
@@ -22,6 +27,13 @@ public class Immobile {
 		StatoImmobile(int i, String nome) {
 			this.i = i;
 			this.nome = nome;
+		}
+		
+		public static StatoImmobile corrispondenzaStato(int sI) {
+			for(StatoImmobile statoImmobile : StatoImmobile.values()) {
+				if(statoImmobile.i == sI) return statoImmobile;		
+			}
+			return null;
 		}
 
 		public int getI() {
@@ -51,6 +63,17 @@ public class Immobile {
 		this.venduto = venduto;
 	}
 
+	
+	public Indirizzo getIndirizzo() {
+		return indirizzo;
+	}
+
+	public void setIndirizzo(Indirizzo indirizzo) {
+		this.indirizzo = indirizzo;
+	}
+	
+	
+	
 	public StatoImmobile getStatoImmobile() {
 		return statoImmobile;
 	}
