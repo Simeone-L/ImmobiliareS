@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
 		try {
 			utente = utenteService.findByUsername(user);
 			
-			if(utente == null || !utente.getPassword().equals(request.getParameter("Password"))) {
+			if(utente == null || !utente.getPassword().equals(request.getParameter("password"))) {
 				request.setAttribute("errorLogin", "Username o Password errati");
 				request.getRequestDispatcher("login.jsp").forward(request, response);
 				return;
