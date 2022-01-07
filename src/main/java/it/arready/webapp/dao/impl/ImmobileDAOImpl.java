@@ -100,6 +100,7 @@ public class ImmobileDAOImpl implements ImmobileDAO {
 			statement.setInt(1, id);
 			resultSet = statement.executeQuery();
 			if (resultSet.next()) {
+				immobile = new Immobile();
 				immobile.setId(resultSet.getInt(1));
 				immobile.setDescrizione(resultSet.getString(2));
 				immobile.setPrezzo(resultSet.getFloat(3));
