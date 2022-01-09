@@ -15,9 +15,8 @@ public interface ImmobileService {
 
 	Immobile findById(int id) throws ServiceException;
 
-	List<Immobile> orderByFind(Connection connection, Float prezzo, Integer numLocali, Integer numBagni,
+	List<Immobile> orderByFind(Float prezzoMin, Float prezzoMax, Integer numLocali, Integer numBagni,
 			Float superficie, Integer piano, StatoImmobile statoImmobile, String citta)
 			throws ServiceException;
 
-	List<Immobile> orderByPriceFromTo(int priceMin, int priceMax) throws ServiceException;
 }

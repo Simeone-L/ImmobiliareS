@@ -90,19 +90,23 @@ public class ImmobileServiceImpl implements ImmobileService {
 		return immobile;
 	}
 
-	
-
 	@Override
-	public List<Immobile> orderByPriceFromTo(int priceMin, int priceMax) throws ServiceException {
-		return null;
-	}
-
-
-	@Override
-	public List<Immobile> orderByFind(Connection connection, Float prezzo, Integer numLocali, Integer numBagni,
+	public List<Immobile> orderByFind(Float prezzoMin, Float prezzoMax, Integer numLocali, Integer numBagni,
 			Float superficie, Integer piano, StatoImmobile statoImmobile, String citta) throws ServiceException {
-		// TODO Auto-generated method stub
-		return null;
+		List<Immobile> immobili = null;
+		Connection connection = null;
+		try {
+			connection = DataSource.getInstance().getConnection();
+			DBUtil.setAutoCommit(connection, false);
+			immobili = immobileDAO.orderByFind(connection, prezzoMin, prezzoMax, numLocali, numBagni, superficie, piano, statoImmobile, citta);
+			DBUtil.commit(connection);
+		} catch (DAOException e) {
+			System.err.println(e.getMessage());
+			DBUtil.rollback(connection);
+			throw new ServiceException(e.getMessage(), e);
+		} finally {
+			DBUtil.close(connection);
+		}
+		return immobili;
 	}
-
 }

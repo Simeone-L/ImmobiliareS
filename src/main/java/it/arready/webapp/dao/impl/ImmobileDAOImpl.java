@@ -130,12 +130,7 @@ public class ImmobileDAOImpl implements ImmobileDAO {
 	}
 
 	@Override
-	public List<Immobile> orderByPriceFromTo(Connection connection, int priceMin, int priceMax) throws DAOException {
-		return null;
-	}
-
-	@Override
-	public List<Immobile> orderByFind(Connection connection, Float prezzo, Integer numLocali, Integer numBagni,
+	public List<Immobile> orderByFind(Connection connection, Float prezzoMin, Float prezzoMax, Integer numLocali, Integer numBagni,
 			Float superficie, Integer piano, StatoImmobile statoImmobile, String citta)
 			throws DAOException {
 		String sql = "SELECT * FROM immobile ";
@@ -146,10 +141,9 @@ public class ImmobileDAOImpl implements ImmobileDAO {
 		
 		if(citta != null) sql += "INNER JOIN indirizzo ON indirizzo(id)=immobile.indirizzo_id ";
 		
-		if(prezzo != null) { 
-			stringParameters.add("prezzo=?");
-			acceptParameters.add(prezzo);
-		}	
+		stringParameters.add("prezzo BETWEEN ? AND ?");
+		acceptParameters.add(prezzoMin);
+		acceptParameters.add(prezzoMax);
 		
 		if(numLocali != null) {
 			stringParameters.add("num_locali=?");

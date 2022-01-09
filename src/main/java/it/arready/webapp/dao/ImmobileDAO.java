@@ -17,9 +17,7 @@ public interface ImmobileDAO {
 	
 	Immobile findById(Connection connection, int id) throws DAOException;
 
-	List<Immobile> orderByPriceFromTo(Connection connection, int priceMin, int priceMax) throws DAOException;
-
-	List<Immobile> orderByFind(Connection connection, Float prezzo, Integer numLocali, Integer numBagni,
+	List<Immobile> orderByFind(Connection connection, Float prezzoMin, Float prezzoMax, Integer numLocali, Integer numBagni,
 			Float superficie, Integer piano, StatoImmobile statoImmobile, String citta)
 			throws DAOException;
 
