@@ -1,31 +1,27 @@
 package it.arready.webapp.control;
 
 import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class CreaAnnuncioServlet
- */
+import it.arready.webapp.model.Annuncio;
+import it.arready.webapp.model.Utente;
+import it.arready.webapp.service.impl.UtenteServiceImpl;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 @WebServlet("/crea-annuncio")
 public class CreaAnnuncioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private UtenteServiceImpl utente = new UtenteServiceImpl();
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public CreaAnnuncioServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Annuncio annuncio = new Annuncio();
 		
 	}
 
