@@ -44,7 +44,7 @@
     }
 
     .img-blocco-1 {
-      background-image: url('');
+      background-image: url('img/unknown1.png');
     }
 
     .form-control {
@@ -65,6 +65,16 @@
     .disappear {
       display: none;
     }
+
+    .bottone-arready {
+      background-color: #be9447;
+      border-color: #be9447;
+    }
+
+    .bottone-arready-2 {
+      border-color: #be9447;
+      color: #be9447;
+    }
   </style>
 
 </head>
@@ -74,11 +84,12 @@
   <!-- HEADER DI TUTTE LE PAGINE -->
   <div class="sticky-top">
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between   "
-      style="background-color: #BBBBBB;">
+      style="background-color: #f8ebcd;">
+      <!--BBBBBB-->
       <!-- tolto -> py-3: altezza header fissa/ mb-4: padding tra header e pag -->
       <!--in href mettere link per tornare in cima home page-->
       <a href="#" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-        <img src="test.jpg" style="width: 279px; height: 62px;" title="Homepage Arready">
+        <img src="logo_img/logo.png" style=" height: 60px;" title="Homepage Arready">
       </a>
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
         <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
@@ -89,10 +100,10 @@
       </ul>
       <div class="col-md-3 text-end">
         <a href="log_in.html">
-          <button type="button" class="btn btn-outline-primary me-2">Accedi</button>
+          <button type="button" class="btn btn-outline-primary me-2 bottone-arready-2">Accedi</button>
         </a>
         <a href="sign_in.html">
-          <button type="button" class="btn btn-primary">Registrati</button>
+          <button type="button" class="btn btn-primary bottone-arready">Registrati</button>
         </a>
 
       </div>
@@ -103,14 +114,19 @@
 
   <!--blocco top page /tolto: container-->
   <section class="py-5 text-center img-blocco-1 parallasse"
-    style="background-color: gray; background-size: cover; background-position: center;">
+    style="background-size: cover; background-position: bottom; ">
+    <!--background-color: #be9447;-->
     <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light" style="font-family: Georgia; color: #EEEEEE;">BENVENUTI SU ARREADY</h1>
+      <div class="col-lg-6 col-md-8 mx-auto" style="background-color: rgba(255, 255, 255, 0.5);">
+        <h1 class="fw-light" style="font-family: Georgia; color: #3d3d3d;">BENVENUTI SU ARREADY</h1>
         <p class="lead text-muted">Qui ci scriveremo qualcosa dopo!</p>
         <p>
-          <a href="annunci.html" class="btn btn-primary my-2">Guarda tutte le offerte</a>
-          <a href="caricamento_annuncio.html" class="btn btn-secondary my-2">Inserisci la tua offerta</a>
+          <a href="annunci.html">
+            <button class="btn btn-primary my-2 bottone-arready">
+              Guarda tutte le offerte
+            </button>
+          </a>
+          <a href="caricamento_annuncio.html" class="btn btn-secondary my-2 ">Inserisci la tua offerta</a>
         </p>
       </div>
     </div>
@@ -149,12 +165,12 @@
             aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
             <rect width="100%" height="100%" fill="#777" />
           </svg>
-          <img src="">
+          <img src="img/foto1.png">
           <div class="container">
             <div class="carousel-caption text-start">
               <h1>Appartamento bilocale cazzi e mazzi</h1>
               <p>10 mq, 2 bagni, ecc.</p>
-              <p><a class="btn btn-lg btn-primary" href="#">Visualizza Annuncio</a></p>
+              <p><a class="btn btn-lg btn-primary bottone-arready" href="#">Visualizza Annuncio</a></p>
             </div>
           </div>
         </div>
@@ -163,12 +179,12 @@
             aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
             <rect width="100%" height="100%" fill="#777" />
           </svg>
-          <img src="">
+          <img src="img/foto2.png">
           <div class="container">
             <div class="carousel-caption">
               <h1>Appartamento bilocale razzi e pazzi</h1>
               <p>10 mq, 2 bagni, ecc.</p>
-              <p><a class="btn btn-lg btn-primary" href="#">Visualizza Annuncio</a></p>
+              <p><a class="btn btn-lg btn-primary bottone-arready" href="#">Visualizza Annuncio</a></p>
             </div>
           </div>
         </div>
@@ -177,12 +193,12 @@
             aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
             <rect width="100%" height="100%" fill="#777" />
           </svg>
-          <img src="">
+          <img src="img/foto3.png">
           <div class="container">
             <div class="carousel-caption text-end">
               <h1>Appartamento bilocale lazzi e bazzi</h1>
               <p>10 mq, 2 bagni, ecc.</p>
-              <p><a class="btn btn-lg btn-primary" href="#">Visualizza Annuncio</a></p>
+              <p><a class="btn btn-lg btn-primary bottone-arready" href="#">Visualizza Annuncio</a></p>
             </div>
           </div>
         </div>
@@ -206,7 +222,9 @@
       <div class="col-12 col-md">
         <p>Arready Immobiliare S.R.L.</p>
         <small class="d-block mb-3 text-muted">&copy; 2017–2021</small>
-        <img src="test.jpg" style="width: 279px; height: 62px;" title="Arready Immobiliare">
+        <a href="#">
+          <img src="logo_img/logo.png" style="height: 62px;" title="Arready Immobiliare">
+        </a>
       </div>
 
       <div class="col-6 col-md">

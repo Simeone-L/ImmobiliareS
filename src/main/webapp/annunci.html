@@ -15,6 +15,8 @@
   <!-- Custom styles for this template -->
   <link href="index_immobiliare.css" rel="stylesheet">
 
+
+
   <style>
     .bd-placeholder-img {
       font-size: 1.125rem;
@@ -39,6 +41,16 @@
     .disappear {
       display: none;
     }
+
+    .bottone-arready {
+      background-color: #be9447;
+      border-color: #be9447;
+    }
+
+    .bottone-arready-2 {
+      border-color: #be9447;
+      color: #be9447;
+    }
   </style>
 
 
@@ -49,13 +61,13 @@
   <!-- HEADER DI TUTTE LE PAGINE -->
   <div class="sticky-top">
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between   "
-      style="background-color: #BBBBBB;">
+      style="background-color: #f8ebcd;">
       <!-- tolto -> py-3: altezza header fissa/ mb-4: padding tra header e pag -->
       <!--in href mettere link per tornare in cima home page-->
       <a href="index_immobiliare.html"
         class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none"
         style="padding-left: 15px;">
-        <img src="test.jpg" style="width: 279px; height: 62px;" title="Homepage Arready">
+        <img src="logo_img/logo.png" style="height: 60px;" title="Homepage Arready">
       </a>
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
         <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
@@ -66,10 +78,10 @@
       </ul>
       <div class="col-md-3 text-end">
         <a href="log_in.html">
-          <button type="button" class="btn btn-outline-primary me-2">Accedi</button>
+          <button type="button" class="btn btn-outline-primary me-2 bottone-arready-2">Accedi</button>
         </a>
         <a href="sign_in.html" style="padding-right: 15px;">
-          <button type="button" class="btn btn-primary">Registrati stronzo</button>
+          <button type="button" class="btn btn-primary bottone-arready">Registrati stronzo</button>
         </a>
 
       </div>
@@ -84,20 +96,19 @@
 
           <h1>CERCA LA TUA PROSSIMA CASA</h1>
           <p>filtra per:</p>
-          <div style="background-color: #BBBBBB;">
+          <div style="background-color: #f8ebcd;">
             <form action="search" method="post">
               <div style="position: relative; text-align: left; padding-left: 50px;">
 
-                <label for="prezzo">Prezzo</label>
+                <label for="prezzo">Prezzo</label> <!-- RANGE A 2 valori-->
                 <div style="position: absolute; padding-left: 55px; display: inline-block;">
-                  <input type="range" id="prezzo" name="prezzo" min="10000" max="10000000" step="1000" value="10000000"
-                    oninput="this.nextElementSibling.value = this.value">
-                  <output></output>€
+                  <!--range 2 punti-->
+
                 </div>
                 <br>
 
                 <label for="n_locali">Numero locali minimo</label>
-                <select id="n_locali" >
+                <select id="n_locali">
                   <option value="">Qualsiasi</option>
                   <option>1</option>
                   <option>2</option>
@@ -123,8 +134,12 @@
                 <p style="font-size: 25px;">Citt&agrave;</p>
               </label>
               <input type="text" name="citta" id="citta" style="size: 50%;">
-              <input type="submit" value="Cerca" class="btn btn-primary" style="width: 100px;">
+              <input type="submit" value="Cerca" class="btn btn-primary bottone-arready" style="width: 100px;">
             </form>
+            <a href="ricerca_completa.html">
+              <!--pagina ricerca completa-->
+              pi&ugrave; filtri
+            </a>
           </div>
         </div>
       </div>
@@ -134,7 +149,7 @@
 
 
     <!-- ALBUM -->
-    <div class="album py-5 bg-light">
+    <div class="album py-5 " style="background-color: #fdf6e3a4;">
       <div class="container">
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -341,7 +356,9 @@
       <div class="col-12 col-md">
         <p>Arready Immobiliare S.R.L.</p>
         <small class="d-block mb-3 text-muted">&copy; 2017–2021</small>
-        <img src="test.jpg" style="width: 279px; height: 62px;" title="Arready Immobiliare">
+        <a href="index_immobiliare.html">
+          <img src="logo_img/logo.png" style="height: 62px;" title="Arready Immobiliare">
+        </a>
       </div>
 
       <div class="col-6 col-md">

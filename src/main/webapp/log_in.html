@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
   <meta name="generator" content="Hugo 0.88.1">
-  <title>Schermata login e registrazione</title>
+  <title>Accesso</title>
 
   <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
 
@@ -30,6 +30,11 @@
         font-size: 3.5rem;
       }
     }
+
+    .bottone-arready {
+      background-color: #be9447;
+      border-color: #be9447;
+    }
   </style>
 
 
@@ -43,8 +48,8 @@
   <!-- MAIN -->
 
   <main class="form-signin">
-    <form action="sign-in" method="post">
-      <img class="mb-4" src="test.jpg" alt="" width="72" height="57">
+    <form action="sign-in" method="post" autocomplete="on">
+      <img class="mb-4" src="logo_img/logo_login.png" alt="" >
       <h1 class="h3 mb-3 fw-normal">Accedi</h1>
 
       <div class="form-floating">
@@ -62,7 +67,7 @@
         </label>
       </div>
 
-      <input class="w-100 btn btn-lg btn-primary" type="submit" value="Accedi"></input>
+      <input class="w-100 btn btn-lg btn-primary bottone-arready" type="submit" value="Accedi"></input>
 
     </form>
   </main>
