@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="it">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.88.1">
+  <title>Schermata Annunci</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="index_immobiliare.css" rel="stylesheet">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    .back-top-button {
+      position: fixed;
+      bottom: 50px;
+      right: 50px;
+    }
+
+    .disappear {
+      display: none;
+    }
+  </style>
+
+
+</head>
+
+<body>
+
+  <!-- HEADER DI TUTTE LE PAGINE -->
+  <div class="sticky-top">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between   "
+      style="background-color: #BBBBBB;">
+      <!-- tolto -> py-3: altezza header fissa/ mb-4: padding tra header e pag -->
+      <!--in href mettere link per tornare in cima home page-->
+      <a href="index_immobiliare.html"
+        class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none"
+        style="padding-left: 15px;">
+        <img src="test.jpg" style="width: 279px; height: 62px;" title="Homepage Arready">
+      </a>
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
+        <li><a href="#" class="nav-link px-2 link-dark">Features</a></li>
+        <li><a href="#" class="nav-link px-2 link-dark">Pricing</a></li>
+        <li><a href="#" class="nav-link px-2 link-dark">FAQs</a></li>
+        <li><a href="#" class="nav-link px-2 link-dark">About</a></li>
+      </ul>
+      <div class="col-md-3 text-end">
+        <a href="log_in.html">
+          <button type="button" class="btn btn-outline-primary me-2">Accedi</button>
+        </a>
+        <a href="sign_in.html" style="padding-right: 15px;">
+          <button type="button" class="btn btn-primary">Registrati stronzo</button>
+        </a>
+
+      </div>
+    </header>
+  </div>
+
+  <main style="width: 100%; height: 100%;">
+    <!--BLOCCO CONTENUTI-->
+    <section class="py-5 text-center container">
+      <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+
+          <h1>CERCA LA TUA PROSSIMA CASA</h1>
+          <p>filtra per:</p>
+          <div style="background-color: #BBBBBB;">
+            <form action="search" method="post">
+              <div style="position: relative; text-align: left; padding-left: 50px;">
+
+                <label for="prezzo">Prezzo</label>
+                <div style="position: absolute; padding-left: 55px; display: inline-block;">
+                  <input type="range" id="prezzo" name="prezzo" min="10000" max="10000000" step="1000" value="10000000"
+                    oninput="this.nextElementSibling.value = this.value">
+                  <output></output>€
+                </div>
+                <br>
+
+                <label for="n_locali">Numero locali minimo</label>
+                <select id="n_locali" >
+                  <option value="">Qualsiasi</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5+</option>
+                </select>
+                <!--<div class="invalid-feedback">
+                  Please provide a valid state.
+                </div>-->
+                <!--class="form-select" Classe di select-->
+                <br>
+
+                <label for="superficie">M² superficie</label>
+                <div style="position: absolute; padding-left: 10px; display: inline-block;">
+                  <input type="range" id="superficie" name="superficie" min="10" max="10000" step="10" value="10000"
+                    oninput="this.nextElementSibling.value = this.value">
+                  <output></output>metri²
+                </div>
+              </div>
+
+              <label for="citta">
+                <p style="font-size: 25px;">Citt&agrave;</p>
+              </label>
+              <input type="text" name="citta" id="citta" style="size: 50%;">
+              <input type="submit" value="Cerca" class="btn btn-primary" style="width: 100px;">
+            </form>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+    <!--<div style="position: relative; width: 50%; text-align: left; padding-left: 50px;">-->
+
+
+    <!-- ALBUM -->
+    <div class="album py-5 bg-light">
+      <div class="container">
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          <div class="col">
+            <div class="card shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
+                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+                  dy=".3em">Thumbnail</text>
+              </svg>
+
+              <div class="card-body">
+                <p class="card-text">descrizione casa</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Apri</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Modifica</button>
+                  </div>
+                  <small class="text-muted">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
+                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+                  dy=".3em">Thumbnail</text>
+              </svg>
+
+              <div class="card-body">
+                <p class="card-text">descrizione casa</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Apri</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Modifica</button>
+                  </div>
+                  <small class="text-muted">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
+                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+                  dy=".3em">Thumbnail</text>
+              </svg>
+
+              <div class="card-body">
+                <p class="card-text">descrizione casa</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Apri</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Modifica</button>
+                  </div>
+                  <small class="text-muted">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
+                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+                  dy=".3em">Thumbnail</text>
+              </svg>
+
+              <div class="card-body">
+                <p class="card-text">descrizione casa</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Apri</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Modifica</button>
+                  </div>
+                  <small class="text-muted">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
+                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+                  dy=".3em">Thumbnail</text>
+              </svg>
+
+              <div class="card-body">
+                <p class="card-text">descrizione casa</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Apri</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Modifica</button>
+                  </div>
+                  <small class="text-muted">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
+                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+                  dy=".3em">Thumbnail</text>
+              </svg>
+
+              <div class="card-body">
+                <p class="card-text">descrizione casa</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Apri</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Modifica</button>
+                  </div>
+                  <small class="text-muted">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
+                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+                  dy=".3em">Thumbnail</text>
+              </svg>
+
+              <div class="card-body">
+                <p class="card-text">descrizione casa</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Apri</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Modifica</button>
+                  </div>
+                  <small class="text-muted">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
+                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+                  dy=".3em">Thumbnail</text>
+              </svg>
+
+              <div class="card-body">
+                <p class="card-text">descrizione casa</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Apri</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Modifica</button>
+                  </div>
+                  <small class="text-muted">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
+                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+                  dy=".3em">Thumbnail</text>
+              </svg>
+
+              <div class="card-body">
+                <p class="card-text">descrizione casa </p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Apri</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Modifica</button>
+                  </div>
+                  <small class="text-muted">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!--FOOTER-->
+  <footer class="container py-5">
+    <div class="row">
+      <div class="col-12 col-md">
+        <p>Arready Immobiliare S.R.L.</p>
+        <small class="d-block mb-3 text-muted">&copy; 2017–2021</small>
+        <img src="test.jpg" style="width: 279px; height: 62px;" title="Arready Immobiliare">
+      </div>
+
+      <div class="col-6 col-md">
+        <h5>Assistenza</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="link-secondary" href="#">Domande frequenti</a></li>
+          <li><a class="link-secondary" href="#">Centro assistenza</a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-md">
+        <h5>Informazioni</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="link-secondary" href="#">Informazioni sull'azienda</a></li>
+          <li><a class="link-secondary" href="#">Vuoi lavorare con noi?</a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-md">
+        <h5>Cagate Legali</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="link-secondary" href="#">Preferenze Cookie</a></li>
+          <li><a class="link-secondary" href="#">Privacy</a></li>
+          <li><a class="link-secondary" href="#">Condizioni d'uso</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!--tasto back to top-->
+  <div class="back-top-button" id="back-top-button">
+    <button class="btn btn-secondary"
+      style="border-radius: 50%; width: 60px; height: 60px; padding: 10px 10px 10px 10px;">
+      <a href="#">
+        <img src="components/icon/arrow_upward_white_24dp.svg" alt="Arrow-upward" title="Torna in cima">
+      </a>
+    </button>
+  </div>
+  <!--SCRIPTING-->
+  <script>
+    back_top = document.getElementById('back-top-button');
+
+    window.addEventListener("scroll", () => {
+      var y = window.scrollY;
+
+      try {
+        if (y <= 100) {
+          back_top.classList.add('disappear');
+          return;
+        } else {
+          back_top.classList.remove('disappear');
+          // note that this is a class defined in your CSS.
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    );
+  </script>
+
+
+  <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+
+</html>
+
+<!--
+  <h1 class="fw-light">Annunci di vendita</h1>
+          <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator,
+            etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+          <p>
+            <a href="#" class="btn btn-primary my-2">Main call to action</a>
+            <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+          </p>
+
+-->

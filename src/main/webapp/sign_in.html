@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="it">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.88.1">
+  <title>Schermata login e registrazione</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
+
+
+
+  <!-- CSS di Bootstrap -->
+  <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+
+
+  <!-- Custom styles for this template -->
+  <link href="signin.css" rel="stylesheet">
+</head>
+
+
+<body class="text-center">
+
+  <!-- MAIN -->
+
+  <main class="form-signin">
+    <form action="sign-in" method="post">
+      <img class="mb-4" src="test.jpg" alt="" width="72" height="57">
+      <h1 class="h3 mb-3 fw-normal">Registrazione</h1>
+
+      <div class="form-floating">
+        <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome">
+        <label for="floatingText">Nome</label>
+      </div>
+      <div class="form-floating">
+        <input type="text" class="form-control" name="cognome" id="cognome" placeholder="Cognome">
+        <label for="floatingText">Cognome</label>
+      </div>
+      <div class="form-floating">
+        <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com">
+        <label for="floatingInput">Indirizzo email</label>
+      </div>
+      <div class="form-floating">
+        <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+        <label for="floatingPassword">Password</label>
+      </div>
+
+      <div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" name="ricordami" value="remember-me"> Ricordami
+        </label>
+      </div>
+
+      <input class="w-100 btn btn-lg btn-primary" type="submit" value="Registrati"></input>
+
+    </form>
+  </main>
+
+  <!--FOOTER /pensare se togliere
+  <footer class="container py-3c" style="bottom: 0; position: absolute; ">
+    <div class="row">
+      <div class="col-12 col-md">
+        <p>Arready Immobiliare S.R.L.</p>
+        <small class="d-block mb-3 text-muted">&copy; 2017–2021</small>
+        <img src="test.jpg" style="width: 279px; height: 62px;" title="Arready Immobiliare">
+      </div>
+
+      <div class="col-6 col-md">
+        <h5>Assistenza</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="link-secondary" href="#">Domande frequenti</a></li>
+          <li><a class="link-secondary" href="#">Centro assistenza</a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-md">
+        <h5>Informazioni</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="link-secondary" href="#">Informazioni sull'azienda</a></li>
+          <li><a class="link-secondary" href="#">Vuoi lavorare con noi?</a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-md">
+        <h5>Cagate Legali</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="link-secondary" href="#">Preferenze Cookie</a></li>
+          <li><a class="link-secondary" href="#">Privacy</a></li>
+          <li><a class="link-secondary" href="#">Condizioni d'uso</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>-->
+
+</body>
+
+</html>
