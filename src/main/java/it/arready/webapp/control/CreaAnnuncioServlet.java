@@ -15,14 +15,15 @@ import jakarta.servlet.http.HttpServletResponse;
 public class CreaAnnuncioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UtenteServiceImpl utente = new UtenteServiceImpl();
-       
-    public CreaAnnuncioServlet() {
-        super();
-    }
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public CreaAnnuncioServlet() {
+		super();
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		Annuncio annuncio = new Annuncio();
-		
+		annuncio.setDataAnnuncio(null);
 	}
 
 }
