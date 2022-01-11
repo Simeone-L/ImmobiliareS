@@ -2,17 +2,16 @@ package it.arready.webapp.control;
 
 import java.io.IOException;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import it.arready.webapp.model.Utente;
 import it.arready.webapp.service.ServiceException;
 import it.arready.webapp.service.UtenteService;
 import it.arready.webapp.service.impl.UtenteServiceImpl;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/LoginServlet")
 public class RegistrazioneServlet extends HttpServlet {
@@ -26,7 +25,7 @@ public class RegistrazioneServlet extends HttpServlet {
 			throws ServletException, IOException {
 		Utente utente = new Utente();
 		utente.setNome("nome");
-		utente.setNome("cognome");
+		utente.setCognome("cognome");
 		utente.setEmail("email");
 		utente.setPassword("password");
 
@@ -78,7 +77,7 @@ public class RegistrazioneServlet extends HttpServlet {
 			request.setAttribute("errorPassword", "Campo Obbligatorio");
 			hasErrors = true;
 		}
-		
+
 		return hasErrors;
 	}
 }
