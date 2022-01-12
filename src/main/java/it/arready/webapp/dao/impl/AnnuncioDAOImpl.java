@@ -83,7 +83,7 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 	public Annuncio findByTitolo(Connection conn, String titolo) throws DAOException {
 		String sql = "select * from annuncio " + "join immobile on immobile.id = annuncio.immobile_id "
 				+ "join indirizzo on indirizzo.id = immobile.indirizzo_id "
-				+ "join utente on utente.id = annuncio.utente_id " + "where annuncio.titolo LIKE %?%";
+				+ "join utente on utente.id = annuncio.utente_id " + "where annuncio.titolo = ?";
 		System.out.println(sql);
 		Annuncio annuncio = null;
 		PreparedStatement statement = null;
@@ -183,7 +183,7 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 
 	@Override
 	public List<Annuncio> orderByFind(Connection connection, Float prezzoMin, Float prezzoMax, Integer numLocali,
-			Integer numBagni, Float superficie, Integer piano, StatoImmobile statoImmobile, String citta)
+			Integer numBagni, Float superficie, Integer piano, StatoImmobile statoImmobile, String citta, String titolo)
 			throws DAOException {
 		String sql = "SELECT * FROM annuncio " + "INNER JOIN immobile ON annuncio.immobile_id = immobile.id "
 				+ "INNER JOIN indirizzo ON indirizzo.id = immobile.indirizzo_id "
@@ -227,6 +227,11 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 		if (citta != null) {
 			stringParameters.add("citta=?");
 			acceptParameters.add(citta);
+		}
+
+		if (titolo != null) {
+			stringParameters.add("titolo LIKE %?%");
+			acceptParameters.add(titolo);
 		}
 
 		if (stringParameters.size() > 0) {

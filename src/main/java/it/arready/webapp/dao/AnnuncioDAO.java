@@ -19,6 +19,7 @@ public interface AnnuncioDAO {
 	Annuncio findByTitolo(Connection conn, String titolo) throws DAOException;
 
 	List<Annuncio> orderByFind(Connection conn, Float prezzoMin, Float prezzoMax, Integer numLocali, Integer numBagni,
-			Float superficie, Integer piano, StatoImmobile statoImmobile, String citta) throws DAOException;
+			Float superficie, Integer piano, StatoImmobile statoImmobile, String citta, String titolo)
+			throws DAOException;
 
 }

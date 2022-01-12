@@ -116,14 +116,15 @@ public class AnnuncioServiceImpl implements AnnuncioService {
 
 	@Override
 	public List<Annuncio> orderByFind(Float prezzoMin, Float prezzoMax, Integer numLocali, Integer numBagni,
-			Float superficie, Integer piano, StatoImmobile statoImmobile, String citta) throws ServiceException {
+			Float superficie, Integer piano, StatoImmobile statoImmobile, String citta, String titolo)
+			throws ServiceException {
 		List<Annuncio> annunci = null;
 		Connection connection = null;
 		try {
 			connection = DataSource.getInstance().getConnection();
 			DBUtil.setAutoCommit(connection, false);
 			annunci = annuncioDAO.orderByFind(connection, prezzoMin, prezzoMax, numLocali, numBagni, superficie, piano,
-					statoImmobile, citta);
+					statoImmobile, citta, titolo);
 			DBUtil.commit(connection);
 		} catch (DAOException e) {
 			System.err.println(e.getMessage());

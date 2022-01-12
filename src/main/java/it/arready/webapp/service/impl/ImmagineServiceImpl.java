@@ -10,11 +10,12 @@ import it.arready.webapp.dao.DataSource;
 import it.arready.webapp.dao.ImmagineDAO;
 import it.arready.webapp.dao.impl.ImmagineDAOImpl;
 import it.arready.webapp.model.Immagine;
+import it.arready.webapp.model.Immobile;
 import it.arready.webapp.service.ImmagineService;
 import it.arready.webapp.service.ServiceException;
 
 public class ImmagineServiceImpl implements ImmagineService {
-	
+
 	private ImmagineDAO immagineDAO = new ImmagineDAOImpl();
 
 	@Override
@@ -35,13 +36,13 @@ public class ImmagineServiceImpl implements ImmagineService {
 	}
 
 	@Override
-	public List<Immagine> ElencoImmagini() throws ServiceException {
+	public List<Immagine> ElencoImmagini(Immobile immobile) throws ServiceException {
 		Connection conn = null;
 		List<Immagine> immagini = new ArrayList<Immagine>();
 		try {
 			conn = DataSource.getInstance().getConnection();
 			DBUtil.setAutoCommit(conn, false);
-			immagini = immagineDAO.findAll(conn);
+			immagini = immagineDAO.findByImmobile(conn, immobile);
 			DBUtil.commit(conn);
 		} catch (DAOException e) {
 			System.out.println(e.getMessage());
@@ -86,5 +87,5 @@ public class ImmagineServiceImpl implements ImmagineService {
 			DBUtil.close(conn);
 		}
 	}
-	
+
 }
