@@ -1,32 +1,31 @@
 package it.arready.webapp.control;
 
 import java.io.IOException;
-import java.util.Date;
+import java.sql.Date;
 
-import it.arready.webapp.dao.UtenteDAO;
-import it.arready.webapp.dao.impl.UtenteDAOImpl;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import it.arready.webapp.model.Annuncio;
 import it.arready.webapp.model.Annuncio.StatoVendita;
 import it.arready.webapp.model.Immobile;
 import it.arready.webapp.model.Immobile.StatoImmobile;
 import it.arready.webapp.model.Indirizzo;
 import it.arready.webapp.model.Utente;
-import it.arready.webapp.service.ImmobileService;
+import it.arready.webapp.service.AnnuncioService;
 import it.arready.webapp.service.ServiceException;
 import it.arready.webapp.service.UtenteService;
-import it.arready.webapp.service.impl.ImmobileServiceImpl;
+import it.arready.webapp.service.impl.AnnuncioServiceImpl;
 import it.arready.webapp.service.impl.UtenteServiceImpl;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/crea-annuncio")
 public class CreaAnnuncioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private ImmobileService immobileService = new ImmobileServiceImpl();
+	private AnnuncioService annuncioService = new AnnuncioServiceImpl();
 	private UtenteService utenteService = new UtenteServiceImpl();
 
 	public CreaAnnuncioServlet() {
@@ -36,18 +35,12 @@ public class CreaAnnuncioServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Date data = new Date();
+		Date data = null;
 
 		Immobile immobile = null;
 		Utente utente = null;
 		Indirizzo indirizzo = null;
 		Annuncio annuncio = null;
-
-		for (StatoVendita statoVendita : StatoVendita.values()) {
-			if (annuncio.getStatoVendita().equals(StatoVendita.values())) {
-				annuncio.setStatoVendita(statoVendita);
-			}
-		}
 
 		try {
 //			immobileService.save(immobile); // (indirizzo, immobile, annuncio)
@@ -91,7 +84,7 @@ public class CreaAnnuncioServlet extends HttpServlet {
 			immobile.setPiano(pianoInt);
 
 			for (StatoImmobile statoImmobile : StatoImmobile.values()) {
-				if (immobile.getStatoImmobile().equals(StatoImmobile.values())) {
+				if (immobile.getStatoImmobile().equals(statoImmobile)) {
 					immobile.setStatoImmobile(statoImmobile);
 				}
 			}
@@ -101,7 +94,7 @@ public class CreaAnnuncioServlet extends HttpServlet {
 			annuncio.setDataAnnuncio(data);
 			annuncio.setImmobile(immobile);
 			for (StatoVendita statoVendita : StatoVendita.values()) {
-				if (annuncio.getStatoVendita().equals(StatoVendita.values())) {
+				if (annuncio.getStatoVendita().equals(statoVendita)) {
 					annuncio.setStatoVendita(statoVendita);
 				}
 			}
