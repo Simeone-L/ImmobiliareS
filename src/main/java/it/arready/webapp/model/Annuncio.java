@@ -39,7 +39,16 @@ public class Annuncio {
 	}
 
 	public Annuncio() {
-		
+		super();
+	}
+
+	public Annuncio(int id, Date dataAnnuncio, Immobile immobile, StatoVendita statoVendita, Utente utente) {
+		super();
+		this.id = id;
+		this.dataAnnuncio = dataAnnuncio;
+		this.immobile = immobile;
+		this.statoVendita = statoVendita;
+		this.utente = utente;
 	}
 
 	public int getId() {

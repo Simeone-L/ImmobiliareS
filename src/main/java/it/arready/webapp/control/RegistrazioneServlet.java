@@ -2,19 +2,18 @@ package it.arready.webapp.control;
 
 import java.io.IOException;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import it.arready.webapp.model.Utente;
 import it.arready.webapp.service.ServiceException;
 import it.arready.webapp.service.UtenteService;
 import it.arready.webapp.service.impl.UtenteServiceImpl;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/LoginServlet")
+@WebServlet("/RegistrazioneServlet")
 public class RegistrazioneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UtenteService utenteService = new UtenteServiceImpl();
@@ -25,10 +24,10 @@ public class RegistrazioneServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Utente utente = new Utente();
-		utente.setNome("nome");
-		utente.setNome("cognome");
-		utente.setEmail("email");
-		utente.setPassword("password");
+		utente.setNome(request.getParameter("nome"));
+		utente.setCognome(request.getParameter("cognome"));
+		utente.setEmail(request.getParameter("email"));
+		utente.setPassword(request.getParameter("password"));
 
 		if (validate(request)) {
 			request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -47,7 +46,7 @@ public class RegistrazioneServlet extends HttpServlet {
 			request.getRequestDispatcher("").forward(request, response);
 		} catch (ServiceException e) {
 			System.err.println(e.getMessage());
-			response.sendRedirect("");
+			response.sendRedirect("error.html");
 		}
 
 		doGet(request, response);
@@ -78,7 +77,7 @@ public class RegistrazioneServlet extends HttpServlet {
 			request.setAttribute("errorPassword", "Campo Obbligatorio");
 			hasErrors = true;
 		}
-		
+
 		return hasErrors;
 	}
 }

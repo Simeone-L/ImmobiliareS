@@ -23,9 +23,9 @@ public class ImmobileDAOImpl implements ImmobileDAO {
 			statement.setString(1, immobile.getDescrizione());
 			statement.setFloat(2, immobile.getPrezzo());
 			statement.setInt(3, immobile.getNumLocali());
-			statement.setInt(4 , immobile.getNumBagni());
-			statement.setFloat(5 , immobile.getSuperficie());
-			statement.setInt(6 , immobile.getPiano());
+			statement.setInt(4, immobile.getNumBagni());
+			statement.setFloat(5, immobile.getSuperficie());
+			statement.setInt(6, immobile.getPiano());
 			statement.setBoolean(7, immobile.isVenduto());
 			statement.setString(8, immobile.getStatoImmobile().getNome());
 			statement.setInt(9, immobile.getIndirizzo().getId());
@@ -53,9 +53,9 @@ public class ImmobileDAOImpl implements ImmobileDAO {
 			statement.setString(1, immobile.getDescrizione());
 			statement.setFloat(2, immobile.getPrezzo());
 			statement.setInt(3, immobile.getNumLocali());
-			statement.setInt(4 , immobile.getNumBagni());
-			statement.setFloat(5 , immobile.getSuperficie());
-			statement.setInt(6 , immobile.getPiano());
+			statement.setInt(4, immobile.getNumBagni());
+			statement.setFloat(5, immobile.getSuperficie());
+			statement.setInt(6, immobile.getPiano());
 			statement.setBoolean(7, immobile.isVenduto());
 			statement.setString(8, immobile.getStatoImmobile().getNome());
 			statement.setInt(9, immobile.getIndirizzo().getId());
@@ -83,5 +83,4 @@ public class ImmobileDAOImpl implements ImmobileDAO {
 			DBUtil.close(statement);
 		}
 	}
-
 }
