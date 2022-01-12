@@ -3,12 +3,14 @@ package it.arready.webapp.control;
 import java.io.IOException;
 import java.sql.Date;
 
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 
 import it.arready.webapp.model.Annuncio;
 import it.arready.webapp.model.Annuncio.StatoVendita;
@@ -43,7 +45,7 @@ public class CreaAnnuncioServlet extends HttpServlet {
 		Annuncio annuncio = null;
 
 		try {
-//			immobileService.save(immobile); // (indirizzo, immobile, annuncio)
+			annuncioService.save(annuncio);
 			HttpSession session = request.getSession();
 
 			immobile = new Immobile();
@@ -83,11 +85,16 @@ public class CreaAnnuncioServlet extends HttpServlet {
 			int pianoInt = Integer.parseInt(pianoString);
 			immobile.setPiano(pianoInt);
 
+
 			for (StatoImmobile statoImmobile : StatoImmobile.values()) {
 				if (immobile.getStatoImmobile().equals(statoImmobile)) {
 					immobile.setStatoImmobile(statoImmobile);
 				}
 			}
+
+			String statoImmobileString = request.getParameter("statoImmobile");
+			StatoImmobile statoImmobile = StatoImmobile.corrispondenzaStatoString(statoImmobileString);
+			immobile.setStatoImmobile(statoImmobile);
 			immobile.setIndirizzo(indirizzo);
 
 			// inizio annuncio
@@ -98,9 +105,13 @@ public class CreaAnnuncioServlet extends HttpServlet {
 					annuncio.setStatoVendita(statoVendita);
 				}
 			}
+
+			String statoVenditaString = request.getParameter("statoVendita");
+			StatoVendita statoVendita = StatoVendita.corrispondenzaStatoString(statoVenditaString);
+			annuncio.setStatoVendita(statoVendita);
 			// session.getAttribute X, utenteDAOFindByX
-			String nome = (String) session.getAttribute("nome");
-			utente = utenteService.findByUsername(nome);
+			String username = (String) session.getAttribute("username");
+			utente = utenteService.findByUsername(username);
 			annuncio.setUtente(utente);
 
 			request.getRequestDispatcher("").forward(request, response);
@@ -110,6 +121,7 @@ public class CreaAnnuncioServlet extends HttpServlet {
 			response.sendRedirect("error.html");
 		}
 		doGet(request, response);
+
 	}
 
 }
