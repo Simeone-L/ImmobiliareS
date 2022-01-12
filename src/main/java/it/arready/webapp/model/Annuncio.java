@@ -6,6 +6,7 @@ public class Annuncio {
 
 	private int id;
 	private Date dataAnnuncio;
+	private String titolo;
 	private Immobile immobile;
 	private StatoVendita statoVendita;
 	private Utente utente;
@@ -51,13 +52,23 @@ public class Annuncio {
 		super();
 	}
 
-	public Annuncio(int id, Date dataAnnuncio, Immobile immobile, StatoVendita statoVendita, Utente utente) {
+	public Annuncio(int id, String titolo, Date dataAnnuncio, Immobile immobile, StatoVendita statoVendita,
+			Utente utente) {
 		super();
 		this.id = id;
+		this.titolo = titolo;
 		this.dataAnnuncio = dataAnnuncio;
 		this.immobile = immobile;
 		this.statoVendita = statoVendita;
 		this.utente = utente;
+	}
+
+	public String getTitolo() {
+		return titolo;
+	}
+
+	public void setTitolo(String titolo) {
+		this.titolo = titolo;
 	}
 
 	public int getId() {

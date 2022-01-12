@@ -80,6 +80,57 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 	}
 
 	@Override
+	public Annuncio findByTitolo(Connection conn, String titolo) throws DAOException {
+		String sql = "select * from annuncio " + "join immobile on immobile.id = annuncio.immobile_id "
+				+ "join indirizzo on indirizzo.id = immobile.indirizzo_id "
+				+ "join utente on utente.id = annuncio.utente_id " + "where annuncio.titolo LIKE %?%";
+		System.out.println(sql);
+		Annuncio annuncio = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		try {
+			statement = conn.prepareStatement(sql);
+			statement.setString(1, titolo);
+			resultSet = statement.executeQuery();
+			if (resultSet.next()) {
+				annuncio = new Annuncio();
+				annuncio.setId(resultSet.getInt(1));
+				annuncio.setDataAnnuncio(resultSet.getDate(2));
+				annuncio.setStatoVendita(StatoVendita.corrispondenzaStato(resultSet.getInt(4)));
+				Immobile immobile = new Immobile();
+				immobile.setId(resultSet.getInt(6));
+				immobile.setDescrizione(resultSet.getString(7));
+				immobile.setPrezzo(resultSet.getFloat(8));
+				immobile.setNumLocali(resultSet.getInt(9));
+				immobile.setNumBagni(resultSet.getInt(10));
+				immobile.setSuperficie(resultSet.getFloat(11));
+				immobile.setPiano(resultSet.getInt(12));
+				immobile.setVenduto(resultSet.getBoolean(13));
+				immobile.setStatoImmobile(StatoImmobile.corrispondenzaStato(resultSet.getInt(14)));
+				Indirizzo indirizzo = new Indirizzo();
+				indirizzo.setId(resultSet.getInt(16));
+				indirizzo.setProvincia(resultSet.getString(17));
+				indirizzo.setCitta(resultSet.getString(18));
+				indirizzo.setVia(resultSet.getString(19));
+				indirizzo.setNumeroCivico(resultSet.getInt(20));
+				Utente utente = new Utente();
+				utente.setId(resultSet.getInt(21));
+				utente.setUsername(resultSet.getString(22));
+				immobile.setIndirizzo(indirizzo);
+				annuncio.setImmobile(immobile);
+				annuncio.setUtente(utente);
+			}
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+			throw new DAOException(e.getMessage(), e);
+		} finally {
+			DBUtil.close(resultSet);
+			DBUtil.close(statement);
+		}
+		return annuncio;
+	}
+
+	@Override
 	public Annuncio findById(Connection conn, int id) throws DAOException {
 		String sql = "select * from annuncio " + "join immobile on immobile.id = annuncio.immobile_id "
 				+ "join indirizzo on indirizzo.id = immobile.indirizzo_id "

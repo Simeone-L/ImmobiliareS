@@ -23,7 +23,7 @@ public class AnnuncioServiceImpl implements AnnuncioService {
 	private IndirizzoDAO indirizzoDAO = new IndirizzoDAOImpl();
 	private ImmobileDAO immobileDAO = new ImmobileDAOImpl();
 	private AnnuncioDAO annuncioDAO = new AnnuncioDAOImpl();
-	
+
 	@Override
 	public void save(Annuncio annuncio) throws ServiceException {
 		Connection connection = null;
@@ -42,7 +42,6 @@ public class AnnuncioServiceImpl implements AnnuncioService {
 			DBUtil.close(connection);
 		}
 	}
-	
 
 	@Override
 	public void update(Immobile immobile) throws ServiceException {
@@ -60,10 +59,7 @@ public class AnnuncioServiceImpl implements AnnuncioService {
 			DBUtil.close(connection);
 		}
 	}
-	
-	
-	
-	
+
 	public void delete(Immobile immobile) throws ServiceException {
 		Connection connection = null;
 		try {
@@ -100,6 +96,25 @@ public class AnnuncioServiceImpl implements AnnuncioService {
 	}
 
 	@Override
+	public Annuncio findByTitolo(String titolo) throws ServiceException {
+		Annuncio annuncio = null;
+		Connection connection = null;
+		try {
+			connection = DataSource.getInstance().getConnection();
+			DBUtil.setAutoCommit(connection, false);
+			annuncio = annuncioDAO.findByTitolo(connection, titolo);
+			DBUtil.commit(connection);
+		} catch (DAOException e) {
+			System.err.println(e.getMessage());
+			DBUtil.rollback(connection);
+			throw new ServiceException(e.getMessage(), e);
+		} finally {
+			DBUtil.close(connection);
+		}
+		return annuncio;
+	}
+
+	@Override
 	public List<Annuncio> orderByFind(Float prezzoMin, Float prezzoMax, Integer numLocali, Integer numBagni,
 			Float superficie, Integer piano, StatoImmobile statoImmobile, String citta) throws ServiceException {
 		List<Annuncio> annunci = null;
@@ -107,7 +122,8 @@ public class AnnuncioServiceImpl implements AnnuncioService {
 		try {
 			connection = DataSource.getInstance().getConnection();
 			DBUtil.setAutoCommit(connection, false);
-			annunci = annuncioDAO.orderByFind(connection, prezzoMin, prezzoMax, numLocali, numBagni, superficie, piano, statoImmobile, citta);
+			annunci = annuncioDAO.orderByFind(connection, prezzoMin, prezzoMax, numLocali, numBagni, superficie, piano,
+					statoImmobile, citta);
 			DBUtil.commit(connection);
 		} catch (DAOException e) {
 			System.err.println(e.getMessage());
@@ -118,4 +134,5 @@ public class AnnuncioServiceImpl implements AnnuncioService {
 		}
 		return annunci;
 	}
+
 }
