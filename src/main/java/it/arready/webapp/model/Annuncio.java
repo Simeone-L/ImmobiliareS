@@ -1,6 +1,6 @@
 package it.arready.webapp.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Annuncio {
 
@@ -15,15 +15,24 @@ public class Annuncio {
 
 		private final int i;
 		private final String nome;
-		
+
 		StatoVendita(int i, String nome) {
 			this.i = i;
 			this.nome = nome;
 		}
-		
+
 		public static StatoVendita corrispondenzaStato(int sI) {
-			for(StatoVendita statoVendita : StatoVendita.values()) {
-				if(statoVendita.i == sI) return statoVendita;		
+			for (StatoVendita statoVendita : StatoVendita.values()) {
+				if (statoVendita.i == sI)
+					return statoVendita;
+			}
+			return null;
+		}
+
+		public static StatoVendita corrispondenzaStatoString(String sI) {
+			for (StatoVendita statoVendita : StatoVendita.values()) {
+				if (statoVendita.nome.equals(sI))
+					return statoVendita;
 			}
 			return null;
 		}
@@ -35,7 +44,7 @@ public class Annuncio {
 		public String getNome() {
 			return nome;
 		}
-		
+
 	}
 
 	public Annuncio() {

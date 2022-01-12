@@ -3,18 +3,16 @@ package it.arready.webapp.control;
 import java.io.IOException;
 import java.util.Date;
 
-import it.arready.webapp.dao.UtenteDAO;
-import it.arready.webapp.dao.impl.UtenteDAOImpl;
 import it.arready.webapp.model.Annuncio;
 import it.arready.webapp.model.Annuncio.StatoVendita;
 import it.arready.webapp.model.Immobile;
 import it.arready.webapp.model.Immobile.StatoImmobile;
 import it.arready.webapp.model.Indirizzo;
 import it.arready.webapp.model.Utente;
-import it.arready.webapp.service.ImmobileService;
+import it.arready.webapp.service.AnnuncioService;
 import it.arready.webapp.service.ServiceException;
 import it.arready.webapp.service.UtenteService;
-import it.arready.webapp.service.impl.ImmobileServiceImpl;
+import it.arready.webapp.service.impl.AnnuncioServiceImpl;
 import it.arready.webapp.service.impl.UtenteServiceImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -26,7 +24,7 @@ import jakarta.servlet.http.HttpSession;
 @WebServlet("/crea-annuncio")
 public class CreaAnnuncioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private ImmobileService immobileService = new ImmobileServiceImpl();
+	private AnnuncioService annuncioService = new AnnuncioServiceImpl();
 	private UtenteService utenteService = new UtenteServiceImpl();
 
 	public CreaAnnuncioServlet() {
@@ -43,14 +41,8 @@ public class CreaAnnuncioServlet extends HttpServlet {
 		Indirizzo indirizzo = null;
 		Annuncio annuncio = null;
 
-		for (StatoVendita statoVendita : StatoVendita.values()) {
-			if (annuncio.getStatoVendita().equals(StatoVendita.values())) {
-				annuncio.setStatoVendita(statoVendita);
-			}
-		}
-
 		try {
-//			immobileService.save(immobile); // (indirizzo, immobile, annuncio)
+			annuncioService.save(annuncio);
 			HttpSession session = request.getSession();
 
 			immobile = new Immobile();
@@ -90,24 +82,22 @@ public class CreaAnnuncioServlet extends HttpServlet {
 			int pianoInt = Integer.parseInt(pianoString);
 			immobile.setPiano(pianoInt);
 
-			for (StatoImmobile statoImmobile : StatoImmobile.values()) {
-				if (immobile.getStatoImmobile().equals(StatoImmobile.values())) {
-					immobile.setStatoImmobile(statoImmobile);
-				}
-			}
+			String statoImmobileString = request.getParameter("statoImmobile");
+			StatoImmobile statoImmobile = StatoImmobile.corrispondenzaStatoString(statoImmobileString);
+			immobile.setStatoImmobile(statoImmobile);
+
 			immobile.setIndirizzo(indirizzo);
 
 			// inizio annuncio
 			annuncio.setDataAnnuncio(data);
 			annuncio.setImmobile(immobile);
-			for (StatoVendita statoVendita : StatoVendita.values()) {
-				if (annuncio.getStatoVendita().equals(StatoVendita.values())) {
-					annuncio.setStatoVendita(statoVendita);
-				}
-			}
+
+			String statoVenditaString = request.getParameter("statoVendita");
+			StatoVendita statoVendita = StatoVendita.corrispondenzaStatoString(statoVenditaString);
+			annuncio.setStatoVendita(statoVendita);
 			// session.getAttribute X, utenteDAOFindByX
-			String nome = (String) session.getAttribute("nome");
-			utente = utenteService.findByUsername(nome);
+			String username = (String) session.getAttribute("username");
+			utente = utenteService.findByUsername(username);
 			annuncio.setUtente(utente);
 
 			request.getRequestDispatcher("").forward(request, response);
@@ -117,6 +107,7 @@ public class CreaAnnuncioServlet extends HttpServlet {
 			response.sendRedirect("error.html");
 		}
 		doGet(request, response);
+
 	}
 
 }
