@@ -119,7 +119,6 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 				Utente utente = new Utente();
 				utente.setId(resultSet.getInt(21));
 				utente.setUsername(resultSet.getString(22));
-				indirizzo.setImmobile(immobile);
 				immobile.setIndirizzo(indirizzo);
 				annuncio.setImmobile(immobile);
 				annuncio.setUtente(utente);
