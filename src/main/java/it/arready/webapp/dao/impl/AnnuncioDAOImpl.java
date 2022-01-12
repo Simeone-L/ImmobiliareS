@@ -137,13 +137,16 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 	public List<Annuncio> orderByFind(Connection connection, Float prezzoMin, Float prezzoMax, Integer numLocali, Integer numBagni,
 			Float superficie, Integer piano, StatoImmobile statoImmobile, String citta)
 			throws DAOException {
-		String sql = "SELECT * FROM annuncio INNER JOIN immobile ON annuncio.immobile_id = immobile.id ";
+		String sql = "SELECT * FROM annuncio " + 
+				"INNER JOIN immobile ON annuncio.immobile_id = immobile.id " +
+				"INNER JOIN indirizzo ON indirizzo.id = immobile.indirizzo_id " +
+				"INNER JOIN utente ON utente.id = annuncio.utente_id ";
 		List<String> stringParameters = new ArrayList<String>();
 		List<Object> acceptParameters = new ArrayList<Object>();
 		List<Annuncio> annunci = new ArrayList<Annuncio>();
-		if (statoImmobile != null) sql += "INNER JOIN stato_immobile ON stato_immobile.id = immobile.stato_immobile_id ";
+//		if (statoImmobile != null) sql += "INNER JOIN stato_immobile ON stato_immobile.id = immobile.stato_immobile_id ";
 		
-		if(citta != null) sql += "INNER JOIN indirizzo ON indirizzo.id = immobile.indirizzo_id ";
+//		if(citta != null) sql += "INNER JOIN indirizzo ON indirizzo.id = immobile.indirizzo_id ";
 		
 		stringParameters.add("prezzo BETWEEN ? AND ?");
 		acceptParameters.add(prezzoMin);
@@ -170,8 +173,8 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 		}
 		
 		if(statoImmobile != null) {
-			stringParameters.add("stato_immobile=?");
-			acceptParameters.add(statoImmobile);
+			stringParameters.add("stato_immobile_id=?");
+			acceptParameters.add(statoImmobile.getI());
 		}
 		
 		if(citta != null) {
@@ -193,7 +196,7 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 		
 		System.out.println(sql);
 		PreparedStatement statement = null;
-		ResultSet rs = null;
+		ResultSet resultSet = null;
 			try {
 				statement= connection.prepareStatement(sql);
 				for(int i = 0; i<acceptParameters.size(); i++) {
@@ -206,23 +209,38 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 					if(acceptParameters.get(i).getClass().getName() == "java.lang.String" ) {
 						statement.setString(i+1, acceptParameters.get(i).toString());
 					}
-					if(acceptParameters.get(i).getClass().getName() == "it.arready.webapp.model.Immobile.StatoImmobile") {
-						statement.setString(i+1, ((StatoImmobile)acceptParameters.get(i)).getNome());
-					}
+//					if(acceptParameters.get(i).getClass().getName() == "it.arready.webapp.model.Immobile.StatoImmobile") {
+//						statement.setString(i+1, ((StatoImmobile)acceptParameters.get(i)).getNome());
+//					}
 				}
-				rs = statement.executeQuery();
-				while(rs.next()) {
+				resultSet = statement.executeQuery();
+				while(resultSet.next()) {
 					Annuncio annuncio = new Annuncio();
-					
+					annuncio.setId(resultSet.getInt(1));
+					annuncio.setDataAnnuncio(resultSet.getDate(2));
+					annuncio.setStatoVendita(StatoVendita.corrispondenzaStato(resultSet.getInt(4)));
 					Immobile immobile = new Immobile();
-					immobile.setId(rs.getInt());
-					immobile.setPrezzo(rs.getFloat());
-					immobile.setNumLocali(rs.getInt());
-					immobile.setNumBagni(rs.getInt());
-					immobile.setSuperficie(rs.getFloat());
-					immobile.setPiano(rs.getInt());
-					immobile.setVenduto(rs.getBoolean());
-					
+					immobile.setId(resultSet.getInt(6));
+					immobile.setDescrizione(resultSet.getString(7));
+					immobile.setPrezzo(resultSet.getFloat(8));
+					immobile.setNumLocali (resultSet.getInt(9));
+					immobile.setNumBagni(resultSet.getInt(10));
+					immobile.setSuperficie(resultSet.getFloat(11));
+					immobile.setPiano(resultSet.getInt(12));
+					immobile.setVenduto(resultSet.getBoolean(13));
+					immobile.setStatoImmobile(StatoImmobile.corrispondenzaStato(resultSet.getInt(14)));
+					Indirizzo indirizzo = new Indirizzo();
+					indirizzo.setId(resultSet.getInt(16));
+					indirizzo.setProvincia(resultSet.getString(17));
+					indirizzo.setCitta(resultSet.getString(18));
+					indirizzo.setVia(resultSet.getString(19));
+					indirizzo.setNumeroCivico(resultSet.getInt(20));
+					Utente utente = new Utente();
+					utente.setId(resultSet.getInt(21));
+					utente.setUsername(resultSet.getString(22));
+					immobile.setIndirizzo(indirizzo);
+					annuncio.setImmobile(immobile);
+					annuncio.setUtente(utente);
 					annunci.add(annuncio);
 				}
 			} catch (SQLException e) {
