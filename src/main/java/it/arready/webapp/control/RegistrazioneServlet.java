@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/LoginServlet")
+@WebServlet("/RegistrazioneServlet")
 public class RegistrazioneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UtenteService utenteService = new UtenteServiceImpl();
@@ -24,10 +24,10 @@ public class RegistrazioneServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Utente utente = new Utente();
-		utente.setNome("nome");
-		utente.setCognome("cognome");
-		utente.setEmail("email");
-		utente.setPassword("password");
+		utente.setNome(request.getParameter("nome"));
+		utente.setCognome(request.getParameter("cognome"));
+		utente.setEmail(request.getParameter("email"));
+		utente.setPassword(request.getParameter("password"));
 
 		if (validate(request)) {
 			request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -46,7 +46,7 @@ public class RegistrazioneServlet extends HttpServlet {
 			request.getRequestDispatcher("").forward(request, response);
 		} catch (ServiceException e) {
 			System.err.println(e.getMessage());
-			response.sendRedirect("");
+			response.sendRedirect("error.html");
 		}
 
 		doGet(request, response);
