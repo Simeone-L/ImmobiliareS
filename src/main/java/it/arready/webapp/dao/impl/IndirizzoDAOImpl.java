@@ -12,7 +12,6 @@ import it.arready.webapp.dao.DBUtil;
 import it.arready.webapp.dao.IndirizzoDAO;
 import it.arready.webapp.model.Immobile;
 import it.arready.webapp.model.Indirizzo;
-import it.arready.webapp.model.Utente;
 
 public class IndirizzoDAOImpl implements IndirizzoDAO {
 

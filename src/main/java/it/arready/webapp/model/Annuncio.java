@@ -1,6 +1,6 @@
 package it.arready.webapp.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Annuncio {
 
@@ -13,19 +13,33 @@ public class Annuncio {
 	public enum StatoVendita {
 		AFFITTO(1, "Affitto"), AFFITTO_A_RISCATTO(2, "Affitto a riscatto"), VENDITA(3, "Vendita");
 
+		private final int i;
+		private final String nome;
+		
 		StatoVendita(int i, String nome) {
-
+			this.i = i;
+			this.nome = nome;
+		}
+		
+		public static StatoVendita corrispondenzaStato(int sI) {
+			for(StatoVendita statoVendita : StatoVendita.values()) {
+				if(statoVendita.i == sI) return statoVendita;		
+			}
+			return null;
 		}
 
+		public int getI() {
+			return i;
+		}
+
+		public String getNome() {
+			return nome;
+		}
+		
 	}
 
-	public Annuncio(int id, Date dataAnnuncio, Immobile immobile, StatoVendita statoVendita, Utente utente) {
-		super();
-		this.id = id;
-		this.dataAnnuncio = dataAnnuncio;
-		this.immobile = immobile;
-		this.statoVendita = statoVendita;
-		this.utente = utente;
+	public Annuncio() {
+		
 	}
 
 	public int getId() {
@@ -66,6 +80,12 @@ public class Annuncio {
 
 	public void setUtente(Utente utente) {
 		this.utente = utente;
+	}
+
+	@Override
+	public String toString() {
+		return "Annuncio [id=" + id + ", dataAnnuncio=" + dataAnnuncio + ", immobile=" + immobile + ", statoVendita="
+				+ statoVendita + ", utente=" + utente + "]";
 	}
 
 }

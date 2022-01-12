@@ -1,7 +1,5 @@
 package it.arready.webapp.model;
 
-import it.arready.webapp.model.Immobile.StatoImmobile;
-
 public class Immobile {
 
 	private int id;
