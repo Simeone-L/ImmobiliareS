@@ -27,9 +27,9 @@ public class ImmobileDAOImpl implements ImmobileDAO {
 			statement.setString(1, immobile.getDescrizione());
 			statement.setFloat(2, immobile.getPrezzo());
 			statement.setInt(3, immobile.getNumLocali());
-			statement.setInt(4 , immobile.getNumBagni());
-			statement.setFloat(5 , immobile.getSuperficie());
-			statement.setInt(6 , immobile.getPiano());
+			statement.setInt(4, immobile.getNumBagni());
+			statement.setFloat(5, immobile.getSuperficie());
+			statement.setInt(6, immobile.getPiano());
 			statement.setBoolean(7, immobile.isVenduto());
 			statement.setString(8, immobile.getStatoImmobile().getNome());
 			statement.setInt(9, immobile.getIndirizzo().getId());
@@ -57,9 +57,9 @@ public class ImmobileDAOImpl implements ImmobileDAO {
 			statement.setString(1, immobile.getDescrizione());
 			statement.setFloat(2, immobile.getPrezzo());
 			statement.setInt(3, immobile.getNumLocali());
-			statement.setInt(4 , immobile.getNumBagni());
-			statement.setFloat(5 , immobile.getSuperficie());
-			statement.setInt(6 , immobile.getPiano());
+			statement.setInt(4, immobile.getNumBagni());
+			statement.setFloat(5, immobile.getSuperficie());
+			statement.setInt(6, immobile.getPiano());
 			statement.setBoolean(7, immobile.isVenduto());
 			statement.setString(8, immobile.getStatoImmobile().getNome());
 			statement.setInt(9, immobile.getIndirizzo().getId());
@@ -104,7 +104,7 @@ public class ImmobileDAOImpl implements ImmobileDAO {
 				immobile.setId(resultSet.getInt(1));
 				immobile.setDescrizione(resultSet.getString(2));
 				immobile.setPrezzo(resultSet.getFloat(3));
-				immobile.setNumLocali (resultSet.getInt(4));
+				immobile.setNumLocali(resultSet.getInt(4));
 				immobile.setNumBagni(resultSet.getInt(5));
 				immobile.setSuperficie(resultSet.getFloat(6));
 				immobile.setPiano(resultSet.getInt(7));
@@ -116,7 +116,6 @@ public class ImmobileDAOImpl implements ImmobileDAO {
 				indirizzo.setCitta(resultSet.getString(13));
 				indirizzo.setVia(resultSet.getString(14));
 				indirizzo.setNumeroCivico(resultSet.getInt(15));
-				indirizzo.setImmobile(immobile);
 				immobile.setIndirizzo(indirizzo);
 			}
 		} catch (SQLException e) {
@@ -130,99 +129,101 @@ public class ImmobileDAOImpl implements ImmobileDAO {
 	}
 
 	@Override
-	public List<Immobile> orderByFind(Connection connection, Float prezzoMin, Float prezzoMax, Integer numLocali, Integer numBagni,
-			Float superficie, Integer piano, StatoImmobile statoImmobile, String citta)
+	public List<Immobile> orderByFind(Connection connection, Float prezzoMin, Float prezzoMax, Integer numLocali,
+			Integer numBagni, Float superficie, Integer piano, StatoImmobile statoImmobile, String citta)
 			throws DAOException {
 		String sql = "SELECT * FROM immobile ";
 		List<String> stringParameters = new ArrayList<String>();
 		List<Object> acceptParameters = new ArrayList<Object>();
 		List<Immobile> immobili = new ArrayList<Immobile>();
-		if (statoImmobile != null) sql += "INNER JOIN stato_immobile ON stato_immobile(id)=immobile.stato_immobile_id ";
-		
-		if(citta != null) sql += "INNER JOIN indirizzo ON indirizzo(id)=immobile.indirizzo_id ";
-		
+		if (statoImmobile != null)
+			sql += "INNER JOIN stato_immobile ON stato_immobile(id)=immobile.stato_immobile_id ";
+
+		if (citta != null)
+			sql += "INNER JOIN indirizzo ON indirizzo(id)=immobile.indirizzo_id ";
+
 		stringParameters.add("prezzo BETWEEN ? AND ?");
 		acceptParameters.add(prezzoMin);
 		acceptParameters.add(prezzoMax);
-		
-		if(numLocali != null) {
+
+		if (numLocali != null) {
 			stringParameters.add("num_locali=?");
 			acceptParameters.add(numLocali);
 		}
-		
-		if(numBagni != null) {
+
+		if (numBagni != null) {
 			stringParameters.add("numBagni=?");
 			acceptParameters.add(numBagni);
 		}
-		
-		if(superficie != null) {
+
+		if (superficie != null) {
 			stringParameters.add("superficie=?");
 			acceptParameters.add(superficie);
 		}
-		
-		if(piano != null) {
+
+		if (piano != null) {
 			stringParameters.add("piano=?");
 			acceptParameters.add(piano);
 		}
-		
-		if(statoImmobile != null) {
+
+		if (statoImmobile != null) {
 			stringParameters.add("stato_immobile=?");
 			acceptParameters.add(statoImmobile);
 		}
-		
-		if(citta != null) {
+
+		if (citta != null) {
 			stringParameters.add("citta=?");
 			acceptParameters.add(citta);
 		}
-				
-		if(stringParameters.size() > 0) {
+
+		if (stringParameters.size() > 0) {
 			sql += "WHERE ";
-		
-			for(int i=0; i<stringParameters.size(); i++) {
-				if(i != stringParameters.size()-1) {
-					sql += stringParameters.get(i)+" AND ";
+
+			for (int i = 0; i < stringParameters.size(); i++) {
+				if (i != stringParameters.size() - 1) {
+					sql += stringParameters.get(i) + " AND ";
 				} else {
 					sql += stringParameters.get(i);
 				}
 			}
 		}
-		
+
 		System.out.println(sql);
 		PreparedStatement statement = null;
 		ResultSet rs = null;
-			try {
-				statement= connection.prepareStatement(sql);
-				for(int i = 0; i<acceptParameters.size(); i++) {
-					if(acceptParameters.get(i).getClass().getName() == "java.lang.Float" ) {
-						statement.setFloat(i+1, Float.parseFloat(acceptParameters.get(i).toString()));
-					}
-					if(acceptParameters.get(i).getClass().getName() == "java.lang.Integer" ) {
-						statement.setInt(i+1, Integer.parseInt(acceptParameters.get(i).toString()));
-					}
-					if(acceptParameters.get(i).getClass().getName() == "java.lang.String" ) {
-						statement.setString(i+1, acceptParameters.get(i).toString());
-					}
-					if(acceptParameters.get(i).getClass().getName() == "it.arready.webapp.model.Immobile.StatoImmobile") {
-						statement.setString(i+1, ((StatoImmobile)acceptParameters.get(i)).getNome());
-					}
+		try {
+			statement = connection.prepareStatement(sql);
+			for (int i = 0; i < acceptParameters.size(); i++) {
+				if (acceptParameters.get(i).getClass().getName() == "java.lang.Float") {
+					statement.setFloat(i + 1, Float.parseFloat(acceptParameters.get(i).toString()));
 				}
-				rs = statement.executeQuery();
-				while(rs.next()) {
-					Immobile immobile = new Immobile();
-					immobile.setId(rs.getInt(1));
-					immobile.setDescrizione(rs.getString(2));
-					immobile.setPrezzo(rs.getFloat(3));
-					immobile.setNumLocali(rs.getInt(4));
-					immobile.setNumBagni(rs.getInt(5));
-					immobile.setSuperficie(rs.getFloat(6));
-					immobile.setPiano(rs.getInt(7));
-					immobile.setVenduto(rs.getBoolean(8));
-					immobili.add(immobile);
+				if (acceptParameters.get(i).getClass().getName() == "java.lang.Integer") {
+					statement.setInt(i + 1, Integer.parseInt(acceptParameters.get(i).toString()));
 				}
-			} catch (SQLException e) {
-				System.err.println(e.getMessage());
-				throw new DAOException(e.getMessage(), e);
+				if (acceptParameters.get(i).getClass().getName() == "java.lang.String") {
+					statement.setString(i + 1, acceptParameters.get(i).toString());
+				}
+				if (acceptParameters.get(i).getClass().getName() == "it.arready.webapp.model.Immobile.StatoImmobile") {
+					statement.setString(i + 1, ((StatoImmobile) acceptParameters.get(i)).getNome());
+				}
 			}
+			rs = statement.executeQuery();
+			while (rs.next()) {
+				Immobile immobile = new Immobile();
+				immobile.setId(rs.getInt(1));
+				immobile.setDescrizione(rs.getString(2));
+				immobile.setPrezzo(rs.getFloat(3));
+				immobile.setNumLocali(rs.getInt(4));
+				immobile.setNumBagni(rs.getInt(5));
+				immobile.setSuperficie(rs.getFloat(6));
+				immobile.setPiano(rs.getInt(7));
+				immobile.setVenduto(rs.getBoolean(8));
+				immobili.add(immobile);
+			}
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+			throw new DAOException(e.getMessage(), e);
+		}
 		return immobili;
 	}
 
