@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
+import com.oracle.wls.shaded.org.apache.xalan.lib.Redirect;
+
 import it.arready.webapp.model.Annuncio;
 import it.arready.webapp.model.Annuncio.StatoVendita;
 import it.arready.webapp.model.Immobile;
@@ -113,9 +115,8 @@ public class CreaAnnuncioServlet extends HttpServlet {
 			String username = (String) session.getAttribute("username");
 			utente = utenteService.findByUsername(username);
 			annuncio.setUtente(utente);
-
 			request.getRequestDispatcher("").forward(request, response);
-
+			response.sendRedirect("/ricerca_completa.html");
 		} catch (ServiceException e) {
 			System.err.println(e.getMessage());
 			response.sendRedirect("error.html");

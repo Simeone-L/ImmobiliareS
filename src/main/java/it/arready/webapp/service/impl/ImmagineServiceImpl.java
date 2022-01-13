@@ -15,7 +15,7 @@ import it.arready.webapp.service.ImmagineService;
 import it.arready.webapp.service.ServiceException;
 
 public class ImmagineServiceImpl implements ImmagineService {
-	
+
 	private ImmagineDAO immagineDAO = new ImmagineDAOImpl();
 
 	@Override
@@ -106,5 +106,5 @@ public class ImmagineServiceImpl implements ImmagineService {
 			DBUtil.close(conn);
 		}
 	}
-	
+
 }

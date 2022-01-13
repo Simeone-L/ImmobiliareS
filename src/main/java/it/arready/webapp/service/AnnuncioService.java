@@ -15,8 +15,9 @@ public interface AnnuncioService {
 
 	Annuncio findById(int id) throws ServiceException;
 
-	List<Annuncio> orderByFind(Float prezzoMin, Float prezzoMax, Integer numLocali, Integer numBagni,
-			Float superficie, Integer piano, StatoImmobile statoImmobile, String citta)
-			throws ServiceException;
+	Annuncio findByTitolo(String titolo) throws ServiceException;
+
+	List<Annuncio> orderByFind(Float prezzoMin, Float prezzoMax, Integer numLocali, Integer numBagni, Float superficie,
+			Integer piano, StatoImmobile statoImmobile, String citta, String titolo) throws ServiceException;
 
 }

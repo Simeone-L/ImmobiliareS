@@ -79,7 +79,7 @@
                     <button type="button" class="btn btn-outline-primary me-2 bottone-arready-2">Accedi</button>
                 </a>
                 <a href="sign_in.html" style="padding-right: 15px;">
-                    <button type="button" class="btn btn-primary bottone-arready">Registrati stronzo</button>
+                    <button type="button" class="btn btn-primary bottone-arready">Registrati</button>
                 </a>
 
             </div>
@@ -87,10 +87,122 @@
     </div>
 
     <!--titolo e autore-->
-    <div style="background-color: blue; padding-left: 50px; padding-top: 50px;">
+    <div style=" padding: 50px 50px 50px 50px; width: 100%;">
         <h1>TITOLO DELL'ANNUNCIO</h1>
-        <a href="utente" style="">link dell'utente proprietario dell'annuncio</a><!--da spostare sulla destra-->
+        <div style="text-align: right;">
+            <a href="#">link dell'utente proprietario dell'annuncio</a>
+            <!--da spostare sulla destra-->
+        </div>
     </div>
+
+    <!--carosello-->
+    <div style="padding: 50px 200px 50px 200px; ">
+        <main>
+            <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <!---->
+                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"
+                        aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
+                </div>
+
+                <div class="carousel-inner">
+                    <!---->
+                    <div class="carousel-item active">
+                        <img src="img/foto1.png" id="immagine">
+                    </div>
+
+                    <div class="carousel-item">
+                        <img src="img/foto2.png" id="immagine">
+                    </div>
+
+                    <div class="carousel-item">
+                        <img src="img/foto3.png" id="immagine">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </main>
+        <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+    </div>
+
+    <!--descrizione-->
+    <div style="padding-right: 150px; background-color: #be9447;">
+        <div style="float: left; width: 50%; padding-left: 200px; display: inline;">
+            <div style="width: fit-content;">
+                <pre style="font-size: 20px;">
+                    <!-- descrizione-->
+Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum 
+Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum 
+                </pre>
+            </div>
+        </div>
+        <div style="display: inline; float: right; padding-right: 200px;">
+            <p style="font-size: 40px;display: inline;" >Prezzo: </p>
+            <!--inserire prezzo--> 99.999€
+        </div>
+    </div>
+
+    
+
+    <div style="padding-top: 200px; padding-left: 200px; padding-bottom: 100px;">
+        <form action="" method="post">
+            <p style="font-size: 25px;">Contatta il venditore</p>
+            <input class="form-control" type="text" name="oggetto_messaggio" id="oggetto_messaggio" placeholder="oggetto del messaggio" style=" width: 25%; background-color: #be944749;">
+            <br>
+            <textarea  rows="4" cols="100" name="messaggio" form="contatta_venditore" style="background-color: #be944749;">Scrivi qui il tuo messaggio</textarea><br>
+            <input class="btn btn-primary bottone-arready" type="submit" value="Invia">
+        </form>
+    </div>
+
+    <!--FOOTER-->
+  <footer class="container py-5">
+    <div class="row">
+      <div class="col-12 col-md">
+        <p>Arready Immobiliare S.R.L.</p>
+        <small class="d-block mb-3 text-muted">&copy; 2017–2021</small>
+        <a href="#">
+          <img src="logo_img/logo.png" style="height: 62px;" title="Arready Immobiliare">
+        </a>
+      </div>
+
+      <div class="col-6 col-md">
+        <h5>Assistenza</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="link-secondary" href="#">Domande frequenti</a></li>
+          <li><a class="link-secondary" href="#">Centro assistenza</a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-md">
+        <h5>Informazioni</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="link-secondary" href="#">Informazioni sull'azienda</a></li>
+          <li><a class="link-secondary" href="#">Vuoi lavorare con noi?</a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-md">
+        <h5>Info Legali</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="link-secondary" href="#">Preferenze Cookie</a></li>
+          <li><a class="link-secondary" href="#">Privacy</a></li>
+          <li><a class="link-secondary" href="#">Condizioni d'uso</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
 </body>
 
 </html>

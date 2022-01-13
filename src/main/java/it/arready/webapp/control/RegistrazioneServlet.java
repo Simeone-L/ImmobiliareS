@@ -24,6 +24,7 @@ public class RegistrazioneServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Utente utente = new Utente();
+		utente.setUsername(request.getParameter("username"));
 		utente.setNome(request.getParameter("nome"));
 		utente.setCognome(request.getParameter("cognome"));
 		utente.setEmail(request.getParameter("email"));
@@ -38,11 +39,11 @@ public class RegistrazioneServlet extends HttpServlet {
 			utenteService.save(utente);
 			HttpSession session = request.getSession();
 			session.setAttribute("utente", utente);
+			session.setAttribute("username", utente.getUsername());
 			session.setAttribute("nome", utente.getNome());
 			session.setAttribute("cognome", utente.getCognome());
 			session.setAttribute("email", utente.getEmail());
 			session.setAttribute("password", utente.getPassword());
-
 			request.getRequestDispatcher("").forward(request, response);
 		} catch (ServiceException e) {
 			System.err.println(e.getMessage());
