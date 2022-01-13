@@ -55,8 +55,8 @@
       <h1 class="h3 mb-3 fw-normal">Accedi</h1>
 
       <div class="form-floating">
-        <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com">
-        <label for="floatingInput">Indirizzo email</label>
+        <input type="text" class="form-control" name="username" id="username" placeholder="username">
+        <label for="floatingInput">Username</label>
       </div>
       <div class="form-floating">
         <input type="password" class="form-control" name="password" id="password" placeholder="Password">
