@@ -3,6 +3,8 @@ package it.arready.webapp.control;
 import java.io.IOException;
 import java.util.Date;
 
+import com.oracle.wls.shaded.org.apache.xalan.lib.Redirect;
+
 import it.arready.webapp.model.Annuncio;
 import it.arready.webapp.model.Annuncio.StatoVendita;
 import it.arready.webapp.model.Immobile;
@@ -99,8 +101,9 @@ public class CreaAnnuncioServlet extends HttpServlet {
 			String username = (String) session.getAttribute("username");
 			utente = utenteService.findByUsername(username);
 			annuncio.setUtente(utente);
-
-			request.getRequestDispatcher("").forward(request, response);
+			this.getServletContext().getRequestDispatcher("/caricamento_annuncio.html").forward(request, response);
+//			request.getRequestDispatcher("").forward(request, response);
+			response.sendRedirect("index_immobiliare.html");
 
 		} catch (ServiceException e) {
 			System.err.println(e.getMessage());

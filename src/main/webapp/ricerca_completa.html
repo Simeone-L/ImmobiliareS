@@ -37,6 +37,16 @@
         font-size: 3.5rem;
       }
     }
+
+    .bottone-arready {
+      background-color: #be9447;
+      border-color: #be9447;
+    }
+
+    .bottone-arready-2 {
+      border-color: #be9447;
+      color: #be9447;
+    }
   </style>
 
 
@@ -66,10 +76,10 @@
       </ul>
       <div class="col-md-3 text-end">
         <a href="log_in.html">
-          <button type="button" class="btn btn-outline-primary me-2">Accedi</button>
+          <button type="button" class="btn btn-outline-primary me-2 bottone-arready-2">Accedi</button>
         </a>
         <a href="sign_in.html" style="padding-right: 15px;">
-          <button type="button" class="btn btn-primary">Registrati stronzo</button>
+          <button type="button" class="btn btn-primary bottone-arready">Registrati</button>
         </a>
 
       </div>
@@ -90,6 +100,12 @@
         <h4 class="mb-3">Inserisci campi</h4>
         <form class="needs-validation" novalidate>
           <div class="row g-3">
+            <div class="col-12">
+              <label for="titolo" class="form-label">Nome dell'articolo</label>
+              <input type="text" class="form-control" id="titolo" placeholder="" value="Qualsiasi">
+  
+            </div>
+
             <div class="col-sm-6">
               <label for="città" class="form-label">Città</label>
               <input type="text" class="form-control" id="città" placeholder="" value="Qualsiasi">
@@ -133,7 +149,7 @@
               <label for="piano" class="form-label">Piano</label>
               <select class="form-select" id="piano">
                 <option value="">Qualsiasi</option>
-                <option>Piano terra</option>
+                <option>0</option>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -244,9 +260,3 @@
 </body>
 
 </html>
-<!-- <p>Carica un'immagine per il tuo annuncio:</p>
-
-<form action="/action_page.php">
-  <input type="file" id="myFile" name="filename">
-  <input type="submit">
-</form> -->

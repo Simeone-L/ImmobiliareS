@@ -195,9 +195,29 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 
 //		if(citta != null) sql += "INNER JOIN indirizzo ON indirizzo.id = immobile.indirizzo_id ";
 
-		stringParameters.add("prezzo BETWEEN ? AND ?");
-		acceptParameters.add(prezzoMin);
-		acceptParameters.add(prezzoMax);
+		stringParameters.add("prezzo BETWEEN ? AND ? ORDER BY prezzo ASC");
+		if (!(prezzoMin != null) && !(prezzoMax != null)) {
+			prezzoMin = 0f;
+			acceptParameters.add(prezzoMin);
+
+			prezzoMax = 5000000f;
+			acceptParameters.add(prezzoMax);
+		} else {
+			if (prezzoMin > prezzoMax) {
+				Float cambio = prezzoMin;
+				prezzoMin = prezzoMax;
+				prezzoMax = cambio;
+
+				acceptParameters.add(prezzoMin);
+				acceptParameters.add(prezzoMax);
+
+			} else {
+				if (prezzoMin < prezzoMax) {
+					acceptParameters.add(prezzoMin);
+					acceptParameters.add(prezzoMax);
+				}
+			}
+		}
 
 		if (numLocali != null) {
 			stringParameters.add("num_locali=?");
