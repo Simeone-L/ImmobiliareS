@@ -16,7 +16,7 @@
 <meta name="generator" content="Hugo 0.88.1">
 <title>Registrazione</title>
 
-<link rel="canonical"
+<link rel="canonical">
 
 
 
