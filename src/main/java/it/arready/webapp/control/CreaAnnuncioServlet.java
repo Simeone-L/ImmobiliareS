@@ -124,26 +124,31 @@ public class CreaAnnuncioServlet extends HttpServlet {
 			immagine1.setImmobile(immobile);
 			immagine1.setPrincipale(true);
 
-			Immagine immagine2 = new Immagine();
-			immagine2.setImmagineUrl("immagineUrl2");
-			immagine2.setImmobile(immobile);
-			immagine2.setPrincipale(false);
+			if (request.getParameter("immagineUrl2") != null) {
+				Immagine immagine2 = new Immagine();
+				immagine2.setImmagineUrl(request.getParameter("immagineUrl2"));
+				immagine2.setImmobile(immobile);
+				immagine2.setPrincipale(false);
+			}
 
-			Immagine immagine3 = new Immagine();
-			immagine3.setImmagineUrl("immagineUrl3");
-			immagine3.setImmobile(immobile);
-			immagine3.setPrincipale(false);
-
-			Immagine immagine4 = new Immagine();
-			immagine4.setImmagineUrl("immagineUrl4");
-			immagine4.setImmobile(immobile);
-			immagine4.setPrincipale(false);
-
-			Immagine immagine5 = new Immagine();
-			immagine5.setImmagineUrl("immagineUrl5");
-			immagine5.setImmobile(immobile);
-			immagine5.setPrincipale(false);
-
+			if (request.getParameter("immagineUrl3") != null) {
+				Immagine immagine3 = new Immagine();
+				immagine3.setImmagineUrl(request.getParameter("immagineUrl3"));
+				immagine3.setImmobile(immobile);
+				immagine3.setPrincipale(false);
+			}
+			if (request.getParameter("immagineUrl4") != null) {
+				Immagine immagine4 = new Immagine();
+				immagine4.setImmagineUrl(request.getParameter("immagineUrl4"));
+				immagine4.setImmobile(immobile);
+				immagine4.setPrincipale(false);
+			}
+			if (request.getParameter("immagineUrl5") != null) {
+				Immagine immagine5 = new Immagine();
+				immagine5.setImmagineUrl(request.getParameter("immagineUrl5"));
+				immagine5.setImmobile(immobile);
+				immagine5.setPrincipale(false);
+			}
 //				
 //				immagini.add(immagine);
 //
