@@ -13,7 +13,6 @@ import it.arready.webapp.dao.impl.AnnuncioDAOImpl;
 import it.arready.webapp.dao.impl.ImmobileDAOImpl;
 import it.arready.webapp.dao.impl.IndirizzoDAOImpl;
 import it.arready.webapp.model.Annuncio;
-import it.arready.webapp.model.Immobile;
 import it.arready.webapp.model.Immobile.StatoImmobile;
 import it.arready.webapp.service.AnnuncioService;
 import it.arready.webapp.service.ServiceException;
@@ -45,12 +44,14 @@ public class AnnuncioServiceImpl implements AnnuncioService {
 	
 
 	@Override
-	public void update(Immobile immobile) throws ServiceException {
+	public void update(Annuncio annuncio) throws ServiceException {
 		Connection connection = null;
 		try {
 			connection = DataSource.getInstance().getConnection();
 			DBUtil.setAutoCommit(connection, false);
-			immobileDAO.update(connection, immobile);
+			indirizzoDAO.update(connection, annuncio.getImmobile().getIndirizzo());
+			immobileDAO.update(connection, annuncio.getImmobile());
+			annuncioDAO.update(connection, annuncio);
 			DBUtil.commit(connection);
 		} catch (DAOException e) {
 			System.err.println(e.getMessage());
@@ -61,15 +62,15 @@ public class AnnuncioServiceImpl implements AnnuncioService {
 		}
 	}
 	
-	
-	
-	
-	public void delete(Immobile immobile) throws ServiceException {
+	@Override
+	public void delete(Annuncio annuncio) throws ServiceException {
 		Connection connection = null;
 		try {
 			connection = DataSource.getInstance().getConnection();
 			DBUtil.setAutoCommit(connection, false);
-			immobileDAO.delete(connection, immobile);
+			annuncioDAO.delete(connection, annuncio);
+			immobileDAO.delete(connection, annuncio.getImmobile());
+			indirizzoDAO.delete(connection, annuncio.getImmobile().getIndirizzo());
 			DBUtil.commit(connection);
 		} catch (DAOException e) {
 			System.err.println(e.getMessage());
