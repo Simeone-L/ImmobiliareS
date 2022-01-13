@@ -46,8 +46,6 @@ public class CreaAnnuncioServlet extends HttpServlet {
 		Utente utente = null;
 		Indirizzo indirizzo = null;
 		Annuncio annuncio = null;
-		Immagine immagine = null;
-		List<Immagine> immagini = null;
 
 		try {
 			annuncioService.save(annuncio);
@@ -57,8 +55,6 @@ public class CreaAnnuncioServlet extends HttpServlet {
 			utente = new Utente();
 			indirizzo = new Indirizzo();
 			annuncio = new Annuncio();
-			immagine = new Immagine();
-			immagini = new ArrayList<Immagine>();
 
 			// inizio indirizzo
 			indirizzo.setProvincia(request.getParameter("provincia"));
@@ -121,16 +117,40 @@ public class CreaAnnuncioServlet extends HttpServlet {
 			annuncio.setUtente(utente);
 
 			// inizio immagine
+//
+//			for (int i = 0; i <= immagini.size(); i++) {
+			Immagine immagine1 = new Immagine();
+			immagine1.setImmagineUrl(request.getParameter("immagineUrl1"));
+			immagine1.setImmobile(immobile);
+			immagine1.setPrincipale(true);
 
-			for (int i = 0; i <= immagini.size(); i++) {
-				immagine.setImmagineUrl(request.getParameter("immagineUrl"));
-				immagine.setImmobile(immobile);
-				immagine.setPrincipale(false);
+			Immagine immagine2 = new Immagine();
+			immagine2.setImmagineUrl("immagineUrl2");
+			immagine2.setImmobile(immobile);
+			immagine2.setPrincipale(false);
 
-				if (!(request.getParameter("immagineUrl") != null)) {
-					break;
-				}
-			}
+			Immagine immagine3 = new Immagine();
+			immagine3.setImmagineUrl("immagineUrl3");
+			immagine3.setImmobile(immobile);
+			immagine3.setPrincipale(false);
+
+			Immagine immagine4 = new Immagine();
+			immagine4.setImmagineUrl("immagineUrl4");
+			immagine4.setImmobile(immobile);
+			immagine4.setPrincipale(false);
+
+			Immagine immagine5 = new Immagine();
+			immagine5.setImmagineUrl("immagineUrl5");
+			immagine5.setImmobile(immobile);
+			immagine5.setPrincipale(false);
+
+//				
+//				immagini.add(immagine);
+//
+//				if (!(request.getParameter("immagineUrl") != null)) {
+//					break;
+//				}
+//			}
 
 			request.getRequestDispatcher("").forward(request, response);
 			response.sendRedirect("/ricerca_completa.html");
