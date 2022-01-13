@@ -40,7 +40,7 @@ public class CreaAnnuncioServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Date data = new Date();
+		Date data = null;
 
 		Immobile immobile = null;
 		Utente utente = null;
@@ -92,15 +92,25 @@ public class CreaAnnuncioServlet extends HttpServlet {
 			int pianoInt = Integer.parseInt(pianoString);
 			immobile.setPiano(pianoInt);
 
+			for (StatoImmobile statoImmobile : StatoImmobile.values()) {
+				if (immobile.getStatoImmobile().equals(statoImmobile)) {
+					immobile.setStatoImmobile(statoImmobile);
+				}
+			}
+
 			String statoImmobileString = request.getParameter("statoImmobile");
 			StatoImmobile statoImmobile = StatoImmobile.corrispondenzaStatoString(statoImmobileString);
 			immobile.setStatoImmobile(statoImmobile);
-
 			immobile.setIndirizzo(indirizzo);
 
 			// inizio annuncio
 			annuncio.setDataAnnuncio(data);
 			annuncio.setImmobile(immobile);
+			for (StatoVendita statoVendita : StatoVendita.values()) {
+				if (annuncio.getStatoVendita().equals(statoVendita)) {
+					annuncio.setStatoVendita(statoVendita);
+				}
+			}
 
 			String statoVenditaString = request.getParameter("statoVendita");
 			StatoVendita statoVendita = StatoVendita.corrispondenzaStatoString(statoVenditaString);
@@ -111,14 +121,15 @@ public class CreaAnnuncioServlet extends HttpServlet {
 			annuncio.setUtente(utente);
 
 			// inizio immagine
+
 			for (int i = 0; i <= immagini.size(); i++) {
 				immagine.setImmagineUrl(request.getParameter("immagineUrl"));
 				immagine.setImmobile(immobile);
 				immagine.setPrincipale(false);
-				
-					if (!(request.getParameter("immagineUrl") != null)) {
-						break;
-					}
+
+				if (!(request.getParameter("immagineUrl") != null)) {
+					break;
+				}
 			}
 
 			request.getRequestDispatcher("").forward(request, response);

@@ -19,7 +19,7 @@ public class ImmagineServiceImpl implements ImmagineService {
 	private ImmagineDAO immagineDAO = new ImmagineDAOImpl();
 
 	@Override
-	public void InserimentoImmagine(Immagine immagine) throws ServiceException {
+	public void inserimentoImmagine(Immagine immagine) throws ServiceException {
 		Connection conn = null;
 		try {
 			conn = DataSource.getInstance().getConnection();
@@ -36,13 +36,13 @@ public class ImmagineServiceImpl implements ImmagineService {
 	}
 
 	@Override
-	public List<Immagine> ElencoImmagini(Immobile immobile) throws ServiceException {
+	public List<Immagine> elencoImmagini(Immobile immobile) throws ServiceException {
 		Connection conn = null;
 		List<Immagine> immagini = new ArrayList<Immagine>();
 		try {
 			conn = DataSource.getInstance().getConnection();
 			DBUtil.setAutoCommit(conn, false);
-			immagini = immagineDAO.findByImmobile(conn, immobile);
+			immagini = immagineDAO.findImmobileImg(conn, immobile);
 			DBUtil.commit(conn);
 		} catch (DAOException e) {
 			System.out.println(e.getMessage());
@@ -55,7 +55,7 @@ public class ImmagineServiceImpl implements ImmagineService {
 	}
 
 	@Override
-	public void ModificaImmagine(Immagine immagine) throws ServiceException {
+	public void modificaImmagine(Immagine immagine) throws ServiceException {
 		Connection conn = null;
 		try {
 			conn = DataSource.getInstance().getConnection();
@@ -70,9 +70,28 @@ public class ImmagineServiceImpl implements ImmagineService {
 			DBUtil.close(conn);
 		}
 	}
+	
+	@Override
+	public Immagine immaginePrincipale(Immobile immobile) throws ServiceException {
+		Connection conn = null;
+		Immagine immagine = null;
+		try {
+			conn = DataSource.getInstance().getConnection();
+			DBUtil.setAutoCommit(conn, false);
+			immagine = immagineDAO.findPrincipale(conn, immobile);
+			DBUtil.commit(conn);
+		} catch (DAOException e) {
+			System.out.println(e.getMessage());
+			DBUtil.rollback(conn);
+			throw new ServiceException(e.getMessage(), e);
+		} finally {
+			DBUtil.close(conn);
+		}
+		return immagine;
+	}
 
 	@Override
-	public void EliminaImmagine(Immagine immagine) throws ServiceException {
+	public void eliminaImmagine(Immagine immagine) throws ServiceException {
 		Connection conn = null;
 		try {
 			conn = DataSource.getInstance().getConnection();

@@ -60,14 +60,14 @@ public class ImmagineDAOImpl implements ImmagineDAO {
 	}
 
 	@Override
-	public List<Immagine> findByImmobile(Connection conn, Immobile immobile) throws DAOException {
-		String sql = "SELECT * FROM immagine inner join IMMOBILE on immobile.id = immagine.immobile_id";
-		// System.out.println(sql);
+	public List<Immagine> findImmobileImg(Connection conn, Immobile immobile) throws DAOException {
+		String sql = "SELECT * FROM immagine JOIN immobile ON immagine.immobile_id = immobile.id WHERE immobile.id = ?";
 		PreparedStatement stat = null;
 		ResultSet rs = null;
 		List<Immagine> immagini = new ArrayList<Immagine>();
 		try {
 			stat = conn.prepareStatement(sql);
+			stat.setInt(1, immobile.getId());
 			rs = stat.executeQuery();
 			while (rs.next()) {
 				Immagine immagine = new Immagine();
@@ -84,6 +84,33 @@ public class ImmagineDAOImpl implements ImmagineDAO {
 			DBUtil.close(stat);
 		}
 		return immagini;
+	}
+	
+	@Override
+	public Immagine findPrincipale(Connection conn, Immobile immobile) throws DAOException {
+		String sql = "SELECT * FROM immagine JOIN immobile ON immagine.immobile_id = immobile.id WHERE immobile.id = ? AND principale = ?";
+		PreparedStatement stat = null;
+		ResultSet rs = null;
+		Immagine immagine = null;
+		try {
+			stat = conn.prepareStatement(sql);
+			stat.setInt(1, immobile.getId());
+			stat.setBoolean(2, true);
+			rs = stat.executeQuery();
+			while(rs.next()) {
+				immagine = new Immagine();
+				immagine.setId(rs.getInt(1));
+				immagine.setImmagineUrl(rs.getString(2));
+				immagine.setPrincipale(rs.getBoolean(3));
+			}
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+			throw new DAOException(e.getMessage(), e);
+		} finally {
+			DBUtil.close(rs);
+			DBUtil.close(stat);
+		}
+		return immagine;
 	}
 
 	@Override
@@ -102,5 +129,4 @@ public class ImmagineDAOImpl implements ImmagineDAO {
 			DBUtil.close(stat);
 		}
 	}
-
 }

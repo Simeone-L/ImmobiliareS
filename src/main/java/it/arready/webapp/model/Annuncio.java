@@ -5,6 +5,7 @@ import java.util.Date;
 public class Annuncio {
 
 	private int id;
+	private String titoloAnnuncio;
 	private Date dataAnnuncio;
 	private String titolo;
 	private Immobile immobile;
@@ -52,17 +53,6 @@ public class Annuncio {
 		super();
 	}
 
-	public Annuncio(int id, String titolo, Date dataAnnuncio, Immobile immobile, StatoVendita statoVendita,
-			Utente utente) {
-		super();
-		this.id = id;
-		this.titolo = titolo;
-		this.dataAnnuncio = dataAnnuncio;
-		this.immobile = immobile;
-		this.statoVendita = statoVendita;
-		this.utente = utente;
-	}
-
 	public String getTitolo() {
 		return titolo;
 	}
@@ -77,6 +67,14 @@ public class Annuncio {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public String getTitoloAnnuncio() {
+		return titoloAnnuncio;
+	}
+
+	public void setTitoloAnnuncio(String titoloAnnuncio) {
+		this.titoloAnnuncio = titoloAnnuncio;
 	}
 
 	public Date getDataAnnuncio() {

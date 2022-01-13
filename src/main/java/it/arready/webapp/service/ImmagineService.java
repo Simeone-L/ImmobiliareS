@@ -6,13 +6,15 @@ import it.arready.webapp.model.Immagine;
 import it.arready.webapp.model.Immobile;
 
 public interface ImmagineService {
-
-	void InserimentoImmagine(Immagine immagine) throws ServiceException;
-
-	List<Immagine> ElencoImmagini(Immobile immobile) throws ServiceException;
-
-	void ModificaImmagine(Immagine immagine) throws ServiceException;
-
-	void EliminaImmagine(Immagine immagine) throws ServiceException;
+	
+	void inserimentoImmagine(Immagine immagine) throws ServiceException;
+	
+	List<Immagine> elencoImmagini(Immobile immobile) throws ServiceException;
+	
+	void modificaImmagine(Immagine immagine) throws ServiceException;
+	
+	Immagine immaginePrincipale(Immobile immobile) throws ServiceException;
+	
+	void eliminaImmagine(Immagine immagine) throws ServiceException;
 
 }
