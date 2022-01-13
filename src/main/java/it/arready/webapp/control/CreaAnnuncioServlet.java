@@ -101,10 +101,8 @@ public class CreaAnnuncioServlet extends HttpServlet {
 			String username = (String) session.getAttribute("username");
 			utente = utenteService.findByUsername(username);
 			annuncio.setUtente(utente);
-			this.getServletContext().getRequestDispatcher("/caricamento_annuncio.html").forward(request, response);
-//			request.getRequestDispatcher("").forward(request, response);
-			response.sendRedirect("index_immobiliare.html");
-
+			request.getRequestDispatcher("").forward(request, response);
+			response.sendRedirect("/ricerca_completa.html");
 		} catch (ServiceException e) {
 			System.err.println(e.getMessage());
 			response.sendRedirect("error.html");

@@ -44,8 +44,7 @@ public class RegistrazioneServlet extends HttpServlet {
 			session.setAttribute("cognome", utente.getCognome());
 			session.setAttribute("email", utente.getEmail());
 			session.setAttribute("password", utente.getPassword());
-
-			this.getServletContext().getRequestDispatcher("/sign_in.html").forward(request, response);
+			request.getRequestDispatcher("").forward(request, response);
 		} catch (ServiceException e) {
 			System.err.println(e.getMessage());
 			response.sendRedirect("error.html");
