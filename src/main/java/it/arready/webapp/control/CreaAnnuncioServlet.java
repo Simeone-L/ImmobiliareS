@@ -1,20 +1,23 @@
 package it.arready.webapp.control;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
-
-import com.oracle.wls.shaded.org.apache.xalan.lib.Redirect;
+import java.util.List;
 
 import it.arready.webapp.model.Annuncio;
 import it.arready.webapp.model.Annuncio.StatoVendita;
+import it.arready.webapp.model.Immagine;
 import it.arready.webapp.model.Immobile;
 import it.arready.webapp.model.Immobile.StatoImmobile;
 import it.arready.webapp.model.Indirizzo;
 import it.arready.webapp.model.Utente;
 import it.arready.webapp.service.AnnuncioService;
+import it.arready.webapp.service.ImmagineService;
 import it.arready.webapp.service.ServiceException;
 import it.arready.webapp.service.UtenteService;
 import it.arready.webapp.service.impl.AnnuncioServiceImpl;
+import it.arready.webapp.service.impl.ImmagineServiceImpl;
 import it.arready.webapp.service.impl.UtenteServiceImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -28,6 +31,7 @@ public class CreaAnnuncioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private AnnuncioService annuncioService = new AnnuncioServiceImpl();
 	private UtenteService utenteService = new UtenteServiceImpl();
+	private ImmagineService immagineService = new ImmagineServiceImpl();
 
 	public CreaAnnuncioServlet() {
 		super();
@@ -42,6 +46,8 @@ public class CreaAnnuncioServlet extends HttpServlet {
 		Utente utente = null;
 		Indirizzo indirizzo = null;
 		Annuncio annuncio = null;
+		Immagine immagine = null;
+		List<Immagine> immagini = null;
 
 		try {
 			annuncioService.save(annuncio);
@@ -51,6 +57,8 @@ public class CreaAnnuncioServlet extends HttpServlet {
 			utente = new Utente();
 			indirizzo = new Indirizzo();
 			annuncio = new Annuncio();
+			immagine = new Immagine();
+			immagini = new ArrayList<Immagine>();
 
 			// inizio indirizzo
 			indirizzo.setProvincia(request.getParameter("provincia"));
@@ -101,6 +109,18 @@ public class CreaAnnuncioServlet extends HttpServlet {
 			String username = (String) session.getAttribute("username");
 			utente = utenteService.findByUsername(username);
 			annuncio.setUtente(utente);
+
+			// inizio immagine
+			for (int i = 0; i <= immagini.size(); i++) {
+				immagine.setImmagineUrl(request.getParameter("immagineUrl"));
+				immagine.setImmobile(immobile);
+				immagine.setPrincipale(false);
+				
+					if (!(request.getParameter("immagineUrl") != null)) {
+						break;
+					}
+			}
+
 			request.getRequestDispatcher("").forward(request, response);
 			response.sendRedirect("/ricerca_completa.html");
 		} catch (ServiceException e) {
