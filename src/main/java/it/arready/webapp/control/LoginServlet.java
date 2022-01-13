@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+
 /**
  * Servlet implementation class LoginServlet
  */
@@ -48,10 +49,10 @@ public class LoginServlet extends HttpServlet {
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("username", utente.getUsername());
-			request.getRequestDispatcher("").forward(request, response);
+			request.getRequestDispatcher("index_immobiliare.jsp").forward(request, response);
 		} catch (ServiceException e) {
 			System.err.println(e.getMessage());
-			response.sendRedirect("");
+			response.sendRedirect("");  
 		}
 		
 	}
