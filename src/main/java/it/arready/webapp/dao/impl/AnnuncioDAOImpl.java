@@ -21,16 +21,15 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 
 	@Override
 	public void save(Connection conn, Annuncio annuncio) throws DAOException {
-		String sql = "INSERT INTO annuncio(data_annuncio, titolo_annuncio, utente_id, immobile_id, stato_vendita_id) VALUES(?,?,?,?,?)";
+		String sql = "INSERT INTO annuncio(data_annuncio, utente_id, immobile_id, stato_vendita_id) VALUES(?,?,?,?)";
 		PreparedStatement stat = null;
 		ResultSet genKey = null;
 		try {
 			stat = conn.prepareStatement(sql, new String[] { "id" });
 			stat.setDate(1, new java.sql.Date(annuncio.getDataAnnuncio().getTime()));
-			stat.setString(2, annuncio.getTitoloAnnuncio());
-			stat.setInt(3, annuncio.getUtente().getId());
-			stat.setInt(4, annuncio.getImmobile().getId());
-			stat.setInt(5, annuncio.getStatoVendita().getI());
+			stat.setInt(2, annuncio.getUtente().getId());
+			stat.setInt(3, annuncio.getImmobile().getId());
+			stat.setInt(4, annuncio.getStatoVendita().getI());
 			stat.executeUpdate();
 			genKey = stat.getGeneratedKeys();
 			if (genKey.next()) {
@@ -47,14 +46,13 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 
 	@Override
 	public void update(Connection conn, Annuncio annuncio) throws DAOException {
-		String sql = "UPDATE annuncio SET titolo_annuncio = ?, stato_vendita_id=? WHERE id=?";
+		String sql = "UPDATE annuncio SET stato_vendita_id=? WHERE id=?";
 		System.out.println(sql);
 		PreparedStatement stat = null;
 		try {
 			stat = conn.prepareStatement(sql);
-			stat.setString(1, annuncio.getTitoloAnnuncio());
-			stat.setInt(2, annuncio.getStatoVendita().getI());
-			stat.setInt(3, annuncio.getId());
+			stat.setInt(1, annuncio.getStatoVendita().getI());
+			stat.setInt(2, annuncio.getId());
 			stat.executeUpdate();
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
@@ -97,28 +95,27 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 			if (resultSet.next()) {
 				annuncio = new Annuncio();
 				annuncio.setId(resultSet.getInt(1));
-				annuncio.setTitoloAnnuncio(resultSet.getString(2));
-				annuncio.setDataAnnuncio(resultSet.getDate(3));
-				annuncio.setStatoVendita(StatoVendita.corrispondenzaStato(resultSet.getInt(5)));
+				annuncio.setDataAnnuncio(resultSet.getDate(2));
+				annuncio.setStatoVendita(StatoVendita.corrispondenzaStato(resultSet.getInt(4)));
 				Immobile immobile = new Immobile();
-				immobile.setId(resultSet.getInt(7));
-				immobile.setDescrizione(resultSet.getString(8));
-				immobile.setPrezzo(resultSet.getFloat(9));
-				immobile.setNumLocali(resultSet.getInt(10));
-				immobile.setNumBagni(resultSet.getInt(11));
-				immobile.setSuperficie(resultSet.getFloat(12));
-				immobile.setPiano(resultSet.getInt(13));
-				immobile.setVenduto(resultSet.getBoolean(14));
-				immobile.setStatoImmobile(StatoImmobile.corrispondenzaStato(resultSet.getInt(15)));
+				immobile.setId(resultSet.getInt(6));
+				immobile.setDescrizione(resultSet.getString(7));
+				immobile.setPrezzo(resultSet.getFloat(8));
+				immobile.setNumLocali(resultSet.getInt(9));
+				immobile.setNumBagni(resultSet.getInt(10));
+				immobile.setSuperficie(resultSet.getFloat(11));
+				immobile.setPiano(resultSet.getInt(12));
+				immobile.setVenduto(resultSet.getBoolean(13));
+				immobile.setStatoImmobile(StatoImmobile.corrispondenzaStato(resultSet.getInt(14)));
 				Indirizzo indirizzo = new Indirizzo();
-				indirizzo.setId(resultSet.getInt(17));
-				indirizzo.setProvincia(resultSet.getString(18));
-				indirizzo.setCitta(resultSet.getString(19));
-				indirizzo.setVia(resultSet.getString(20));
-				indirizzo.setNumeroCivico(resultSet.getInt(21));
+				indirizzo.setId(resultSet.getInt(16));
+				indirizzo.setProvincia(resultSet.getString(17));
+				indirizzo.setCitta(resultSet.getString(18));
+				indirizzo.setVia(resultSet.getString(19));
+				indirizzo.setNumeroCivico(resultSet.getInt(20));
 				Utente utente = new Utente();
-				utente.setId(resultSet.getInt(22));
-				utente.setUsername(resultSet.getString(23));
+				utente.setId(resultSet.getInt(21));
+				utente.setUsername(resultSet.getString(22));
 				immobile.setIndirizzo(indirizzo);
 				annuncio.setImmobile(immobile);
 				annuncio.setUtente(utente);
@@ -149,28 +146,27 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 			if (resultSet.next()) {
 				annuncio = new Annuncio();
 				annuncio.setId(resultSet.getInt(1));
-				annuncio.setTitoloAnnuncio(resultSet.getString(2));
-				annuncio.setDataAnnuncio(resultSet.getDate(3));
-				annuncio.setStatoVendita(StatoVendita.corrispondenzaStato(resultSet.getInt(5)));
+				annuncio.setDataAnnuncio(resultSet.getDate(2));
+				annuncio.setStatoVendita(StatoVendita.corrispondenzaStato(resultSet.getInt(4)));
 				Immobile immobile = new Immobile();
-				immobile.setId(resultSet.getInt(7));
-				immobile.setDescrizione(resultSet.getString(8));
-				immobile.setPrezzo(resultSet.getFloat(9));
-				immobile.setNumLocali(resultSet.getInt(10));
-				immobile.setNumBagni(resultSet.getInt(11));
-				immobile.setSuperficie(resultSet.getFloat(12));
-				immobile.setPiano(resultSet.getInt(13));
-				immobile.setVenduto(resultSet.getBoolean(14));
-				immobile.setStatoImmobile(StatoImmobile.corrispondenzaStato(resultSet.getInt(15)));
+				immobile.setId(resultSet.getInt(6));
+				immobile.setDescrizione(resultSet.getString(7));
+				immobile.setPrezzo(resultSet.getFloat(8));
+				immobile.setNumLocali(resultSet.getInt(9));
+				immobile.setNumBagni(resultSet.getInt(10));
+				immobile.setSuperficie(resultSet.getFloat(11));
+				immobile.setPiano(resultSet.getInt(12));
+				immobile.setVenduto(resultSet.getBoolean(13));
+				immobile.setStatoImmobile(StatoImmobile.corrispondenzaStato(resultSet.getInt(14)));
 				Indirizzo indirizzo = new Indirizzo();
-				indirizzo.setId(resultSet.getInt(17));
-				indirizzo.setProvincia(resultSet.getString(18));
-				indirizzo.setCitta(resultSet.getString(19));
-				indirizzo.setVia(resultSet.getString(20));
-				indirizzo.setNumeroCivico(resultSet.getInt(21));
+				indirizzo.setId(resultSet.getInt(16));
+				indirizzo.setProvincia(resultSet.getString(17));
+				indirizzo.setCitta(resultSet.getString(18));
+				indirizzo.setVia(resultSet.getString(19));
+				indirizzo.setNumeroCivico(resultSet.getInt(20));
 				Utente utente = new Utente();
-				utente.setId(resultSet.getInt(22));
-				utente.setUsername(resultSet.getString(23));
+				utente.setId(resultSet.getInt(21));
+				utente.setUsername(resultSet.getString(22));
 				immobile.setIndirizzo(indirizzo);
 				annuncio.setImmobile(immobile);
 				annuncio.setUtente(utente);
@@ -186,9 +182,10 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 	}
 
 	@Override
-	public List<Annuncio> orderByFind(Connection connection, Float prezzoMin, Float prezzoMax, Integer numLocali,
-			Integer numBagni, Float superficie, Integer piano, StatoImmobile statoImmobile, String citta, String titolo)
-			throws DAOException {
+	public List<Annuncio> orderByFind(Connection conn, Float prezzoMin, Float prezzoMax, Integer numLocali,
+			Integer numBagni, Float superficieMin, Float superficieMax, Integer piano, StatoImmobile statoImmobile,
+			String citta, String titolo, String provincia, String indirizzo, Integer numeroCivico,
+			StatoVendita statoVendita) throws DAOException {
 		String sql = "SELECT * FROM annuncio " + "INNER JOIN immobile ON annuncio.immobile_id = immobile.id "
 				+ "INNER JOIN indirizzo ON indirizzo.id = immobile.indirizzo_id "
 				+ "INNER JOIN utente ON utente.id = annuncio.utente_id ";
@@ -200,6 +197,7 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 //		if(citta != null) sql += "INNER JOIN indirizzo ON indirizzo.id = immobile.indirizzo_id ";
 
 		stringParameters.add("prezzo BETWEEN ? AND ? ORDER BY prezzo ASC");
+
 		if (!(prezzoMin != null) && !(prezzoMax != null)) {
 			prezzoMin = 0f;
 			acceptParameters.add(prezzoMin);
@@ -215,8 +213,8 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 				acceptParameters.add(prezzoMin);
 				acceptParameters.add(prezzoMax);
 
-			} else {
-				if (prezzoMin < prezzoMax) {
+			} else if (prezzoMin < prezzoMax) {
+				{
 					acceptParameters.add(prezzoMin);
 					acceptParameters.add(prezzoMax);
 				}
@@ -233,9 +231,10 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 			acceptParameters.add(numBagni);
 		}
 
-		if (superficie != null) {
-			stringParameters.add("superficie=?");
-			acceptParameters.add(superficie);
+		if (superficieMin != null && superficieMax != null) {
+			stringParameters.add("superficie BETWEEN ? AND ?");
+			acceptParameters.add(superficieMin);
+			acceptParameters.add(superficieMax);
 		}
 
 		if (piano != null) {
@@ -258,6 +257,21 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 			acceptParameters.add(titolo);
 		}
 
+		if (provincia != null) {
+			stringParameters.add("provincia=?");
+			acceptParameters.add(provincia);
+		}
+
+		if (indirizzo != null) {
+			stringParameters.add("indirizzo=?");
+			acceptParameters.add(indirizzo);
+		}
+
+		if (statoVendita != null) {
+			stringParameters.add("stato_vendita=?");
+			acceptParameters.add(statoVendita.getI());
+		}
+
 		if (stringParameters.size() > 0) {
 			sql += "WHERE ";
 
@@ -274,7 +288,7 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		try {
-			statement = connection.prepareStatement(sql);
+			statement = conn.prepareStatement(sql);
 			for (int i = 0; i < acceptParameters.size(); i++) {
 				if (acceptParameters.get(i).getClass().getName() == "java.lang.Float") {
 					statement.setFloat(i + 1, Float.parseFloat(acceptParameters.get(i).toString()));
@@ -293,29 +307,28 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 			while (resultSet.next()) {
 				Annuncio annuncio = new Annuncio();
 				annuncio.setId(resultSet.getInt(1));
-				annuncio.setTitoloAnnuncio(resultSet.getString(2));
-				annuncio.setDataAnnuncio(resultSet.getDate(3));
-				annuncio.setStatoVendita(StatoVendita.corrispondenzaStato(resultSet.getInt(5)));
+				annuncio.setDataAnnuncio(resultSet.getDate(2));
+				annuncio.setStatoVendita(StatoVendita.corrispondenzaStato(resultSet.getInt(4)));
 				Immobile immobile = new Immobile();
-				immobile.setId(resultSet.getInt(7));
-				immobile.setDescrizione(resultSet.getString(8));
-				immobile.setPrezzo(resultSet.getFloat(9));
-				immobile.setNumLocali(resultSet.getInt(10));
-				immobile.setNumBagni(resultSet.getInt(11));
-				immobile.setSuperficie(resultSet.getFloat(12));
-				immobile.setPiano(resultSet.getInt(13));
-				immobile.setVenduto(resultSet.getBoolean(14));
-				immobile.setStatoImmobile(StatoImmobile.corrispondenzaStato(resultSet.getInt(15)));
-				Indirizzo indirizzo = new Indirizzo();
-				indirizzo.setId(resultSet.getInt(17));
-				indirizzo.setProvincia(resultSet.getString(18));
-				indirizzo.setCitta(resultSet.getString(19));
-				indirizzo.setVia(resultSet.getString(20));
-				indirizzo.setNumeroCivico(resultSet.getInt(21));
+				immobile.setId(resultSet.getInt(6));
+				immobile.setDescrizione(resultSet.getString(7));
+				immobile.setPrezzo(resultSet.getFloat(8));
+				immobile.setNumLocali(resultSet.getInt(9));
+				immobile.setNumBagni(resultSet.getInt(10));
+				immobile.setSuperficie(resultSet.getFloat(11));
+				immobile.setPiano(resultSet.getInt(12));
+				immobile.setVenduto(resultSet.getBoolean(13));
+				immobile.setStatoImmobile(StatoImmobile.corrispondenzaStato(resultSet.getInt(14)));
+				Indirizzo indirizzo1 = new Indirizzo();
+				indirizzo1.setId(resultSet.getInt(16));
+				indirizzo1.setProvincia(resultSet.getString(17));
+				indirizzo1.setCitta(resultSet.getString(18));
+				indirizzo1.setVia(resultSet.getString(19));
+				indirizzo1.setNumeroCivico(resultSet.getInt(20));
 				Utente utente = new Utente();
-				utente.setId(resultSet.getInt(22));
-				utente.setUsername(resultSet.getString(23));
-				immobile.setIndirizzo(indirizzo);
+				utente.setId(resultSet.getInt(21));
+				utente.setUsername(resultSet.getString(22));
+				immobile.setIndirizzo(indirizzo1);
 				annuncio.setImmobile(immobile);
 				annuncio.setUtente(utente);
 				annunci.add(annuncio);
