@@ -21,6 +21,9 @@
   <!-- Custom styles for Carousel -->
   <link href="carousel.css" rel="stylesheet">
 
+  <!-- link for font -->
+  <link href="font.css" rel="stylesheet">
+
   <style>
     .bd-placeholder-img {
       font-size: 1.125rem;
@@ -75,6 +78,10 @@
       border-color: #be9447;
       color: #be9447;
     }
+
+    h1 {
+      font-family: HomestayDemo;
+    }
   </style>
 
 </head>
@@ -117,9 +124,9 @@
     style="background-size: cover; background-position: bottom; ">
     <!--background-color: #be9447;-->
     <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto" style="background-color: rgba(255, 255, 255, 0.5);">
-        <h1 class="fw-light" style="font-family: Georgia; color: #3d3d3d;">BENVENUTI SU ARREADY</h1>
-        <p class="lead text-muted">Qui ci scriveremo qualcosa dopo!</p>
+      <div class="col-lg-6 col-md-8 mx-auto" style="background-color: rgba(255, 255, 255, 0.8);">
+        <h1 class="fw-light" style="color: #3d3d3d;">BENVENUTI SU ARREADY</h1>
+        <p class="lead" style="color: black;">Casetta in campagna? Arready ti accompagna!</p>
         <p>
           <a href="tutti_annunci.html">
             <button class="btn btn-primary my-2 bottone-arready">
@@ -139,7 +146,7 @@
       <p style="font-size: 22px;">Cerca il tuo prossimo appartamento</p>
     </div>
     <div class="spacer-searchbar"></div>
-    <input type="text" class="form-control" placeholder="Cerca per citt&agrave;">
+    <input type="text" class="form-control" placeholder="Cerca per parole chiave">
     <div class="input-group-append">
       <a href="tutti_annunci.html">
         <button class="btn btn-secondary" type="button">
@@ -152,7 +159,7 @@
 
   <!--CORPO CAROSELLO-->
   <main>
-    <div class="" style="margin-left: 400px ; margin-right: 400px; padding-top: 50px;">
+    <div class="container" style="padding-top: 50px;">
       <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
@@ -219,8 +226,8 @@
 
 
   <!--FOOTER-->
-  <footer class="container py-5">
-    <div class="row">
+  <footer class="py-5" style="background-color: #f8ebcd;">
+    <div class="row container" style="margin: auto;">
       <div class="col-12 col-md">
         <p>Arready Immobiliare S.R.L.</p>
         <small class="d-block mb-3 text-muted">&copy; 2017–2021</small>
@@ -246,7 +253,7 @@
       </div>
 
       <div class="col-6 col-md">
-        <h5>Cagate Legali</h5>
+        <h5>Info Legali</h5>
         <ul class="list-unstyled text-small">
           <li><a class="link-secondary" href="#">Preferenze Cookie</a></li>
           <li><a class="link-secondary" href="#">Privacy</a></li>

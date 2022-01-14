@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'HomestayDemo';
+	src: url('font/HomestayDemo.eot');
+	src: url('font/HomestayDemo.eot?#iefix') format('embedded-opentype'),
+		url('font/HomestayDemo.woff') format('woff'),
+		url('font/HomestayDemo.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}

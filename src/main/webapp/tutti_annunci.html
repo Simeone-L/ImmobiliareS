@@ -15,6 +15,9 @@
   <!-- Custom styles for this template -->
   <link href="index_immobiliare.css" rel="stylesheet">
 
+  <!-- link for font -->
+  <link href="font.css" rel="stylesheet">
+
   <!--CSS for search bar
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>-->
@@ -52,6 +55,10 @@
     .bottone-arready-2 {
       border-color: #be9447;
       color: #be9447;
+    }
+
+    h1 {
+      font-family: HomestayDemo;
     }
   </style>
 
@@ -99,29 +106,30 @@
           <h1>CERCA LA TUA PROSSIMA CASA</h1>
           <p>filtra per:</p>
           <div style="background-color: #f8ebcd;">
+            <br>
             <form action="search" method="post">
               <div style="position: relative; text-align: left; padding-left: 50px;">
 
-                <label for="prezzo">Prezzo</label> <!-- RANGE A 2 valori-->
-                <div style="position: absolute; padding-left: 55px; display: inline-block;">
-                  <!--range 2 punti-->
-
+                <label for="prezzoMin">Prezzo Minimo</label>
+                <div style=" padding-left: 55px; display: inline-block;">
+                  <input type="number" id="prezzoMin" placeholder="Qualsiasi" step="500">
+                </div>
+                <br>
+                <label for="prezzoMax">Prezzo Massimo</label>
+                <div style=" padding-left: 55px; display: inline-block;">
+                  <input type="number" id="prezzoMax" placeholder="Qualsiasi" step="500">
                 </div>
                 <br>
 
-                <label for="n_locali">Numero locali minimo</label>
-                <select id="n_locali">
+                <label for="numeroLocali">Numero locali minimo</label>
+                <select id="numeroLocali">
                   <option value="">Qualsiasi</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5+</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5+</option>
                 </select>
-                <!--<div class="invalid-feedback">
-                  Please provide a valid state.
-                </div>-->
-                <!--class="form-select" Classe di select-->
                 <br>
 
                 <label for="superficie">M² superficie</label>
@@ -133,7 +141,8 @@
               </div>
 
               <label for="citta">
-                <p style="font-size: 25px;">Cerca</p> <!--ricerca per titolo-->
+                <p style="font-size: 25px;">Cerca</p>
+                <!--ricerca per titolo-->
               </label>
               <input type="search" name="citta" id="citta" style="size: 50%;">
               <input type="submit" value="Cerca" class="btn btn-primary bottone-arready" style="width: 100px;">
@@ -142,53 +151,187 @@
               <!--pagina ricerca completa-->
               pi&ugrave; filtri
             </a>
+            <br><br>
+            <form method="" action="">
+              <label for="ordinamento">Ordina per:</label>
+              <select id="ordinamento">
+                <option value="pCrescente">prezzo crescente</option>
+                <option value="pDecrescente">prezzo decrescente</option>
+                <option value="sCrescente">superficie crecente</option>
+                <option value="sDecrescente">superficie decrescente</option>
+              </select>
+              <input class="btn btn-outline-primary bottone-arready-2" type="submit" value="Ordina" >
+            </form>
+            <br>
           </div>
         </div>
-      </div>
       </div>
     </section>
     <!--<div style="position: relative; width: 50%; text-align: left; padding-left: 50px;">-->
 
 
     <!-- ALBUM -->
-    <div class="py-5 " style="background-color: #fdf6e3a4;">
+    <div class="album py-5" style="background-color: #fdf6e3a4; ">
       <div class="container">
-        <div class="row-cols-sm-2 row-cols-md-3 g-3" style="margin: auto;"> <!--row row-cols-1   -->
-          <div class=""><!--col-->
 
+        <!--riga-->
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" style="margin: auto;">
+
+          <!--INIZIO CICLO-->
+          <!--colonna-->
+          <!--inizio casella-->
+          <div class="col">
+            <a href="annuncio.html" style="color: black; text-decoration: none; cursor: pointer;">
+              <div class="card shadow-sm">
+                <img class="bd-placeholder-img card-img-top" width="100%" height="225" role="img"
+                  aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"
+                  src="https://imagizer.imageshack.com/img924/3462/z9BgMv.jpg">
+                <div class="card-body">
+                  <p class="card-text">Casa Bella</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Apri</button>
+                      <!--<button type="button" class="btn btn-sm btn-outline-secondary">Modifica</button>-->
+                    </div>
+                    <small class="text-muted">100€</small>
+                  </div>
+                </div>
+              </div>
+            </a>
+
+          </div>
+          <!--fine singola casella-->
+          <!--inizio casella-->
+          <div class="col">
             <div class="card shadow-sm">
-              <!--<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
-                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-                  dy=".3em">Thumbnail</text>
-              </svg>-->
-              <img class="bd-placeholder-img card-img-top" width="100%" height="225" role="img" aria-label="Placeholder: Thumbnail"  preserveAspectRatio="xMidYMid slice" focusable="false" 
-              src="https://imagizer.imageshack.com/img924/3462/z9BgMv.jpg">
+              <img class="bd-placeholder-img card-img-top" width="100%" height="225" role="img"
+                aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"
+                src="https://imagizer.imageshack.com/img924/3462/z9BgMv.jpg">
               <div class="card-body">
-                <p class="card-text">descrizione casa</p>
+                <p class="card-text">Casa Bella</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
                     <a href="annuncio.html">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Apri</button>
-                    <!--<button type="button" class="btn btn-sm btn-outline-secondary">Modifica</button>-->
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Apri</button>
+                      <!--<button type="button" class="btn btn-sm btn-outline-secondary">Modifica</button>-->
                     </a>
                   </div>
-                  <small class="text-muted">9 mins</small>
+                  <small class="text-muted">100€</small>
                 </div>
               </div>
             </div>
+          </div>
 
-          </div> 
+          <!--inizio casella-->
+          <div class="col">
+            <div class="card shadow-sm">
+              <img class="bd-placeholder-img card-img-top" width="100%" height="225" role="img"
+                aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"
+                src="https://imagizer.imageshack.com/img924/3462/z9BgMv.jpg">
+              <div class="card-body">
+                <p class="card-text">Casa Bella</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <a href="annuncio.html">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Apri</button>
+                      <!--<button type="button" class="btn btn-sm btn-outline-secondary">Modifica</button>-->
+                    </a>
+                  </div>
+                  <small class="text-muted">100€</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--fine singola casella-->
         </div>
+        <!--fine riga-->
+
+        <!--nuova riga-->
+        <!--riga-->
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" style="margin: auto;">
+
+          <!--INIZIO CICLO-->
+          <!--colonna-->
+          <!--inizio casella-->
+          <div class="col">
+            <a href="annuncio.html" style="color: black; text-decoration: none; cursor: pointer;">
+              <div class="card shadow-sm">
+                <img class="bd-placeholder-img card-img-top" width="100%" height="225" role="img"
+                  aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"
+                  src="https://imagizer.imageshack.com/img924/3462/z9BgMv.jpg">
+                <div class="card-body">
+                  <p class="card-text">Casa Bella</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Apri</button>
+                      <!--<button type="button" class="btn btn-sm btn-outline-secondary">Modifica</button>-->
+                    </div>
+                    <small class="text-muted">100€</small>
+                  </div>
+                </div>
+              </div>
+            </a>
+
+          </div>
+          <!--fine singola casella-->
+          <!--inizio casella-->
+          <div class="col">
+            <div class="card shadow-sm">
+              <img class="bd-placeholder-img card-img-top" width="100%" height="225" role="img"
+                aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"
+                src="https://imagizer.imageshack.com/img924/3462/z9BgMv.jpg">
+              <div class="card-body">
+                <p class="card-text">Casa Bella</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <a href="annuncio.html">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Apri</button>
+                      <!--<button type="button" class="btn btn-sm btn-outline-secondary">Modifica</button>-->
+                    </a>
+                  </div>
+                  <small class="text-muted">100€</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--inizio casella-->
+          <div class="col">
+            <div class="card shadow-sm">
+              <img class="bd-placeholder-img card-img-top" width="100%" height="225" role="img"
+                aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"
+                src="https://imagizer.imageshack.com/img924/3462/z9BgMv.jpg">
+              <div class="card-body">
+                <p class="card-text">Casa Bella</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <a href="annuncio.html">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Apri</button>
+                      <!--<button type="button" class="btn btn-sm btn-outline-secondary">Modifica</button>-->
+                    </a>
+                  </div>
+                  <small class="text-muted">100€</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--fine singola casella-->
+        </div>
+        <!--fine colonna-->
+
+        <!--FINE CLICLO-->
+
+
+
+
       </div>
     </div>
 
   </main>
 
   <!--FOOTER-->
-  <footer class="container py-5">
-    <div class="row">
+  <footer class="py-5" style="background-color: #f8ebcd;">
+    <div class="row container" style="margin: auto;">
       <div class="col-12 col-md">
         <p>Arready Immobiliare S.R.L.</p>
         <small class="d-block mb-3 text-muted">&copy; 2017–2021</small>
