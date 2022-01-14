@@ -7,7 +7,6 @@ public class Annuncio {
 	private int id;
 	private String titoloAnnuncio;
 	private Date dataAnnuncio;
-	private String titolo;
 	private Immobile immobile;
 	private StatoVendita statoVendita;
 	private Utente utente;
@@ -51,14 +50,6 @@ public class Annuncio {
 
 	public Annuncio() {
 		super();
-	}
-
-	public String getTitolo() {
-		return titolo;
-	}
-
-	public void setTitolo(String titolo) {
-		this.titolo = titolo;
 	}
 
 	public int getId() {
