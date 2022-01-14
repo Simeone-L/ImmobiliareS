@@ -106,7 +106,7 @@
         <a href="log_in.jsp">
           <button type="button" class="btn btn-outline-primary me-2 bottone-arready-2">Accedi</button>
         </a>
-        <a href="sign_in.html">
+        <a href="sign_in.jsp">
           <button type="button" class="btn btn-primary bottone-arready">Registrati</button>
         </a>
         <%}else{%>
@@ -130,12 +130,12 @@
         <h1 class="fw-light" style="font-family: Georgia; color: #3d3d3d;">BENVENUTI SU ARREADY</h1>
         <p class="lead text-muted">Qui ci scriveremo qualcosa dopo!</p>
         <p>
-          <a href="tutti_annunci.html">
+          <a href="tutti_annunci.jsp">
             <button class="btn btn-primary my-2 bottone-arready">
               Guarda tutte le offerte
             </button>
           </a>
-          <a href="caricamento_annuncio.html" class="btn btn-secondary my-2 ">Inserisci la tua offerta</a>
+          <a href="caricamento_annuncio.jsp" class="btn btn-secondary my-2 ">Inserisci la tua offerta</a>
         </p>
       </div>
     </div>
@@ -150,7 +150,7 @@
     <div class="spacer-searchbar"></div>
     <input type="text" class="form-control" placeholder="Cerca per citt&agrave;">
     <div class="input-group-append">
-      <a href="tutti_annunci.html">
+      <a href="tutti_annunci.jsp">
         <button class="btn btn-secondary" type="button">
           <i class="fa fa-search"></i>
         </button>
@@ -194,7 +194,7 @@
               <div class="carousel-caption">
                 <h1>Appartamento bilocale razzi e pazzi</h1>
                 <p>10 mq, 2 bagni, ecc.</p>
-                <p><a class="btn btn-lg btn-primary bottone-arready" href="annuncio.html">Visualizza Annuncio</a></p>
+                <p><a class="btn btn-lg btn-primary bottone-arready" href="annuncio.jsp">Visualizza Annuncio</a></p>
               </div>
             </div>
           </div>
@@ -208,7 +208,7 @@
               <div class="carousel-caption text-end">
                 <h1>Appartamento bilocale lazzi e bazzi</h1>
                 <p>10 mq, 2 bagni, ecc.</p>
-                <p><a class="btn btn-lg btn-primary bottone-arready" href="annuncio.html">Visualizza Annuncio</a></p>
+                <p><a class="btn btn-lg btn-primary bottone-arready" href="annuncio.jsp">Visualizza Annuncio</a></p>
               </div>
             </div>
           </div>
