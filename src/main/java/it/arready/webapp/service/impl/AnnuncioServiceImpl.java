@@ -13,6 +13,7 @@ import it.arready.webapp.dao.impl.AnnuncioDAOImpl;
 import it.arready.webapp.dao.impl.ImmobileDAOImpl;
 import it.arready.webapp.dao.impl.IndirizzoDAOImpl;
 import it.arready.webapp.model.Annuncio;
+import it.arready.webapp.model.Annuncio.StatoVendita;
 import it.arready.webapp.model.Immobile.StatoImmobile;
 import it.arready.webapp.service.AnnuncioService;
 import it.arready.webapp.service.ServiceException;
@@ -60,7 +61,7 @@ public class AnnuncioServiceImpl implements AnnuncioService {
 			DBUtil.close(connection);
 		}
 	}
-	
+
 	@Override
 	public void delete(Annuncio annuncio) throws ServiceException {
 		Connection connection = null;
@@ -120,15 +121,16 @@ public class AnnuncioServiceImpl implements AnnuncioService {
 
 	@Override
 	public List<Annuncio> orderByFind(Float prezzoMin, Float prezzoMax, Integer numLocali, Integer numBagni,
-			Float superficie, Integer piano, StatoImmobile statoImmobile, String citta, String titolo)
+			Float superficieMin, Float superficieMax, Integer piano, StatoImmobile statoImmobile, String citta,
+			String titolo, String provincia, String indirizzo, Integer numeroCivico, StatoVendita statoVendita)
 			throws ServiceException {
 		List<Annuncio> annunci = null;
 		Connection connection = null;
 		try {
 			connection = DataSource.getInstance().getConnection();
 			DBUtil.setAutoCommit(connection, false);
-			annunci = annuncioDAO.orderByFind(connection, prezzoMin, prezzoMax, numLocali, numBagni, superficie, superficie, piano,
-					statoImmobile, citta, titolo, titolo, titolo, piano, null);
+			annunci = annuncioDAO.orderByFind(connection, prezzoMin, prezzoMax, numLocali, numBagni, superficieMin,
+					superficieMax, piano, statoImmobile, citta, titolo, titolo, titolo, piano, null);
 			DBUtil.commit(connection);
 		} catch (DAOException e) {
 			System.err.println(e.getMessage());
