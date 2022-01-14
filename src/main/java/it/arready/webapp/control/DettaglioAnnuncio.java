@@ -37,7 +37,7 @@ public class DettaglioAnnuncio extends HttpServlet {
 			String idS = request.getParameter("id");
 			int id = Integer.parseInt(idS);
 			Annuncio annuncio = annuncioService.findById(id);
-			List<Immagine> immagini = immagineService.ElencoImmagini(annuncio.getImmobile());
+			List<Immagine> immagini = immagineService.elencoImmagini(annuncio.getImmobile());
 
 			request.getRequestDispatcher("").forward(request, response);
 		} catch (ServiceException e) {

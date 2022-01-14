@@ -1,36 +1,37 @@
 package it.arready.webapp.control;
 
 import java.io.IOException;
-import java.sql.Date;
-
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-
-import com.oracle.wls.shaded.org.apache.xalan.lib.Redirect;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import it.arready.webapp.model.Annuncio;
 import it.arready.webapp.model.Annuncio.StatoVendita;
+import it.arready.webapp.model.Immagine;
 import it.arready.webapp.model.Immobile;
 import it.arready.webapp.model.Immobile.StatoImmobile;
 import it.arready.webapp.model.Indirizzo;
 import it.arready.webapp.model.Utente;
 import it.arready.webapp.service.AnnuncioService;
+import it.arready.webapp.service.ImmagineService;
 import it.arready.webapp.service.ServiceException;
 import it.arready.webapp.service.UtenteService;
 import it.arready.webapp.service.impl.AnnuncioServiceImpl;
+import it.arready.webapp.service.impl.ImmagineServiceImpl;
 import it.arready.webapp.service.impl.UtenteServiceImpl;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/crea-annuncio")
 public class CreaAnnuncioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private AnnuncioService annuncioService = new AnnuncioServiceImpl();
 	private UtenteService utenteService = new UtenteServiceImpl();
+	private ImmagineService immagineService = new ImmagineServiceImpl();
 
 	public CreaAnnuncioServlet() {
 		super();
@@ -87,7 +88,6 @@ public class CreaAnnuncioServlet extends HttpServlet {
 			int pianoInt = Integer.parseInt(pianoString);
 			immobile.setPiano(pianoInt);
 
-
 			for (StatoImmobile statoImmobile : StatoImmobile.values()) {
 				if (immobile.getStatoImmobile().equals(statoImmobile)) {
 					immobile.setStatoImmobile(statoImmobile);
@@ -115,6 +115,48 @@ public class CreaAnnuncioServlet extends HttpServlet {
 			String username = (String) session.getAttribute("username");
 			utente = utenteService.findByUsername(username);
 			annuncio.setUtente(utente);
+
+			// inizio immagine
+//
+//			for (int i = 0; i <= immagini.size(); i++) {
+			Immagine immagine1 = new Immagine();
+			immagine1.setImmagineUrl(request.getParameter("immagineUrl1"));
+			immagine1.setImmobile(immobile);
+			immagine1.setPrincipale(true);
+
+			if (request.getParameter("immagineUrl2") != null) {
+				Immagine immagine2 = new Immagine();
+				immagine2.setImmagineUrl(request.getParameter("immagineUrl2"));
+				immagine2.setImmobile(immobile);
+				immagine2.setPrincipale(false);
+			}
+
+			if (request.getParameter("immagineUrl3") != null) {
+				Immagine immagine3 = new Immagine();
+				immagine3.setImmagineUrl(request.getParameter("immagineUrl3"));
+				immagine3.setImmobile(immobile);
+				immagine3.setPrincipale(false);
+			}
+			if (request.getParameter("immagineUrl4") != null) {
+				Immagine immagine4 = new Immagine();
+				immagine4.setImmagineUrl(request.getParameter("immagineUrl4"));
+				immagine4.setImmobile(immobile);
+				immagine4.setPrincipale(false);
+			}
+			if (request.getParameter("immagineUrl5") != null) {
+				Immagine immagine5 = new Immagine();
+				immagine5.setImmagineUrl(request.getParameter("immagineUrl5"));
+				immagine5.setImmobile(immobile);
+				immagine5.setPrincipale(false);
+			}
+//				
+//				immagini.add(immagine);
+//
+//				if (!(request.getParameter("immagineUrl") != null)) {
+//					break;
+//				}
+//			}
+
 			request.getRequestDispatcher("").forward(request, response);
 			response.sendRedirect("/ricerca_completa.html");
 		} catch (ServiceException e) {
