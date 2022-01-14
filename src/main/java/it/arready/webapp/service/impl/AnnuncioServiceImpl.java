@@ -127,8 +127,8 @@ public class AnnuncioServiceImpl implements AnnuncioService {
 		try {
 			connection = DataSource.getInstance().getConnection();
 			DBUtil.setAutoCommit(connection, false);
-			annunci = annuncioDAO.orderByFind(connection, prezzoMin, prezzoMax, numLocali, numBagni, superficie, piano,
-					statoImmobile, citta, titolo);
+			annunci = annuncioDAO.orderByFind(connection, prezzoMin, prezzoMax, numLocali, numBagni, superficie, superficie, piano,
+					statoImmobile, citta, titolo, titolo, titolo, piano, null);
 			DBUtil.commit(connection);
 		} catch (DAOException e) {
 			System.err.println(e.getMessage());
