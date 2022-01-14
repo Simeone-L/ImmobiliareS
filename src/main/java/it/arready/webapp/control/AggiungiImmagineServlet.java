@@ -50,7 +50,7 @@ public class AggiungiImmagineServlet extends HttpServlet {
 
 			immagineService.inserimentoImmagine(immagine);
 
-			response.sendRedirect("annuncio.html");
+			response.sendRedirect("annuncio.jsp");
 		} catch (ServiceException e) {
 			System.err.println(e.getMessage());
 			response.sendRedirect("error.html");

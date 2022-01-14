@@ -157,7 +157,7 @@ public class CreaAnnuncioServlet extends HttpServlet {
 //				}
 //			}
 
-			request.getRequestDispatcher("").forward(request, response);
+			request.getRequestDispatcher("annuncio.jsp").forward(request, response);
 			response.sendRedirect("/ricerca_completa.html");
 		} catch (ServiceException e) {
 			System.err.println(e.getMessage());
