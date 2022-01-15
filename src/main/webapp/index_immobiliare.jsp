@@ -23,6 +23,9 @@
   <!-- Custom styles for Carousel -->
   <link href="carousel.css" rel="stylesheet">
 
+  <!-- link for font -->
+  <link href="font.css" rel="stylesheet">
+
   <style>
     .bd-placeholder-img {
       font-size: 1.125rem;
@@ -77,6 +80,10 @@
       border-color: #be9447;
       color: #be9447;
     }
+    
+    h1 {
+      font-family: HomestayDemo;
+    }
   </style>
 
 </head>
@@ -87,8 +94,6 @@
   <div class="sticky-top">
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between   "
       style="background-color: #f8ebcd;">
-      <!--BBBBBB-->
-      <!-- tolto -> py-3: altezza header fissa/ mb-4: padding tra header e pag -->
       <!--in href mettere link per tornare in cima home page-->
       <a href="#" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
         <img src="logo_img/logo.png" style=" height: 60px;" title="Homepage Arready">
@@ -124,11 +129,10 @@
   <!--blocco top page /tolto: container-->
   <section class="py-5 text-center img-blocco-1 parallasse"
     style="background-size: cover; background-position: bottom; ">
-    <!--background-color: #be9447;-->
     <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto" style="background-color: rgba(255, 255, 255, 0.5);">
-        <h1 class="fw-light" style="font-family: Georgia; color: #3d3d3d;">BENVENUTI SU ARREADY</h1>
-        <p class="lead text-muted">Qui ci scriveremo qualcosa dopo!</p>
+      <div class="col-lg-6 col-md-8 mx-auto" style="background-color: rgba(255, 255, 255, 0.8);">
+        <h1 class="fw-light" style="color: #3d3d3d;">BENVENUTI SU ARREADY</h1>
+        <p class="lead" style="color: black;">Casetta in campagna? Arready ti accompagna!</p>
         <p>
           <a href="tutti_annunci.jsp">
             <button class="btn btn-primary my-2 bottone-arready">
@@ -148,10 +152,10 @@
       <p style="font-size: 22px;">Cerca il tuo prossimo appartamento</p>
     </div>
     <div class="spacer-searchbar"></div>
-    <input type="text" class="form-control" placeholder="Cerca per citt&agrave;">
+    <input type="text" class="form-control" placeholder="Cerca per Parola Chiave">
     <div class="input-group-append">
       <a href="tutti_annunci.jsp">
-        <button class="btn btn-secondary" type="button">
+        <button class="btn btn-secondary" type="button"><!--  -->
           <i class="fa fa-search"></i>
         </button>
       </a>
@@ -161,7 +165,7 @@
 
   <!--CORPO CAROSELLO-->
   <main>
-    <div class="" style="margin-left: 400px ; margin-right: 400px; padding-top: 50px;">
+    <div class="container" style="padding-top: 50px;">
       <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
@@ -171,24 +175,18 @@
         </div>
         <div class="carousel-inner ">
           <div class="carousel-item active">
-            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-              <rect width="100%" height="100%" fill="#777" />
-            </svg>
+            
             <img src="img/foto1.png">
             <div class="container">
               <div class="carousel-caption text-start">
-                <h1>Appartamento bilocale cazzi e mazzi</h1>
+                <h1>Appartamento bilocale gazzi e mazzi</h1>
                 <p>10 mq, 2 bagni, ecc.</p>
                 <p><a class="btn btn-lg btn-primary bottone-arready" href="annuncio.html">Visualizza Annuncio</a></p>
               </div>
             </div>
           </div>
           <div class="carousel-item">
-            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-              <rect width="100%" height="100%" fill="#777" />
-            </svg>
+            
             <img src="img/foto2.png">
             <div class="container">
               <div class="carousel-caption">
@@ -199,10 +197,7 @@
             </div>
           </div>
           <div class="carousel-item">
-            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-              <rect width="100%" height="100%" fill="#777" />
-            </svg>
+            
             <img src="img/foto3.png">
             <div class="container">
               <div class="carousel-caption text-end">
@@ -228,8 +223,8 @@
 
 
   <!--FOOTER-->
-  <footer class="container py-5">
-    <div class="row">
+  <footer class="py-5" style="background-color: #f8ebcd;">
+    <div class="row container" style="margin: auto;">
       <div class="col-12 col-md">
         <p>Arready Immobiliare S.R.L.</p>
         <small class="d-block mb-3 text-muted">&copy; 2017–2021</small>
@@ -255,7 +250,7 @@
       </div>
 
       <div class="col-6 col-md">
-        <h5>Cagate Legali</h5>
+        <h5>Info Legali</h5>
         <ul class="list-unstyled text-small">
           <li><a class="link-secondary" href="#">Preferenze Cookie</a></li>
           <li><a class="link-secondary" href="#">Privacy</a></li>
@@ -300,11 +295,3 @@
 </body>
 
 </html>
-
-<!--
- OK tra blocco e ricerca mettere scritta centrata "cerca appartamento x regione + pannello ricerca"
-
- OK mettere footer con back top
-
- carosello di img con annunci recenti
--->
