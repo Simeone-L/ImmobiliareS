@@ -322,7 +322,7 @@
             <div class="col-12">
               <label for="superficie" class="form-label">Superficie</label>
               <div class="input-group has-validation">
-                <input type="text" class="form-control" id="superficie" placeholder="" required>
+                <input type="number" class="form-control" id="superficie" placeholder="" required>
                 <span class="input-group-text">mq</span>
                 <div class="invalid-feedback">
                   Inserisci i metri quadri
