@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.arready.webapp.model.Annuncio;
+import it.arready.webapp.model.Annuncio.Ordinamento;
 import it.arready.webapp.model.Annuncio.StatoVendita;
 import it.arready.webapp.model.Immobile.StatoImmobile;
 import it.arready.webapp.service.AnnuncioService;
@@ -71,8 +72,25 @@ public class RicercaAnnuncioServlet extends HttpServlet {
 
 			}
 
+			String oPString = request.getParameter("ordinamentoPrezzo");
+			Ordinamento ordinamentoPrezzo = null;
+			for (Ordinamento ordinam : Ordinamento.values()) {
+				if (ordinam.getOrdinam().equals(oPString))
+					;
+				ordinamentoPrezzo = ordinam;
+			}
+
+			String oSString = request.getParameter("ordinamentoSuperficie");
+			Ordinamento ordinamentoSuperficie = null;
+			for (Ordinamento ordinam : Ordinamento.values()) {
+				if (ordinam.getOrdinam().equals(oSString))
+					;
+				ordinamentoPrezzo = ordinam;
+			}
+
 			annuncioService.orderByFind(prezzoMin, prezzoMax, numeroLocali, bagni, superficieMin, superficieMax, piano,
-					statoImmobile, citta, titolo, provincia, indirizzo, numeroCivico, statoVendita);
+					statoImmobile, citta, titolo, provincia, indirizzo, numeroCivico, statoVendita, ordinamentoPrezzo,
+					ordinamentoSuperficie);
 			request.setAttribute("annunci", annunci);
 			request.getRequestDispatcher("tutti_annunci.jsp").forward(request, response);
 		} catch (ServiceException e) {
