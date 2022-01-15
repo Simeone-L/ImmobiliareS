@@ -297,6 +297,7 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 			}
 			if (ordinamentoSuperficie != null) {
 				acceptParameters.add(ordinamentoSuperficie);
+				
 			}
 		}
 
