@@ -4,17 +4,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import it.arready.webapp.model.Annuncio;
+import it.arready.webapp.model.Annuncio.StatoVendita;
 import it.arready.webapp.model.Immobile.StatoImmobile;
 import it.arready.webapp.service.AnnuncioService;
 import it.arready.webapp.service.ServiceException;
 import it.arready.webapp.service.impl.AnnuncioServiceImpl;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class RicercaAnnuncioServlet
@@ -22,42 +22,57 @@ import it.arready.webapp.service.impl.AnnuncioServiceImpl;
 @WebServlet(name = "ricerca-annuncio", urlPatterns = { "/ricerca-annuncio" })
 public class RicercaAnnuncioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	AnnuncioService annuncioService = new AnnuncioServiceImpl();
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public RicercaAnnuncioServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public RicercaAnnuncioServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		List<Annuncio> annunci = null;
-		
+
 		try {
 			annunci = new ArrayList<Annuncio>();
-			
+
 			float prezzoMin = Float.parseFloat(request.getParameter("prezzoMin"));
 			float prezzoMax = Float.parseFloat(request.getParameter("prezzoMax"));
 			String statoImmobileString = request.getParameter("statoImmobile");
 			StatoImmobile statoImmobile = null;
-			for(StatoImmobile s : StatoImmobile.values()) {
-				if(s.getNome().equals(statoImmobileString)) statoImmobile = s;
+			for (StatoImmobile s : StatoImmobile.values()) {
+				if (s.getNome().equals(statoImmobileString))
+					statoImmobile = s;
 			}
 			int bagni = Integer.parseInt(request.getParameter("bagni"));
 			int piano = Integer.parseInt(request.getParameter("piano"));
 			int numeroLocali = Integer.parseInt(request.getParameter("numeroLocali"));
-			float superficie = Float.parseFloat(request.getParameter("superficie"));
+			float superficieMin = Float.parseFloat(request.getParameter("superficieMin"));
+			float superficieMax = Float.parseFloat(request.getParameter("superficieMax"));
 			String citta = request.getParameter("citta");
 			String titolo = request.getParameter("titolo");
-			
-			
-			annuncioService.orderByFind(prezzoMin, prezzoMax, numeroLocali, bagni, superficie, piano, statoImmobile, citta, titolo);
+			String provincia = request.getParameter("provincia");
+			String indirizzo = request.getParameter("indirizzo");
+			int numeroCivico = Integer.parseInt(request.getParameter("numeroCivico"));
+
+			String statoVenditaString = request.getParameter("statoVendita");
+			StatoVendita statoVendita = null;
+			for (StatoVendita sV : StatoVendita.values()) {
+				if (sV.getNome().equals(statoVenditaString))
+					statoVendita = sV;
+
+			}
+
+			annuncioService.orderByFind(prezzoMin, prezzoMax, numeroLocali, bagni, superficieMin, superficieMax, piano,
+					statoImmobile, citta, titolo, provincia, indirizzo, numeroCivico, statoVendita);
 			request.setAttribute("annunci", annunci);
 			request.getRequestDispatcher("tutti_annunci.jsp").forward(request, response);
 		} catch (ServiceException e) {

@@ -10,6 +10,44 @@ public class Annuncio {
 	private Immobile immobile;
 	private StatoVendita statoVendita;
 	private Utente utente;
+	private Ordinamento ordinam;
+
+	public enum Ordinamento {
+		ASC(4, "ASC"), DESC(5, "DESC");
+
+		private final int x;
+		private final String ordinam;
+
+		Ordinamento(int x, String ordinam) {
+			this.x = x;
+			this.ordinam = ordinam;
+		}
+
+		public static Ordinamento corrispondenzeOrdinamento(int o) {
+
+			for (Ordinamento ordine : Ordinamento.values()) {
+				if (ordine.x == o)
+					return ordine;
+			}
+			return null;
+		}
+
+		public static Ordinamento corrispondenzaOrdinamentoString(String o) {
+			for (Ordinamento ordine : Ordinamento.values()) {
+				if (ordine.ordinam.equals(o))
+					return ordine;
+			}
+			return null;
+		}
+
+		public int getX() {
+			return x;
+		}
+
+		public String getOrdinam() {
+			return ordinam;
+		}
+	}
 
 	public enum StatoVendita {
 		AFFITTO(1, "Affitto"), AFFITTO_A_RISCATTO(2, "Affitto a riscatto"), VENDITA(3, "Vendita");
@@ -22,17 +60,17 @@ public class Annuncio {
 			this.nome = nome;
 		}
 
-		public static StatoVendita corrispondenzaStato(int sI) {
+		public static StatoVendita corrispondenzaStato(int sV) {
 			for (StatoVendita statoVendita : StatoVendita.values()) {
-				if (statoVendita.i == sI)
+				if (statoVendita.i == sV)
 					return statoVendita;
 			}
 			return null;
 		}
 
-		public static StatoVendita corrispondenzaStatoString(String sI) {
+		public static StatoVendita corrispondenzaStatoString(String sV) {
 			for (StatoVendita statoVendita : StatoVendita.values()) {
-				if (statoVendita.nome.equals(sI))
+				if (statoVendita.nome.equals(sV))
 					return statoVendita;
 			}
 			return null;
@@ -59,7 +97,7 @@ public class Annuncio {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public String getTitoloAnnuncio() {
 		return titoloAnnuncio;
 	}

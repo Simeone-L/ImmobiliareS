@@ -11,6 +11,7 @@ import it.arready.webapp.dao.AnnuncioDAO;
 import it.arready.webapp.dao.DAOException;
 import it.arready.webapp.dao.DBUtil;
 import it.arready.webapp.model.Annuncio;
+import it.arready.webapp.model.Annuncio.Ordinamento;
 import it.arready.webapp.model.Annuncio.StatoVendita;
 import it.arready.webapp.model.Immobile;
 import it.arready.webapp.model.Immobile.StatoImmobile;
@@ -185,7 +186,7 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 	public List<Annuncio> orderByFind(Connection conn, Float prezzoMin, Float prezzoMax, Integer numLocali,
 			Integer numBagni, Float superficieMin, Float superficieMax, Integer piano, StatoImmobile statoImmobile,
 			String citta, String titolo, String provincia, String indirizzo, Integer numeroCivico,
-			StatoVendita statoVendita) throws DAOException {
+			StatoVendita statoVendita, Ordinamento ordinamento) throws DAOException {
 		String sql = "SELECT * FROM annuncio " + "INNER JOIN immobile ON annuncio.immobile_id = immobile.id "
 				+ "INNER JOIN indirizzo ON indirizzo.id = immobile.indirizzo_id "
 				+ "INNER JOIN utente ON utente.id = annuncio.utente_id ";
@@ -196,14 +197,37 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 
 //		if(citta != null) sql += "INNER JOIN indirizzo ON indirizzo.id = immobile.indirizzo_id ";
 
-		stringParameters.add("prezzo BETWEEN ? AND ? ORDER BY prezzo ASC");
+//		stringParameters.add("prezzo BETWEEN ? AND ? ORDER BY prezzo ASC");
+//
+//		if (!(prezzoMin != null) && !(prezzoMax != null)) {
+//			prezzoMin = 0f;
+//			acceptParameters.add(prezzoMin);
+//
+//			prezzoMax = 5000000f;
+//			acceptParameters.add(prezzoMax);
+//		} else {
+//			if (prezzoMin > prezzoMax) {
+//				Float cambio = prezzoMin;
+//				prezzoMin = prezzoMax;
+//				prezzoMax = cambio;
+//
+//				acceptParameters.add(prezzoMin);
+//				acceptParameters.add(prezzoMax);
+//
+//			} else if (prezzoMin < prezzoMax) {
+//				{
+//					acceptParameters.add(prezzoMin);
+//					acceptParameters.add(prezzoMax);
+//				}
+//			}
+//		}
 
-		if (!(prezzoMin != null) && !(prezzoMax != null)) {
+		stringParameters.add("prezzo BETWEEN ? ");
+
+		if (!(prezzoMin != null)) {
 			prezzoMin = 0f;
-			acceptParameters.add(prezzoMin);
 
-			prezzoMax = 5000000f;
-			acceptParameters.add(prezzoMax);
+			acceptParameters.add(prezzoMin);
 		} else {
 			if (prezzoMin > prezzoMax) {
 				Float cambio = prezzoMin;
@@ -211,14 +235,72 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 				prezzoMax = cambio;
 
 				acceptParameters.add(prezzoMin);
-				acceptParameters.add(prezzoMax);
 
-			} else if (prezzoMin < prezzoMax) {
-				{
+			} else {
+				if (prezzoMin < prezzoMax) {
 					acceptParameters.add(prezzoMin);
+				}
+			}
+		}
+
+		stringParameters.add("AND ?");
+
+		if (!(prezzoMax != null)) {
+			prezzoMax = 5000000f;
+			acceptParameters.add(prezzoMax);
+		} else {
+			if (prezzoMax < prezzoMin) {
+				Float cambio = prezzoMax;
+				prezzoMax = prezzoMin;
+				prezzoMin = cambio;
+
+				acceptParameters.add(prezzoMax);
+			} else {
+				if (prezzoMax > prezzoMin) {
 					acceptParameters.add(prezzoMax);
 				}
 			}
+		}
+
+		stringParameters.add("superficie BETWEEN");
+		if (!(superficieMin != null)) {
+			superficieMin = 0f;
+			acceptParameters.add(superficieMin);
+		} else {
+			if (superficieMin > superficieMax) {
+				Float cambio = superficieMin;
+				superficieMin = superficieMax;
+				superficieMax = cambio;
+
+				acceptParameters.add(superficieMin);
+			} else if (superficieMin < superficieMax) {
+				acceptParameters.add(superficieMin);
+			}
+		}
+
+		stringParameters.add(" AND ?");
+		if (!(superficieMax != null)) {
+			superficieMax = 100000f;
+		} else {
+			if (superficieMax < superficieMin) {
+				Float cambio = superficieMax;
+				superficieMax = superficieMin;
+				superficieMin = cambio;
+
+				acceptParameters.add(superficieMax);
+			} else if (superficieMax > superficieMin) {
+				acceptParameters.add(superficieMax);
+			}
+		}
+
+		if (indirizzo != null) {
+			stringParameters.add("via=?");
+			acceptParameters.add(acceptParameters);
+		}
+
+		if (numeroCivico != null) {
+			stringParameters.add("num");
+			acceptParameters.add(numeroCivico);
 		}
 
 		if (numLocali != null) {
@@ -229,12 +311,6 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 		if (numBagni != null) {
 			stringParameters.add("numBagni=?");
 			acceptParameters.add(numBagni);
-		}
-
-		if (superficieMin != null && superficieMax != null) {
-			stringParameters.add("superficie BETWEEN ? AND ?");
-			acceptParameters.add(superficieMin);
-			acceptParameters.add(superficieMax);
 		}
 
 		if (piano != null) {
