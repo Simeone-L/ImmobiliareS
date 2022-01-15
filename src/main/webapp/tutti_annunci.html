@@ -112,12 +112,12 @@
 
                 <label for="prezzoMin">Prezzo Minimo</label>
                 <div style=" padding-left: 55px; display: inline-block;">
-                  <input type="number" id="prezzoMin" placeholder="Qualsiasi" step="500">
+                  <input type="number" id="prezzoMin" name="prezzoMin" placeholder="Qualsiasi" step="500">
                 </div>
                 <br>
                 <label for="prezzoMax">Prezzo Massimo</label>
                 <div style=" padding-left: 55px; display: inline-block;">
-                  <input type="number" id="prezzoMax" placeholder="Qualsiasi" step="500">
+                  <input type="number" id="prezzoMax" name="prezzoMax" placeholder="Qualsiasi" step="500">
                 </div>
                 <br>
 
@@ -132,12 +132,16 @@
                 </select>
                 <br>
 
-                <label for="superficie">M² superficie</label>
-                <div style="position: absolute; padding-left: 10px; display: inline-block;">
-                  <input type="range" id="superficie" name="superficie" min="10" max="10000" step="10" value="10000"
-                    oninput="this.nextElementSibling.value = this.value">
-                  <output></output>metri²
+                <label for="superficieMin">superficie Minima</label>
+                <div style=" padding-left: 55px; display: inline-block;">
+                  <input type="number" id="superficieMin" name="superficieMin" placeholder="Qualsiasi" step="50">
                 </div>
+                <br>
+                <label for="superficieMax">superficie Massima</label>
+                <div style=" padding-left: 55px; display: inline-block;">
+                  <input type="number" id="superficieMax" name="superficieMax" placeholder="Qualsiasi" step="50">
+                </div>
+
               </div>
 
               <label for="citta">
@@ -405,14 +409,3 @@
 </body>
 
 </html>
-
-<!--
-  <h1 class="fw-light">Annunci di vendita</h1>
-          <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator,
-            etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
-          <p>
-            <a href="#" class="btn btn-primary my-2">Main call to action</a>
-            <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-          </p>
-
--->
