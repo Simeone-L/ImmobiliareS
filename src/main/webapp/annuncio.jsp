@@ -226,7 +226,7 @@ che nel pensier rinova la paura!
                             <p class="text-muted" style="float: left; ">Indirizzo</p>
                         </td>
                         <td>
-                            <p style="float: right; "> via [ via ] [ cittÃ  ] nÂ° [ n ]</p>
+                            <p style="float: right; "> via [ via ] [ città  ] n° [ n ]</p>
                         </td>
                     </tr>
                 </tbody>
@@ -251,16 +251,15 @@ che nel pensier rinova la paura!
     </div>
 
     <div style="padding-bottom: 100px; padding-top: 50px">
-        <hr>
     </div>
 
     <!--FOOTER-->
 
-    <footer class="container py-5">
-        <div class="row">
+    <footer class="py-5" style="background-color: #f8ebcd;">
+        <div class="row container" style="margin: auto;">
             <div class="col-12 col-md">
                 <p>Arready Immobiliare S.R.L.</p>
-                <small class="d-block mb-3 text-muted">&copy; 2017â€“2021</small>
+                <small class="d-block mb-3 text-muted">&copy; 2017-€“2021</small>
                 <a href="#">
                     <img src="logo_img/logo.png" style="height: 62px;" title="Arready Immobiliare">
                 </a>
@@ -292,8 +291,5 @@ che nel pensier rinova la paura!
             </div>
         </div>
     </footer>
-
 </body>
-
 </html>
-
