@@ -186,7 +186,8 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 	public List<Annuncio> orderByFind(Connection conn, Float prezzoMin, Float prezzoMax, Integer numLocali,
 			Integer numBagni, Float superficieMin, Float superficieMax, Integer piano, StatoImmobile statoImmobile,
 			String citta, String titolo, String provincia, String indirizzo, Integer numeroCivico,
-			StatoVendita statoVendita, Ordinamento ordinamento) throws DAOException {
+			StatoVendita statoVendita, Ordinamento ordinamentoPrezzo, Ordinamento ordinamentoSuperficie)
+			throws DAOException {
 		String sql = "SELECT * FROM annuncio " + "INNER JOIN immobile ON annuncio.immobile_id = immobile.id "
 				+ "INNER JOIN indirizzo ON indirizzo.id = immobile.indirizzo_id "
 				+ "INNER JOIN utente ON utente.id = annuncio.utente_id ";
@@ -243,7 +244,7 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 			}
 		}
 
-		stringParameters.add("AND ?");
+		stringParameters.add("? ORDER BY prezzo ?");
 
 		if (!(prezzoMax != null)) {
 			prezzoMax = 5000000f;
@@ -260,9 +261,12 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 					acceptParameters.add(prezzoMax);
 				}
 			}
+			if (ordinamentoPrezzo != null) {
+				acceptParameters.add(ordinamentoPrezzo);
+			}
 		}
 
-		stringParameters.add("superficie BETWEEN");
+		stringParameters.add("superficie BETWEEN ?");
 		if (!(superficieMin != null)) {
 			superficieMin = 0f;
 			acceptParameters.add(superficieMin);
@@ -278,7 +282,7 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 			}
 		}
 
-		stringParameters.add(" AND ?");
+		stringParameters.add("? ORDER BY superficie ?");
 		if (!(superficieMax != null)) {
 			superficieMax = 100000f;
 		} else {
@@ -290,6 +294,9 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 				acceptParameters.add(superficieMax);
 			} else if (superficieMax > superficieMin) {
 				acceptParameters.add(superficieMax);
+			}
+			if (ordinamentoSuperficie != null) {
+				acceptParameters.add(ordinamentoSuperficie);
 			}
 		}
 

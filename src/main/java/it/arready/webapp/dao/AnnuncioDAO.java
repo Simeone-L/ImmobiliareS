@@ -23,6 +23,6 @@ public interface AnnuncioDAO {
 	List<Annuncio> orderByFind(Connection conn, Float prezzoMin, Float prezzoMax, Integer numLocali, Integer numBagni,
 			Float superficieMin, Float superficieMax, Integer piano, StatoImmobile statoImmobile, String citta,
 			String titolo, String provincia, String indirizzo, Integer numeroCivico, StatoVendita statoVendita,
-			Ordinamento ordinamento) throws DAOException;
+			Ordinamento ordinamentoPrezzo, Ordinamento ordinamentoSuperficie) throws DAOException;
 
 }
