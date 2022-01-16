@@ -42,7 +42,6 @@
     .parallasse {
       width: 100%;
       background-attachment: fixed;
-
       background-size: cover;
     }
 
@@ -86,7 +85,7 @@
 
 </head>
 
-<body>
+<body style="background-color: #fdf6e3d7; ">
 
   <!-- HEADER DI TUTTE LE PAGINE -->
   <div class="sticky-top">
@@ -141,7 +140,7 @@
   <br>
 
   <!--barra alt-->
-  <div class="input-group bg-light container" style="padding-top: 10px; padding-bottom: 20px;">
+  <div class="input-group container" style="padding-top: 10px; padding-bottom: 20px;">
     <div class="container text-center">
       <p style="font-size: 22px;">Cerca il tuo prossimo appartamento</p>
     </div>
@@ -268,6 +267,7 @@
   <!--SCRIPTING-->
   <script>
     back_top = document.getElementById('back-top-button');
+    back_top.classList.add('disappear');
 
     window.addEventListener("scroll", () => {
       var y = window.scrollY;

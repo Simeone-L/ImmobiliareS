@@ -60,12 +60,26 @@
     h1 {
       font-family: HomestayDemo;
     }
+
+    .sfondo {
+      background-image: url(img/background1.png);
+      background-color: rgba(255, 255, 255, 0.45);
+      background-blend-mode: lighten;
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+
+    .parallasse {
+      width: 100%;
+      background-attachment: fixed;
+      background-size: cover;
+    }
   </style>
 
 
 </head>
 
-<body>
+<body class="sfondo parallasse">
 
   <!-- HEADER DI TUTTE LE PAGINE -->
   <div class="sticky-top">
@@ -107,63 +121,75 @@
           <p>filtra per:</p>
           <div style="background-color: #f8ebcd;">
             <br>
+            <!---->
             <form action="search" method="post">
-              <div style="position: relative; text-align: left; padding-left: 50px;">
-
-                <label for="prezzoMin">Prezzo Minimo</label>
-                <div style=" padding-left: 55px; display: inline-block;">
-                  <input type="number" id="prezzoMin" name="prezzoMin" placeholder="Qualsiasi" step="500">
-                </div>
-                <br>
-                <label for="prezzoMax">Prezzo Massimo</label>
-                <div style=" padding-left: 55px; display: inline-block;">
-                  <input type="number" id="prezzoMax" name="prezzoMax" placeholder="Qualsiasi" step="500">
-                </div>
-                <br>
-
-                <label for="numeroLocali">Numero locali minimo</label>
-                <select id="numeroLocali">
-                  <option value="">Qualsiasi</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5+</option>
-                </select>
-                <br>
-
-                <label for="superficieMin">superficie Minima</label>
-                <div style=" padding-left: 55px; display: inline-block;">
-                  <input type="number" id="superficieMin" name="superficieMin" placeholder="Qualsiasi" step="50">
-                </div>
-                <br>
-                <label for="superficieMax">superficie Massima</label>
-                <div style=" padding-left: 55px; display: inline-block;">
-                  <input type="number" id="superficieMax" name="superficieMax" placeholder="Qualsiasi" step="50">
-                </div>
-
-              </div>
-
-              <label for="citta">
-                <p style="font-size: 25px;">Cerca</p>
-                <!--ricerca per titolo-->
-              </label>
-              <input type="search" name="citta" id="citta" style="size: 50%;">
+              <table style="width: 95%;">
+                <tbody>
+                  <tr>
+                    <td><label for="prezzoMin">Prezzo Minimo</label></td>
+                    <td style="float: right;"><input type="number" id="prezzoMin" name="prezzoMin"
+                        placeholder="Qualsiasi" step="1"></td>
+                  </tr>
+                  <tr>
+                    <td><label for="prezzoMax">Prezzo Massimo</label></td>
+                    <td style="float: right;"><input type="number" id="prezzoMax" name="prezzoMax"
+                        placeholder="Qualsiasi" step="1"></td>
+                  </tr>
+                  <tr>
+                    <td><label for="numeroLocali">Numero locali minimo</label></td>
+                    <td style="float: right;"><select id="numeroLocali">
+                        <option value="">Qualsiasi</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5+</option>
+                      </select></td>
+                  </tr>
+                  <tr>
+                    <td><label for="superficieMin">Superficie Minima</label></td>
+                    <td style="float: right;"><input type="number" id="superficieMin" name="superficieMin"
+                        placeholder="Qualsiasi" step="1"></td>
+                  </tr>
+                  <tr>
+                    <td><label for="superficieMax">Superficie Massima</label></td>
+                    <td style="float: right;"><input type="number" id="superficieMax" name="superficieMax"
+                        placeholder="Qualsiasi" step="1"></td>
+                  </tr>
+                  <tr>
+                    <td><label for="titolo"> Cerca per Parola Chiave</labe>
+                    </td>
+                    <td style="float: right;"><input type="search" name="titolo" id="titolo" placeholder="Qualsiasi">
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <a href="ricerca_completa.html">
+                pi&ugrave; filtri
+              </a>
+              <br><br>
               <input type="submit" value="Cerca" class="btn btn-primary bottone-arready" style="width: 100px;">
-            </form>
-            <a href="ricerca_completa.html">
-              <!--pagina ricerca completa-->
-              pi&ugrave; filtri
-            </a>
-            <br><br>
-            <form method="" action="">
-              <label for="ordinamento">Ordina per:</label>
-              <select id="ordinamento">
-                <option value="pCrescente">prezzo crescente</option>
-                <option value="pDecrescente">prezzo decrescente</option>
-                <option value="sCrescente">superficie crecente</option>
-                <option value="sDecrescente">superficie decrescente</option>
-              </select>
+              <br><br>
+              <!--un'altra form?-->
+              <table style="width: 95%;">
+                <tbody>
+                  <tr>
+                    <td><label for="ordinamentoPrezzo">Ordina per Prezzo</label></td>
+                    <td style="float: right;"><select id="ordinamentoPrezzo" name="ordinamentoPrezzo">
+                        <option value="crescente">Crescente</option>
+                        <option value="decrescente">Decrescente</option>
+                      </select></td>
+                  </tr>
+                  <tr>
+                    <td><label for="ordinamentoSuperficie">Ordina per Superficie</label></td>
+                    <td style="float: right;"><select id="ordinamentoSuperficie" name="ordinamentoSuperficie">
+                      <option value="crescente">Crecente</option>
+                      <option value="decrescente">Decrescente</option>
+                    </select></td>
+                  </tr>
+                </tbody>
+              </table>
+              <br>
               <input class="btn btn-outline-primary bottone-arready-2" type="submit" value="Ordina" >
             </form>
             <br>
@@ -175,8 +201,12 @@
 
 
     <!-- ALBUM -->
-    <div class="album py-5" style="background-color: #fdf6e3a4; ">
+    <div class="album py-5" style="background-color: #fdf6e3d7; ">
       <div class="container">
+
+
+
+
 
         <!--riga-->
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" style="margin: auto;">
@@ -197,137 +227,17 @@
                       <button type="button" class="btn btn-sm btn-outline-secondary">Apri</button>
                       <!--<button type="button" class="btn btn-sm btn-outline-secondary">Modifica</button>-->
                     </div>
-                    <small class="text-muted">100€</small>
+                    
+                    <small class="text-muted">100mq - 100€</small>
                   </div>
                 </div>
               </div>
             </a>
 
-          </div>
-          <!--fine singola casella-->
-          <!--inizio casella-->
-          <div class="col">
-            <div class="card shadow-sm">
-              <img class="bd-placeholder-img card-img-top" width="100%" height="225" role="img"
-                aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"
-                src="https://imagizer.imageshack.com/img924/3462/z9BgMv.jpg">
-              <div class="card-body">
-                <p class="card-text">Casa Bella</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <a href="annuncio.html">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Apri</button>
-                      <!--<button type="button" class="btn btn-sm btn-outline-secondary">Modifica</button>-->
-                    </a>
-                  </div>
-                  <small class="text-muted">100€</small>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!--inizio casella-->
-          <div class="col">
-            <div class="card shadow-sm">
-              <img class="bd-placeholder-img card-img-top" width="100%" height="225" role="img"
-                aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"
-                src="https://imagizer.imageshack.com/img924/3462/z9BgMv.jpg">
-              <div class="card-body">
-                <p class="card-text">Casa Bella</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <a href="annuncio.html">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Apri</button>
-                      <!--<button type="button" class="btn btn-sm btn-outline-secondary">Modifica</button>-->
-                    </a>
-                  </div>
-                  <small class="text-muted">100€</small>
-                </div>
-              </div>
-            </div>
           </div>
           <!--fine singola casella-->
         </div>
         <!--fine riga-->
-
-        <!--nuova riga-->
-        <!--riga-->
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" style="margin: auto;">
-
-          <!--INIZIO CICLO-->
-          <!--colonna-->
-          <!--inizio casella-->
-          <div class="col">
-            <a href="annuncio.html" style="color: black; text-decoration: none; cursor: pointer;">
-              <div class="card shadow-sm">
-                <img class="bd-placeholder-img card-img-top" width="100%" height="225" role="img"
-                  aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"
-                  src="https://imagizer.imageshack.com/img924/3462/z9BgMv.jpg">
-                <div class="card-body">
-                  <p class="card-text">Casa Bella</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Apri</button>
-                      <!--<button type="button" class="btn btn-sm btn-outline-secondary">Modifica</button>-->
-                    </div>
-                    <small class="text-muted">100€</small>
-                  </div>
-                </div>
-              </div>
-            </a>
-
-          </div>
-          <!--fine singola casella-->
-          <!--inizio casella-->
-          <div class="col">
-            <div class="card shadow-sm">
-              <img class="bd-placeholder-img card-img-top" width="100%" height="225" role="img"
-                aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"
-                src="https://imagizer.imageshack.com/img924/3462/z9BgMv.jpg">
-              <div class="card-body">
-                <p class="card-text">Casa Bella</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <a href="annuncio.html">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Apri</button>
-                      <!--<button type="button" class="btn btn-sm btn-outline-secondary">Modifica</button>-->
-                    </a>
-                  </div>
-                  <small class="text-muted">100€</small>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!--inizio casella-->
-          <div class="col">
-            <div class="card shadow-sm">
-              <img class="bd-placeholder-img card-img-top" width="100%" height="225" role="img"
-                aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"
-                src="https://imagizer.imageshack.com/img924/3462/z9BgMv.jpg">
-              <div class="card-body">
-                <p class="card-text">Casa Bella</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <a href="annuncio.html">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Apri</button>
-                      <!--<button type="button" class="btn btn-sm btn-outline-secondary">Modifica</button>-->
-                    </a>
-                  </div>
-                  <small class="text-muted">100€</small>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--fine singola casella-->
-        </div>
-        <!--fine colonna-->
-
-        <!--FINE CLICLO-->
-
-
-
-
       </div>
     </div>
 
@@ -372,7 +282,7 @@
   </footer>
 
   <!--tasto back to top-->
-  <div class="back-top-button" id="back-top-button">
+  <div class="back-top-button" id="back-top-button" >
     <button class="btn btn-secondary"
       style="border-radius: 50%; width: 60px; height: 60px; padding: 10px 10px 10px 10px;">
       <a href="#">
@@ -383,6 +293,7 @@
   <!--SCRIPTING-->
   <script>
     back_top = document.getElementById('back-top-button');
+    back_top.classList.add('disappear');
 
     window.addEventListener("scroll", () => {
       var y = window.scrollY;
