@@ -42,15 +42,19 @@ public class RicercaAnnuncioServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		List<Annuncio> annunci = null;
 
 		try {
 			annunci = new ArrayList<Annuncio>();
 
-			float prezzoMin = Float.parseFloat(request.getParameter("prezzoMin"));
-			float prezzoMax = Float.parseFloat(request.getParameter("prezzoMax"));
+			Float prezzoMin = null;
+			if(request.getParameter("prezzoMin") != null) prezzoMin = Float.parseFloat(request.getParameter("prezzoMin")); 
+			Float prezzoMax = null;
+			if(request.getParameter("prezzoMax") != null) prezzoMax = Float.parseFloat(request.getParameter("prezzoMax"));
+			
+			
 			String statoImmobileString = request.getParameter("statoImmobile");
 			StatoImmobile statoImmobile = null;
 			for (StatoImmobile s : StatoImmobile.values()) {
@@ -92,7 +96,7 @@ public class RicercaAnnuncioServlet extends HttpServlet {
 				ordinamentoPrezzo = ordinam;
 			}
 
-			annuncioService.orderByFind(prezzoMin, prezzoMax, numeroLocali, bagni, superficieMin, superficieMax, piano,
+			annunci = annuncioService.orderByFind(prezzoMin, prezzoMax, numeroLocali, bagni, superficieMin, superficieMax, piano,
 					statoImmobile, citta, titolo, provincia, indirizzo, numeroCivico, statoVendita, ordinamentoPrezzo,
 					ordinamentoSuperficie);
 			request.setAttribute("annunci", annunci);

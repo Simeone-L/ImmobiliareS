@@ -134,11 +134,13 @@
         <h1 class="fw-light" style="color: #3d3d3d;">BENVENUTI SU ARREADY</h1>
         <p class="lead" style="color: black;">Casetta in campagna? Arready ti accompagna!</p>
         <p>
-          <a href="tutti_annunci.jsp">
-            <button class="btn btn-primary my-2 bottone-arready">
-              Guarda tutte le offerte
-            </button>
-          </a>
+            
+            <form action="ricerca-annuncio" method="get">
+            <input type="submit" class="btn btn-primary my-2 bottone-arready" value="Guarda tutte le offerte"/>
+            </form>  
+              
+            
+       
           <a href="caricamento_annuncio.jsp" class="btn btn-secondary my-2 ">Inserisci la tua offerta</a>
         </p>
       </div>

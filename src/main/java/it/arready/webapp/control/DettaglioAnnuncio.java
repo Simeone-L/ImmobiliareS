@@ -39,7 +39,7 @@ public class DettaglioAnnuncio extends HttpServlet {
 			Annuncio annuncio = annuncioService.findById(id);
 			List<Immagine> immagini = immagineService.elencoImmagini(annuncio.getImmobile());
 
-			request.getRequestDispatcher("").forward(request, response);
+			request.getRequestDispatcher("dettaglio-annuncio.jsp").forward(request, response);
 		} catch (ServiceException e) {
 			System.err.println(e.getMessage());
 
