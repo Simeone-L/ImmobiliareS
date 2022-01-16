@@ -49,12 +49,8 @@ public class RicercaAnnuncioServlet extends HttpServlet {
 		try {
 			annunci = new ArrayList<Annuncio>();
 
-			Float prezzoMin = null;
-			if (request.getParameter("prezzoMin") != null)
-				prezzoMin = Float.parseFloat(request.getParameter("prezzoMin"));
-			Float prezzoMax = null;
-			if (request.getParameter("prezzoMax") != null)
-				prezzoMax = Float.parseFloat(request.getParameter("prezzoMax"));
+			Float prezzoMin = Float.parseFloat(request.getParameter("prezzoMin"));
+			Float prezzoMax = Float.parseFloat(request.getParameter("prezzoMax"));
 
 			StatoImmobile statoImmobile = null;
 			if (request.getParameter("statoImmobile") != null) {
@@ -77,13 +73,9 @@ public class RicercaAnnuncioServlet extends HttpServlet {
 			if (request.getParameter("numeroLocali") != null)
 				numeroLocali = Integer.parseInt(request.getParameter("numeroLocali"));
 
-			Float superficieMin = null;
-			if (request.getParameter("superficieMin") != null)
-				superficieMin = Float.parseFloat(request.getParameter("superficieMin"));
+			Float superficieMin = Float.parseFloat(request.getParameter("superficieMin"));
 
-			Float superficieMax = null;
-			if (request.getParameter("superficieMax") != null)
-				superficieMax = Float.parseFloat(request.getParameter("superficieMax"));
+			Float superficieMax = Float.parseFloat(request.getParameter("superficieMax"));
 
 			String citta = null;
 			if (request.getParameter("citta") != null)
