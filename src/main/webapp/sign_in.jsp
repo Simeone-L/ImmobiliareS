@@ -64,8 +64,8 @@
 					<label for="floatingText">Nome </label>
 					<input type="text" class="form-control" name="nome" id="nome"
 					placeholder="Nome" >
-					<c:when test="${not empty errorCognome}">
-					<c:out value="${errorCognome}"/>
+					<c:when test="${not empty errorNome}">
+					<c:out value="${errorNnome}"/>
 					</c:when>
 					
 			</div>
@@ -74,8 +74,8 @@
 					<label for="floatingText">Cognome </label>
 					<input type="text" class="form-control" name="cognome" id="cognome"
 					placeholder="Cognome">
-					<c:when test="${not empty errorUsername}">
-					<c:out value="${errorUsername}"/>
+					<c:when test="${not empty errorCognome}">
+					<c:out value="${errorCognome}"/>
 					</c:when>
 					
 			</div>
@@ -84,9 +84,9 @@
 				    <label for="floatingText">Username</label>
 				    <input type="text" class="form-control" name="username"
 					id="username" placeholder="Username"> 
-					<c:when test="${not empty errorEmail}">
-					<c:out value="${errorEmail}"/>
-					</c:when>	
+					<c:when test="${not empty errorUsername}">
+					<c:out value="${errorUsername}"/>
+					</c:when>
 					
 					
 			</div>
@@ -95,7 +95,9 @@
 					<label for="floatingInput">Email </label>
 					<input type="email" class="form-control" name="email" id="email"
 					placeholder="name@example.com">
-				 	
+				 	<c:when test="${not empty errorEmail}">
+					<c:out value="${errorEmail}"/>
+					</c:when>
 					
 					
 			</div>
