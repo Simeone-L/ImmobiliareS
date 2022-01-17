@@ -300,7 +300,7 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 			}
 
 		}
-
+		
 		if (indirizzo != "qualsiasi") {
 			stringParameters.add("via=?");
 			acceptParameters.add(indirizzo);

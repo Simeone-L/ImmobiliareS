@@ -150,9 +150,9 @@ public class Immobile {
 
 	@Override
 	public String toString() {
-		return "Immobile: \nid " + id + ", descrizione " + descrizione + ", prezzo " + prezzo + ", numLocali "
-				+ numLocali + ", numBagni " + numBagni + ", superficie " + superficie + ", piano " + piano
-				+ ", venduto " + venduto;
+		return "Immobile [id=" + id + ", descrizione=" + descrizione + ", prezzo=" + prezzo + ", numLocali=" + numLocali
+				+ ", numBagni=" + numBagni + ", superficie=" + superficie + ", piano=" + piano + ", statoImmobile="
+				+ statoImmobile + ", venduto=" + venduto + ", indirizzo=" + indirizzo + "]";
 	}
 
 }

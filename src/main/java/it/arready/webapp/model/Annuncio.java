@@ -50,7 +50,8 @@ public class Annuncio {
 	}
 
 	public enum StatoVendita {
-		AFFITTO(1, "Affitto"), AFFITTO_A_RISCATTO(2, "Affitto a riscatto"), VENDITA(3, "Vendita"), DEFAULT(0,"Default");
+		AFFITTO(1, "Affitto"), AFFITTO_A_RISCATTO(2, "Affitto a riscatto"), VENDITA(3, "Vendita"),
+		DEFAULT(0, "Default");
 
 		private final int i;
 		private final String nome;
@@ -140,8 +141,9 @@ public class Annuncio {
 
 	@Override
 	public String toString() {
-		return "Annuncio [id=" + id + ", dataAnnuncio=" + dataAnnuncio + ", immobile=" + immobile + ", statoVendita="
-				+ statoVendita + ", utente=" + utente + "]";
+		return "Annuncio [id=" + id + ", titoloAnnuncio=" + titoloAnnuncio + ", dataAnnuncio=" + dataAnnuncio
+				+ ", immobile=" + immobile + ", statoVendita=" + statoVendita + ", utente=" + utente + ", ordinam="
+				+ ordinam + "]";
 	}
 
 }
