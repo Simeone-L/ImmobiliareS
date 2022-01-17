@@ -78,23 +78,23 @@
       style="background-color: #f8ebcd;">
       <!-- tolto -> py-3: altezza header fissa/ mb-4: padding tra header e pag -->
       <!--in href mettere link per tornare in cima home page-->
-      <a href="index_immobiliare.html"
+      <a href="index_immobiliare.jsp"
         class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none"
         style="padding-left: 15px;">
         <img src="logo_img/logo.png" style="height: 60px;" title="Homepage Arready">
       </a>
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
+        <li><a href="index_immobiliare.jsp" class="nav-link px-2 link-secondary">Home</a></li>
         <li><a href="#" class="nav-link px-2 link-dark">Features</a></li>
         <li><a href="#" class="nav-link px-2 link-dark">Pricing</a></li>
         <li><a href="#" class="nav-link px-2 link-dark">FAQs</a></li>
         <li><a href="#" class="nav-link px-2 link-dark">About</a></li>
       </ul>
       <div class="col-md-3 text-end">
-        <a href="log_in.html">
+        <a href="log_in.jsp">
           <button type="button" class="btn btn-outline-primary me-2 bottone-arready-2">Accedi</button>
         </a>
-        <a href="sign_in.html" style="padding-right: 15px;">
+        <a href="sign_in.jsp" style="padding-right: 15px;">
           <button type="button" class="btn btn-primary bottone-arready">Registrati</button>
         </a>
 
@@ -117,33 +117,34 @@
             <form action="ricerca-annuncio" method="post">
               <div style="position: relative; text-align: left; padding-left: 50px;">
 
-                <label for="prezzoMin">Prezzo Minimo</label>
+                <label for="prezzoMin">Prezzo Minimo  </label>
                 <div style=" padding-left: 55px; display: inline-block;">
-                  <input type="number" id="prezzoMin" placeholder="Qualsiasi" step="500" >
+                  <input type="number" id="prezzoMin" placeholder="Qualsiasi" step="500" name="prezzoMin" min="0" max="5000000" value="0">
                 </div>
                 <br>
-                <label for="prezzoMax">Prezzo Massimo</label>
+                <label for="prezzoMax">Prezzo Massimo  </label>
                 <div style=" padding-left: 55px; display: inline-block;">
-                  <input type="number" id="prezzoMax" placeholder="Qualsiasi" step="500">
+                  <input type="number" id="prezzoMax" placeholder="Qualsiasi" step="500" name="prezzoMax" min="0" max="5000000" value="5000000">
+                  
                 </div>
                 <br>
 
-                <label for="numeroLocali">Numero locali minimo</label>
-                <select id="numeroLocali">
-                  <option value="">Qualsiasi</option>
+                <label for="numeroLocali">Numero locali </label>
+                <select id="numeroLocali" name="numeroLocali">
+                  <option value="0">Qualsiasi</option>
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
                   <option value="4">4</option>
-                  <option value="5">5+</option>
+                  <option value="5">5</option> <!-- to update numLocali+ -->
                 </select>
                 <br>
 
-                <label for="superficie">MÂ² superficie</label>
+                <label for="superficie">metri<sup>2</sup> superficie </label>
                 <div style="position: absolute; padding-left: 10px; display: inline-block;">
-                  <input type="range" id="superficie" name="superficie" min="10" max="10000" step="10" value="10000"
+                  <input type="range" id="superficie" name="superficie" min="0" max="100000" step="10" value="0"
                     oninput="this.nextElementSibling.value = this.value">
-                  <output></output>metriÂ²
+                  <output></output>metri<sup>2</sup>
                 </div>
               </div>
 
@@ -151,21 +152,24 @@
                 <p style="font-size: 25px;">Cerca</p>
                 <!--ricerca per titolo-->
               </label>
-              <input type="search" name="citta" id="citta" style="size: 50%;">
+              <input type="search" name="citta" id="citta" style="size: 50%;" value="qualsiasi">
+              
               <input type="submit" value="Cerca" class="btn btn-primary bottone-arready" style="width: 100px;">
             </form>
-            <a href="ricerca_completa.html">
+            <a href="ricerca_completa.jsp">
               <!--pagina ricerca completa-->
               pi&ugrave; filtri
             </a>
             <br><br>
             <form method="ricerca-annuncio" action="get">
               <label for="ordinamento">Ordina per:</label>
-              <select id="ordinamento">
-                <option value="pCrescente">prezzo crescente</option>
-                <option value="pDecrescente">prezzo decrescente</option>
-                <option value="sCrescente">superficie crecente</option>
-                <option value="sDecrescente">superficie decrescente</option>
+              <select id="ordinamento" name="ordinamentoPrezzo">
+                <option value="crescente">prezzo crescente</option>
+                <option value="decrescente">prezzo decrescente</option>
+              </select>  
+               <select id="ordinamento" name="ordinamentoSuperficie"> 
+                <option value="crescente">superficie crecente</option>
+                <option value="decrescente">superficie decrescente</option>
               </select>
               <input class="btn btn-outline-primary bottone-arready-2" type="submit" value="Ordina" >
             </form>

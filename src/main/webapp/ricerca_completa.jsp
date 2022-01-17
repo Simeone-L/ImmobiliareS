@@ -76,26 +76,31 @@
         <img src="logo_img/logo.png" style="height: 60px;" title="Homepage Arready">
       </a>
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
+        <li><a href="index_immobiliare.jsp" class="nav-link px-2 link-secondary">Home</a></li>
         <li><a href="#" class="nav-link px-2 link-dark">Features</a></li>
         <li><a href="#" class="nav-link px-2 link-dark">Pricing</a></li>
         <li><a href="#" class="nav-link px-2 link-dark">FAQs</a></li>
         <li><a href="#" class="nav-link px-2 link-dark">About</a></li>
       </ul>
       <div class="col-md-3 text-end">
-       <%String username = (String) session.getAttribute("username"); %>
-       <%if (username == null){ %>
+       
+       <form action="login" method="post">
+       <c:when test="${username == null}" >
         <a href="log_in.jsp">
           <button type="button" class="btn btn-outline-primary me-2 bottone-arready-2">Accedi</button>
         </a>
+        <form action="sign_in" method="post">
         <a href="sign_in.jsp">
           <button type="button" class="btn btn-primary bottone-arready">Registrati</button>
         </a>
-        <%}else{%>
+        </form>
+        </form>
+        </c:when>
+        <c:otherwise >
         <form action="logout" method="get">
         	<input class="btn btn-primary bottone-arready" type="submit" value="Esci"></input>
         </form>
-        <%} %>
+        </c:otherwise>
 
       </div>
     </header>
@@ -117,20 +122,20 @@
           <div class="row g-3">
             <div class="col-12">
               <label for="titolo" class="form-label">Ricerca per Parole Chiave</label>
-              <input type="text" class="form-control" id="titolo" name="titolo" placeholder="" value="Qualsiasi">
+              <input type="text" class="form-control" id="titolo" name="titolo" placeholder="" value="qualsiasi">
 
             </div>
 
             <div class="col-sm-6">
-              <label for="città" class="form-label">Città</label>
-              <input type="text" class="form-control" id="citta" name="citta" placeholder="" value="Qualsiasi">
+              <label for="citta" class="form-label">Citt&agrave;</label>
+              <input type="text" class="form-control" id="citta" name="citta" placeholder="" value="qualsiasi">
 
             </div>
 
             <div class="col-sm-6">
               <label for="provincia" class="form-label">Provincia</label>
               <select id="provincia" name="provincia" class="form-control">
-                <option value="">Qualsiasi</option>
+                <option value="qualsiasi">Qualsiasi</option>
                 <option value="ag">Agrigento</option>
                 <option value="al">Alessandria</option>
                 <option value="an">Ancona</option>
@@ -247,54 +252,55 @@
             <div class="col-8">
               <label for="indirizzo" class="form-label">Indirizzo</label>
               <input type="text" class="form-control" id="indirizzo" name="indirizzo" placeholder="Via Mario Rossi"
-                value="Qualsiasi">
+                 value="qualsiasi">
             </div>
 
             <div class="col-4">
               <label for="numeroCivico" class="form-label">Civico</label>
               <input type="text" class="form-control" id="numeroCivico" name="numeroCivico"
-                placeholder="Via Mario Rossi" value="Qualsiasi">
+                placeholder="Via Mario Rossi" value="0" >
 
             </div>
 
             <div class="col-md-6">
               <label for="prezzoMin" class="form-label">Prezzo Minimo</label>
               <div class="input-group has-validation">
-                <input type="number" class="form-control" id="prezzoMin" name="prezzoMin" placeholder="Qualsiasi">
-                <span class="input-group-text">€</span>
+                <input type="number" class="form-control" id="prezzoMin" name="prezzoMin" placeholder="0" min="0" max="5000000" value="0">
+                <span class="input-group-text">&#128;</span>
               </div>
             </div>
 
             <div class="col-md-6">
               <label for="prezzoMax" class="form-label">Prezzo Massimo</label>
               <div class="input-group has-validation">
-                <input type="number" class="form-control" id="prezzoMax" name="prezzoMax" placeholder="Qualsiasi">
-                <span class="input-group-text">€</span>
+              
+                <input type="number" class="form-control" id="prezzoMax" name="prezzoMax" placeholder="5000000" min="0" max="5000000" value="5000000">
+                <span class="input-group-text">&#128;</span>
               </div>
             </div>
 
             <div class="col-6">
               <label for="superficieMin" class="form-label">Superficie Minima</label>
               <div class="input-group has-validation">
-                <input type="number" class="form-control" id="superficieMin" name="superficieMin" placeholder=""
-                  value="Qualsiasi">
-                <span class="input-group-text">mq</span>
+                <input type="number" class="form-control" id="superficieMin" name="superficieMin" placeholder="0 mq"
+                   min="0" max="100000" value="0">
+                <span class="input-group-text">metri<sup>2</sup></span>
               </div>
             </div>
 
             <div class="col-6">
               <label for="superficieMax" class="form-label">Superficie Massima</label>
               <div class="input-group has-validation">
-                <input type="number" class="form-control" id="superficieMax" name="superficieMax" placeholder=""
-                  value="Qualsiasi">
-                <span class="input-group-text">mq</span>
+                <input type="number" class="form-control" id="superficieMax" name="superficieMax" placeholder="100000 mq"
+                 mix="0" max="100000" value="100000">
+                <span class="input-group-text">metri<sup>2</sup></span>
               </div>
             </div>
 
             <div class="col-md-4">
               <label for="numeroLocali" class="form-label">Numero Locali</label>
               <select class="form-select" id="numeroLocali" name="numeroLocali">
-                <option value="">Qualsiasi</option>
+                <option value="0">Qualsiasi</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -304,7 +310,7 @@
                 <option value="7">7</option>
                 <option value="8">8</option>
                 <option value="9">9</option>
-                <option value="10">Più di 9</option>
+                <!--  <option value="10"> 10</option> -->
               </select>
 
             </div>
@@ -312,7 +318,8 @@
             <div class="col-md-4">
               <label for="piano" class="form-label">Piano</label>
               <select class="form-select" id="piano" name="piano">
-                <option value="">Qualsiasi</option>
+                <option value="-10">Qualsiasi</option>
+                <option value="-1">-1</option>
                 <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -323,7 +330,7 @@
                 <option value="7">7</option>
                 <option value="8">8</option>
                 <option value="9">9</option>
-                <option value="10">Più di 9</option>
+                <!-- <option value="10">Più di 9</option> -->
               </select>
 
             </div>
@@ -331,11 +338,11 @@
             <div class="col-md-4">
               <label for="bagni" class="form-label">Bagni</label>
               <select class="form-select" id="bagni" name="bagni">
-                <option value="">Qualsiasi</option>
+                <option value="0">Qualsiasi</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
-                <option value="4">Più di 3</option>
+                <option value="4">4</option> <!-- to update numBagni+ -->
               </select>
 
             </div>
@@ -343,7 +350,7 @@
             <div class="col-md-5">
               <label for="statoImmobile" class="form-label">Condizioni dell'Immobile</label>
               <select class="form-select" id="statoImmobile" name="statoImmobile">
-                <option value="">Qualsiasi</option>
+                <option value="qualsiasi">Qualsiasi</option>
                 <option value="nuovo">Nuovo</option>
                 <option value="buono">Buono</option>
                 <option value="vecchio">Vecchio</option>
@@ -356,7 +363,7 @@
             <div class="col-md-5">
               <label for="statoVendita" class="form-label">Stato vendita</label>
               <select class="form-select" id="statoVendita" name="statoVendita">
-                <option value="">Qualsiasi</option>
+                <option value="qualsiasi">Qualsiasi</option>
                 <option value="vendita">Vendita</option>
                 <option value="affitto">Affitto</option>
                 <option value="affittoRiscatto">Affitto a Riscatto</option>
