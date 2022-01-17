@@ -49,68 +49,77 @@ public class RicercaAnnuncioServlet extends HttpServlet {
 		try {
 			annunci = new ArrayList<Annuncio>();
 
-			Float prezzoMin = Float.parseFloat(request.getParameter("prezzoMin"));
-			Float prezzoMax = Float.parseFloat(request.getParameter("prezzoMax"));
+			Float prezzoMin = 0f;
+			if (request.getParameter("prezzoMin") != "0")
+				Float.parseFloat(request.getParameter("prezzoMin"));
 
-			StatoImmobile statoImmobile = null;
-			if (request.getParameter("statoImmobile") != null) {
-				String statoImmobileString = request.getParameter("statoImmobile");
+			Float prezzoMax = 5000000f;
+			if (request.getParameter("prezzoMax") != "5000000")
+				Float.parseFloat(request.getParameter("prezzoMax"));
+
+			Integer bagni = 0;
+			if (request.getParameter("bagni") != "0")
+				bagni = Integer.parseInt(request.getParameter("bagni"));
+
+			Integer piano = -10;
+			if (request.getParameter("piano") != "-10")
+				piano = Integer.parseInt(request.getParameter("piano"));
+
+			Integer numeroLocali = 0;
+			if (request.getParameter("numeroLocali") != "0")
+				numeroLocali = Integer.parseInt(request.getParameter("numeroLocali"));
+
+			Float superficieMin = 0f;
+			if (request.getParameter("superficieMin") != "0")
+				Float.parseFloat(request.getParameter("superficieMin"));
+
+			Float superficieMax = 100000f;
+			if (request.getParameter("superficieMax") != "100000")
+				Float.parseFloat(request.getParameter("superficieMax"));
+
+			String citta = "qualsiasi";
+			if (request.getParameter("citta") != "qualsiasi")
+				citta = request.getParameter("citta");
+
+			String titolo = "qualsiasi";
+			if (request.getParameter("titolo") != "qualsiasi")
+				titolo = request.getParameter("titolo");
+
+			String provincia = "qualsiasi";
+			if (request.getParameter("provincia") != null)
+				provincia = request.getParameter("provincia");
+
+			String indirizzo = "qualsiasi";
+			if (request.getParameter("indirizzo") != "qualsiasi")
+				indirizzo = request.getParameter("indirizzo");
+
+			Integer numeroCivico = 0;
+			if (request.getParameter("numeroCivico") != "0")
+				numeroCivico = Integer.parseInt(request.getParameter("numeroCivico"));
+			
+			String statoImmobileString = "qualsiasi";
+			StatoImmobile statoImmobile = StatoImmobile.DEFAULT;
+			if (request.getParameter("statoImmobile") != "qualsiasi") {
+				statoImmobileString = request.getParameter("statoImmobile");
 				for (StatoImmobile s : StatoImmobile.values()) {
 					if (s.getNome().equals(statoImmobileString))
 						statoImmobile = s;
 				}
 			}
 
-			Integer bagni = 0;
-			if (request.getParameter("bagni") != null)
-				bagni = Integer.parseInt(request.getParameter("bagni"));
-
-			Integer piano = null;
-			if (request.getParameter("piano") != null)
-				piano = Integer.parseInt(request.getParameter("piano"));
-
-			Integer numeroLocali = null;
-			if (request.getParameter("numeroLocali") != null)
-				numeroLocali = Integer.parseInt(request.getParameter("numeroLocali"));
-
-			Float superficieMin = Float.parseFloat(request.getParameter("superficieMin"));
-
-			Float superficieMax = Float.parseFloat(request.getParameter("superficieMax"));
-
-			String citta = null;
-			if (request.getParameter("citta") != null)
-				citta = request.getParameter("citta");
-
-			String titolo = null;
-			if (request.getParameter("titolo") != null)
-				titolo = request.getParameter("titolo");
-
-			String provincia = null;
-			if (request.getParameter("provincia") != null)
-				provincia = request.getParameter("provincia");
-
-			String indirizzo = null;
-			if (request.getParameter("indirizzo") != null)
-				indirizzo = request.getParameter("indirizzo");
-
-			Integer numeroCivico = null;
-			if (request.getParameter("numeroCivico") != null)
-				numeroCivico = Integer.parseInt(request.getParameter("numeroCivico"));
-
-			String statoVenditaString = null;
-			StatoVendita statoVendita = null;
-			if (request.getParameter("statoVendita") != null) {
+			String statoVenditaString = "qualsiasi";
+			StatoVendita statoVendita = StatoVendita.DEFAULT;
+			if (request.getParameter("statoVendita") != "qualsiasi") {
 				statoVenditaString = request.getParameter("statoVendita");
 				for (StatoVendita sV : StatoVendita.values()) {
 					if (sV.getNome().equals(statoVenditaString))
 						statoVendita = sV;
-
 				}
 			}
 
-			String oPString = null;
-			Ordinamento ordinamentoPrezzo = null;
-			if (request.getParameter("ordinamentoPrezzo") != null) {
+			String oPString = "crescente";
+			Ordinamento ordinamentoPrezzo = Ordinamento.ASC;
+			if (request.getParameter("ordinamentoPrezzo") != "crescente") {
 				oPString = request.getParameter("ordinamentoPrezzo");
 				ordinamentoPrezzo = null;
 				for (Ordinamento ordinam : Ordinamento.values()) {
@@ -120,9 +129,9 @@ public class RicercaAnnuncioServlet extends HttpServlet {
 				}
 			}
 
-			String oSString = null;
-			Ordinamento ordinamentoSuperficie = null;
-			if (request.getParameter("ordinamentoSuperficie") != null) {
+			String oSString = "crescente";
+			Ordinamento ordinamentoSuperficie = Ordinamento.ASC;
+			if (request.getParameter("ordinamentoSuperficie") != "crescente") {
 				oSString = request.getParameter("ordinamentoSuperficie");
 				ordinamentoSuperficie = null;
 				for (Ordinamento ordinam : Ordinamento.values()) {

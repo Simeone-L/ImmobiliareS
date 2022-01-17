@@ -50,7 +50,7 @@ public class Annuncio {
 	}
 
 	public enum StatoVendita {
-		AFFITTO(1, "Affitto"), AFFITTO_A_RISCATTO(2, "Affitto a riscatto"), VENDITA(3, "Vendita");
+		AFFITTO(1, "Affitto"), AFFITTO_A_RISCATTO(2, "Affitto a riscatto"), VENDITA(3, "Vendita"), DEFAULT(0,"Default");
 
 		private final int i;
 		private final String nome;

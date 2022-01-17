@@ -225,9 +225,8 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 
 		stringParameters.add("prezzo BETWEEN ? ");
 
-		if (!(prezzoMin != null)) {
-			prezzoMin = 0f;
-
+		if (prezzoMin == 0) {
+//			prezzoMin = 0f;
 			acceptParameters.add(prezzoMin);
 		} else {
 			if (prezzoMin > prezzoMax) {
@@ -246,9 +245,10 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 
 		stringParameters.add("? ORDER BY prezzo ?");
 
-		if (!(prezzoMax != null)) {
-			prezzoMax = 5000000f;
+		if (prezzoMax == 5000000) {
+//			prezzoMax = 5000000f;
 			acceptParameters.add(prezzoMax);
+			acceptParameters.add(superficieMin);
 		} else {
 			if (prezzoMax < prezzoMin) {
 				Float cambio = prezzoMax;
@@ -256,19 +256,18 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 				prezzoMin = cambio;
 
 				acceptParameters.add(prezzoMax);
+				acceptParameters.add(ordinamentoPrezzo);
 			} else {
 				if (prezzoMax > prezzoMin) {
 					acceptParameters.add(prezzoMax);
+					acceptParameters.add(ordinamentoPrezzo);
 				}
-			}
-			if (ordinamentoPrezzo != null) {
-				acceptParameters.add(ordinamentoPrezzo);
 			}
 		}
 
 		stringParameters.add("superficie BETWEEN ?");
-		if (!(superficieMin != null)) {
-			superficieMin = 0f;
+		if (superficieMin == 0) {
+//			superficieMin = 0f;
 			acceptParameters.add(superficieMin);
 		} else {
 			if (superficieMin > superficieMax) {
@@ -283,8 +282,10 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 		}
 
 		stringParameters.add("? ORDER BY superficie ?");
-		if (!(superficieMax != null)) {
-			superficieMax = 100000f;
+		if (!(superficieMax != 100000)) {
+//			superficieMax = 100000f;
+			acceptParameters.add(superficieMax);
+			acceptParameters.add(ordinamentoSuperficie);
 		} else {
 			if (superficieMax < superficieMin) {
 				Float cambio = superficieMax;
@@ -292,65 +293,65 @@ public class AnnuncioDAOImpl implements AnnuncioDAO {
 				superficieMin = cambio;
 
 				acceptParameters.add(superficieMax);
+				acceptParameters.add(ordinamentoSuperficie);
 			} else if (superficieMax > superficieMin) {
 				acceptParameters.add(superficieMax);
-			}
-			if (ordinamentoSuperficie != null) {
 				acceptParameters.add(ordinamentoSuperficie);
 			}
+
 		}
 
-		if (indirizzo != null) {
+		if (indirizzo != "qualsiasi") {
 			stringParameters.add("via=?");
-			acceptParameters.add(acceptParameters);
+			acceptParameters.add(indirizzo);
 		}
 
-		if (numeroCivico != null) {
+		if (numeroCivico != 0) {
 			stringParameters.add("num");
 			acceptParameters.add(numeroCivico);
 		}
 
-		if (numLocali != null) {
+		if (numLocali != 0) {
 			stringParameters.add("num_locali=?");
 			acceptParameters.add(numLocali);
 		}
 
-		if (numBagni != null) {
+		if (numBagni != 0) {
 			stringParameters.add("numBagni=?");
 			acceptParameters.add(numBagni);
 		}
 
-		if (piano != null) {
+		if (piano != -10) {
 			stringParameters.add("piano=?");
 			acceptParameters.add(piano);
 		}
 
-		if (statoImmobile != null) {
+		if (statoImmobile != StatoImmobile.DEFAULT) {
 			stringParameters.add("stato_immobile_id=?");
 			acceptParameters.add(statoImmobile.getI());
 		}
 
-		if (citta != null) {
+		if (citta != "qualsiasi") {
 			stringParameters.add("citta=?");
 			acceptParameters.add(citta);
 		}
 
-		if (titolo != null) {
+		if (titolo != "qualsiasi") {
 			stringParameters.add("titolo LIKE %?%");
 			acceptParameters.add(titolo);
 		}
 
-		if (provincia != null) {
+		if (provincia != "qualsiasi") {
 			stringParameters.add("provincia=?");
 			acceptParameters.add(provincia);
 		}
 
-		if (indirizzo != null) {
+		if (indirizzo != "qualsiasi") {
 			stringParameters.add("indirizzo=?");
 			acceptParameters.add(indirizzo);
 		}
 
-		if (statoVendita != null) {
+		if (statoVendita != StatoVendita.DEFAULT) {
 			stringParameters.add("stato_vendita=?");
 			acceptParameters.add(statoVendita.getI());
 		}
